@@ -253,11 +253,21 @@ body {
 }
 
 .service-icon-placeholder {
-    width: 44px;
-    height: 44px;
+    width: 60px;
+    /* Increased size for icon container */
+    height: 60px;
     border-radius: var(--radius-md);
     background: rgba(40, 163, 222, 0.1);
-    border: 1px solid rgba(40, 163, 222, 0.2);
+    /* border: 1px solid rgba(40, 163, 222, 0.2); Removed border as per request for cleaner look, or kept if user wants card-like? User asked to "remove placeholder styles (dashed borders)" but code had solid. Let's keep background, maybe remove border. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
 }
 
 .service-card h3 {
