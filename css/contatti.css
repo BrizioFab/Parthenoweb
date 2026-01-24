@@ -1,22 +1,6 @@
-:root {
-    --bg-dark: #0b0f1a;
-    --text-light: #ffffff;
-    --text-muted: #c0c7d6;
-    --accent: #1ddf7c;
-    --accent-hover: #1aa96a;
-    --input-bg: #1a1f2e;
-    --border-color: #2c344a;
-    --font-main: system-ui, sans-serif;
-}
+/* Removed :root and body to avoid conflict with styles.css */
 
-body {
-    margin: 0;
-    font-family: var(--font-main);
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-}
-
-.container {
+.contact-wrapper {
     max-width: 720px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
@@ -54,14 +38,15 @@ body {
 .contact-info a {
     color: var(--accent);
     text-decoration: none;
+    font-weight: 500;
 }
 
 .cta-box {
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
     padding: 2rem;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--card-shadow);
 }
 
 .cta-box h2 {
@@ -90,11 +75,12 @@ body {
     width: 100%;
     max-width: 360px;
     padding: 0.8rem 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-main);
+    color: var(--text-main);
     font-size: 1rem;
+    font-family: inherit;
 }
 
 .contact-form input::placeholder {
@@ -106,13 +92,16 @@ body {
     border: none;
     border-radius: 999px;
     background-color: var(--accent);
-    color: #02101b;
+    color: #ffffff;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: all var(--transition-fast);
+    font-family: inherit;
 }
 
 .contact-form button:hover {
     background-color: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(40, 163, 222, 0.4);
 }
