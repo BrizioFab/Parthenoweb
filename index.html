@@ -122,38 +122,7 @@
         </section>
     </main>
 
-    <!-- Cookie Banner -->
-    <div id="cookieBanner" class="cookie-banner">
-        <div class="cookie-content">
-            <h3>Rispetto della tua Privacy</h3>
-            <p>Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo
-                profilazione né tracciamento pubblicitario.</p>
-        </div>
-        <div class="cookie-actions">
-            <a href="pages/cookies.html" class="nav-link">Cookie Policy</a>
-            <button id="acceptCookies" class="btn-accept">Accetta</button>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const banner = document.getElementById('cookieBanner');
-            const acceptBtn = document.getElementById('acceptCookies');
-
-            // Check if user already accepted
-            if (!localStorage.getItem('cookiesAccepted')) {
-                // Show banner after a slight delay
-                setTimeout(() => {
-                    banner.classList.add('visible');
-                }, 500);
-            }
-
-            acceptBtn.addEventListener('click', () => {
-                localStorage.setItem('cookiesAccepted', 'true');
-                banner.classList.remove('visible');
-            });
-        });
-    </script>
+    <script src="js/cookie-banner.js"></script>
 </body>
 
 </html>
