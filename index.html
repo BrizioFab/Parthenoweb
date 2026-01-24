@@ -20,10 +20,12 @@
 <body>
     <header class="site-header">
         <div class="container nav-container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="assets/images/Logo Sfondato.webp" alt="Logo Parthenoweb" class="logo-img" />
-                <span class="logo-text">Parthenoweb</span>
-            </div>
+                <span class="logo-text">
+                    <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
+                </span>
+            </a>
             <nav class="main-nav">
                 <a href="index.html" class="nav-link active">Home</a>
                 <a href="pages/portfolio.html" class="nav-link">Portfolio</a>
@@ -38,11 +40,12 @@
             <div class="container hero-content">
 
                 <div class="hero-text">
-                    <h1>Contattaci per una Consulenza Gratuita</h1>
+                    <h1><span class="text-blue">Contattaci</span> per una <span class="text-green">Consulenza
+                            Gratuita</span></h1>
                     <p>
                         Ci conosceremo meglio, e avrai il tuo Primo Preventivo Gratuito
                     </p>
-                    <a href="#" class="btn-primary">Contattaci</a>
+                    <a href="pages/contattaci.html" class="btn-primary">Contattaci</a>
                 </div>
 
                 <div class="hero-graphic">
@@ -123,6 +126,39 @@
             </div>
         </section>
     </main>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-content">
+            <h3>Rispetto della tua Privacy</h3>
+            <p>Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo
+                profilazione né tracciamento pubblicitario.</p>
+        </div>
+        <div class="cookie-actions">
+            <a href="pages/cookies.html" class="nav-link">Cookie Policy</a>
+            <button id="acceptCookies" class="btn-accept">Accetta</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const banner = document.getElementById('cookieBanner');
+            const acceptBtn = document.getElementById('acceptCookies');
+
+            // Check if user already accepted
+            if (!localStorage.getItem('cookiesAccepted')) {
+                // Show banner after a slight delay
+                setTimeout(() => {
+                    banner.classList.add('visible');
+                }, 500);
+            }
+
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookiesAccepted', 'true');
+                banner.classList.remove('visible');
+            });
+        });
+    </script>
 </body>
 
 </html>

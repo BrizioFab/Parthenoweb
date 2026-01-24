@@ -1,18 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
     --bg-main: #020b1f;
     --bg-card: #07132f;
-    --accent: #1ddf7c;
-    --accent-soft: #1aa96a;
+    --accent: #28A3DE;
+    /* Blue Main */
+    --accent-hover: #2086b8;
+    --secondary: #80B147;
+    /* Green Secondary */
     --text-main: #ffffff;
     --text-muted: #c0c7d6;
-    --nav-bg: rgba(2, 11, 31, 0.9);
+    --nav-bg: rgba(2, 11, 31, 0.95);
     --border-soft: #1b2640;
     --card-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
     --radius-lg: 18px;
     --radius-md: 12px;
     --radius-sm: 8px;
     --transition-fast: 0.2s ease-out;
-    --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 *,
@@ -26,6 +31,16 @@ body {
     font-family: var(--font-main);
     background: radial-gradient(circle at top, #0b1b3f 0, #020b1f 45%, #000000 100%);
     color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* Utilities */
+.text-blue {
+    color: var(--accent);
+}
+
+.text-green {
+    color: var(--secondary);
 }
 
 /* Layout base */
@@ -59,6 +74,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    text-decoration: none;
 }
 
 .logo-img {
@@ -68,10 +84,19 @@ body {
 }
 
 .logo-text {
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.logo-partheno {
+    color: var(--accent);
+}
+
+.logo-web {
+    color: var(--secondary);
 }
 
 .main-nav {
@@ -83,7 +108,8 @@ body {
 .nav-link {
     text-decoration: none;
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 500;
     transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
@@ -97,22 +123,26 @@ body {
 }
 
 .nav-cta {
-    padding: 0.55rem 1.2rem;
+    padding: 0.6rem 1.4rem;
     border-radius: 999px;
     background: var(--accent);
-    color: #02101b;
+    color: #ffffff;
     font-weight: 600;
-    box-shadow: 0 10px 25px rgba(29, 223, 124, 0.35);
+    box-shadow: 0 10px 25px rgba(40, 163, 222, 0.35);
+    transition: all var(--transition-fast);
 }
 
 .nav-cta:hover {
-    background: var(--accent-soft);
+    background: var(--accent-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(40, 163, 222, 0.45);
 }
 
 /* Hero */
 
 .hero {
-    padding: 4.5rem 0 3.5rem;
+    padding: 5rem 0 4rem;
 }
 
 .hero-content {
@@ -123,80 +153,76 @@ body {
 }
 
 .hero-text h1 {
-    font-size: clamp(2.2rem, 3vw, 2.8rem);
-    margin: 0 0 1rem;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin: 0 0 1.2rem;
+    line-height: 1.1;
+    font-weight: 700;
 }
 
 .hero-text p {
-    margin: 0 0 1.8rem;
+    margin: 0 0 2rem;
     color: var(--text-muted);
     line-height: 1.6;
-    max-width: 32rem;
+    max-width: 34rem;
+    font-size: 1.1rem;
 }
 
 .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.8rem 1.8rem;
+    padding: 0.9rem 2rem;
     border-radius: 999px;
     background: var(--accent);
-    color: #02101b;
+    color: #ffffff;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 16px 35px rgba(29, 223, 124, 0.4);
+    box-shadow: 0 16px 35px rgba(40, 163, 222, 0.3);
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
 .btn-primary:hover {
-    background: var(--accent-soft);
-    transform: translateY(-1px);
-    box-shadow: 0 20px 40px rgba(29, 223, 124, 0.5);
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(40, 163, 222, 0.4);
 }
 
-/* Placeholder grafica hero */
+/* Hero Graphic */
 
 .hero-graphic {
     display: flex;
     justify-content: center;
 }
 
-.volcano-placeholder {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    border: 2px dashed rgba(255, 255, 255, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    text-align: center;
-    padding: 1rem;
-    background: radial-gradient(circle at top, rgba(29, 223, 124, 0.12), transparent 60%);
+.hero-img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(40, 163, 222, 0.2));
 }
 
 /* Sezione servizi */
 
 .services {
-    padding: 2rem 0 4.5rem;
+    padding: 3rem 0 5rem;
 }
 
 .services-header {
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .services-header h2 {
-    font-size: 1.4rem;
-    letter-spacing: 0.12em;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-main);
 }
 
 .services-header p {
     margin: 0;
     color: var(--text-muted);
+    font-size: 1.05rem;
 }
 
 /* Griglia servizi */
@@ -210,38 +236,101 @@ body {
 .service-card {
     background: var(--bg-card);
     border-radius: var(--radius-lg);
-    padding: 1.4rem 1.3rem;
+    padding: 1.8rem 1.5rem;
     border: 1px solid var(--border-soft);
     box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 1rem;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    height: 100%;
 }
 
 .service-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6);
-    border-color: rgba(29, 223, 124, 0.4);
+    border-color: rgba(40, 163, 222, 0.4);
 }
 
 .service-icon-placeholder {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-md);
-    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(40, 163, 222, 0.1);
+    border: 1px solid rgba(40, 163, 222, 0.2);
 }
 
 .service-card h3 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
 }
 
 .service-card p {
     margin: 0;
     color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Cookie Banner */
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(7, 19, 47, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-soft);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    max-width: 900px;
+    margin: 0 auto;
+    transform: translateY(150%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-banner.visible {
+    transform: translateY(0);
+}
+
+.cookie-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+.cookie-content p {
+    margin: 0;
     font-size: 0.9rem;
-    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-accept {
+    padding: 0.6rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+
+.btn-accept:hover {
+    background: var(--accent-hover);
 }
 
 /* Responsiveness */
@@ -249,12 +338,18 @@ body {
 @media (max-width: 900px) {
     .hero-content {
         grid-template-columns: minmax(0, 1fr);
+        text-align: center;
+        /* User wanted better alignment, but standard mobile hero is usually centered or left. 
+           Keeping text-align left if user prefers, but centered usually looks better stacked.
+           Let's stick to left for consistency if previously left, but code had center for some parts?
+           Checking previous CSS... it had text-align: left for mobile. Let's keep it.
+        */
         text-align: left;
     }
 
     .hero-graphic {
         order: -1;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .services-grid {
@@ -264,14 +359,80 @@ body {
 
 @media (max-width: 640px) {
     .nav-container {
-        gap: 1rem;
+        gap: 0.5rem;
+        height: 64px;
+    }
+
+    .logo-img {
+        height: 36px;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .logo {
+        gap: 0.5rem;
     }
 
     .main-nav {
-        gap: 0.9rem;
+        gap: 0.8rem;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+    }
+
+    .nav-cta {
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Mobile Carousel for Services */
+    .services {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
+
+    .services .container {
+        padding: 0;
+    }
+
+    .services-header {
+        padding: 0 1.5rem;
     }
 
     .services-grid {
-        grid-template-columns: minmax(0, 1fr);
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding: 0 1.5rem 2rem;
+        /* Bottom padding for scrollbar/shadow */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .service-card {
+        min-width: 280px;
+        scroll-snap-align: center;
+    }
+
+    .cookie-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 18px 18px 0 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .cookie-actions {
+        width: 100%;
+    }
+
+    .btn-accept {
+        width: 100%;
     }
 }
