@@ -27,21 +27,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navHTML = `
     <header class="site-header">
-        <div class="container nav-container">
-            <a href="${homeLink}" class="logo">
-                <img src="${logoSrc}" alt="Logo Parthenoweb" class="logo-img" />
-                <span class="logo-text">
-                    <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
-                </span>
-            </a>
-            <nav class="main-nav">
-                <a href="${homeLink}" class="nav-link ${isActive('index.html')}">Home</a>
-                <a href="${portfolioLink}" class="nav-link ${isActive('portfolio.html')}">Portfolio</a>
-                <a href="${contactLink}" class="nav-link nav-cta ${isActive('contattaci.html')}">Contattaci</a>
-            </nav>
+        <div class="nav-container">
+            <div class="container" style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
+                <a href="${homeLink}" class="logo">
+                    <img src="${logoSrc}" alt="Logo Parthenoweb" class="logo-img" />
+                    <span class="logo-text">
+                        <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
+                    </span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+                <nav class="main-nav">
+                    <a href="${homeLink}" class="nav-link ${isActive('index.html')}">Home</a>
+                    <a href="${portfolioLink}" class="nav-link ${isActive('portfolio.html')}">Portfolio</a>
+                    <button class="nav-cta" onclick="window.location.href='${contactLink}'">Contattaci</button>
+                </nav>
+            </div>
         </div>
     </header>
     `;
 
     navbarPlaceholder.innerHTML = navHTML;
+
+    // Mobile menu toggle functionality
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav = document.querySelector('.main-nav');
+
+    if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = mainNav.contains(event.target);
+            const isClickOnToggle = navToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle) {
+                mainNav.classList.remove('active');
+            }
+        });
+    }
 });
+

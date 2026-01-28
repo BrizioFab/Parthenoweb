@@ -1,13 +1,46 @@
 /* ===============================
-   CONTATTI – NICEPAGE 2 COLONNE
+   Contact Page Premium Styles
 ================================ */
 
 .contact-section {
     padding: 6rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.02) 0%, transparent 50%, rgba(0, 255, 136, 0.02) 100%);
+    position: relative;
+    overflow: hidden;
 }
 
-/* GRID PRINCIPALE */
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: -300px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float 25s ease-in-out infinite;
+}
+
+.contact-section::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float-reverse 30s ease-in-out infinite;
+}
+
 .contact-wrapper {
+    position: relative;
+    z-index: 1;
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1.5rem;
@@ -17,158 +50,204 @@
     align-items: start;
 }
 
-/* ===============================
-   COLONNA SINISTRA
-================================ */
-
+/* Left Column */
 .contact-left {
     display: flex;
     flex-direction: column;
 }
 
-.hero-text h1 {
+.contact-left .hero-text h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    color: var(--text-main);
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    line-height: 1.7;
+    color: var(--text-primary);
 }
 
 .text-blue {
-    color: var(--accent);
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .text-green {
-    color: var(--secondary);
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .contact-subtitle {
     font-size: 1.1rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     line-height: 1.7;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     max-width: 520px;
 }
 
 .contact-info {
-    font-size: 1rem;
-    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.contact-info:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
 }
 
 .contact-info p {
-    margin: 0.6rem 0;
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .contact-info a {
     color: var(--accent);
     font-weight: 600;
     text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .contact-info a:hover {
-    text-decoration: underline;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    transform: translateX(5px);
 }
 
-/* ===============================
-   COLONNA DESTRA – FORM
-================================ */
-
+/* Right Column - Form */
 .cta-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius-lg);
-    padding: 3rem 2.5rem;
-    box-shadow: var(--card-shadow);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 255, 136, 0.02) 100%);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 24px;
+    padding: 3.5rem 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.cta-box:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(0, 255, 136, 0.05) 100%);
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 30px 80px rgba(0, 212, 255, 0.15);
+    transform: translateY(-5px);
 }
 
 .cta-box h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .cta-box p {
     font-size: 1rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 2rem;
 }
 
-/* FORM VERTICALE */
+/* Form Styles */
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 0.9rem 1.1rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-soft);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-main);
+    padding: 1rem 1.3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: rgba(26, 31, 46, 0.5);
+    color: var(--text-primary);
     font-size: 1rem;
     font-family: inherit;
-    transition: all var(--transition-fast);
-}
-
-.contact-form textarea {
-    resize: vertical;
-    min-height: 100px;
-    line-height: 1.5;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-    color: var(--text-muted);
+    color: var(--text-tertiary);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(79, 163, 247, 0.1);
+    background: rgba(26, 31, 46, 0.8);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 140px;
 }
 
 .contact-form button {
-    padding: 1rem 2.2rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--accent);
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-    color: #fff;
+    padding: 1.1rem 2.5rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #000;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: all var(--transition-fast);
-    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .contact-form button:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 10px 30px rgba(79, 163, 247, 0.45);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(0, 212, 255, 0.5);
 }
 
 .contact-form button:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
 }
 
-/* ===============================
-   RESPONSIVE – COME NICEPAGE
-================================ */
+#form-message {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    display: none;
+}
 
+#form-message.success {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+    display: block;
+}
+
+#form-message.error {
+    background: rgba(255, 100, 100, 0.1);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    color: #ff6464;
+    display: block;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
     .contact-wrapper {
         grid-template-columns: 1fr;
@@ -181,7 +260,12 @@
     }
 
     .contact-subtitle {
-        max-width: 640px;
+        max-width: 100%;
+    }
+
+    .contact-info {
+        margin: 0 auto;
+        max-width: 400px;
     }
 
     .cta-box {
@@ -189,61 +273,30 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+    .contact-section {
+        padding: 3rem 0;
+        min-height: auto;
+    }
+
+    .contact-wrapper {
+        padding: 0 1rem;
+    }
+
     .cta-box {
         padding: 2rem 1.5rem;
     }
-}
-
-/* ===============================
-   MOBILE REFINEMENT – SAFE
-================================ */
-
-@media (max-width: 600px) {
-
-    .contact-section {
-        padding: 4rem 0;
-    }
-
-    .contact-title {
-        font-size: 2rem;
-        line-height: 1.2;
-        margin-bottom: 1.2rem;
-    }
-
-    .contact-subtitle {
-        font-size: 1rem;
-        line-height: 1.65;
-        margin-bottom: 1.6rem;
-    }
-
-    .contact-info {
-        font-size: 0.95rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .cta-box {
-        padding: 2rem 1.6rem;
-    }
 
     .cta-box h2 {
-        font-size: 1.35rem;
-        text-align: center;
+        font-size: 1.4rem;
     }
 
-    .cta-box p {
-        font-size: 0.95rem;
-        text-align: center;
-        margin-bottom: 1.6rem;
-    }
-
-    .contact-form input {
-        font-size: 1rem;
-        padding: 0.95rem 1rem;
+    .contact-form input,
+    .contact-form textarea {
+        padding: 0.9rem 1rem;
     }
 
     .contact-form button {
-        padding: 0.9rem 1.5rem;
-        font-size: 1rem;
+        padding: 1rem 2rem;
     }
 }

@@ -3,131 +3,198 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Parthenoweb - L'internet fatto semplice</title>
+    <title>Parthenoweb - Web Design & Development Professionali</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Soluzioni web premium per il tuo business. Design, sviluppo e strategie digitali.">
+    
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Favicon standard (desktop, Android, tutti i browser) -->
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/Favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Favicon/favicon-16x16.png">
-
-    <!-- Apple Touch Icon (iPhone, iPad, Safari) -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/Favicon/apple-touch-icon.png">
-
-    <!-- Android Chrome Icons -->
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/Favicon/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/Favicon/android-chrome-512x512.png">
-
-    <!-- Manifest (opzionale ma consigliato per Android/Chrome) -->
     <link rel="manifest" href="site.webmanifest">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <body>
+    <!-- Navbar -->
     <div id="navbar-placeholder"></div>
     <script src="js/navbar.js"></script>
 
     <main>
-        <!-- HERO -->
-        <section class="hero">
+        <!-- HERO Section Premium -->
+        <section class="hero" id="hero">
+            <div class="hero-background">
+                <div class="hero-gradient-1"></div>
+                <div class="hero-gradient-2"></div>
+                <div class="hero-particles" id="particles"></div>
+            </div>
+
             <div class="container hero-content">
-
-                <div class="hero-text">
-                    <h1><span class="text-blue">Contattaci</span> per una <span class="text-green">Consulenza
-                            Gratuita</span></h1>
-                    <p>
-                        Ci conosceremo meglio, e avrai il tuo Primo Preventivo Gratuito
-                    </p>
-                    <a href="pages/contattaci.html" class="btn-primary">Contattaci</a>
+                <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
+                    <h1>Trasforma il tuo <span class="gradient-text">Business</span> in Digitale</h1>
+                    <p>Design innovativo, strategie mirate e tecnologie all'avanguardia per portare la tua azienda al livello successivo.</p>
+                    
+                    <div class="hero-cta">
+                        <a href="#services" class="btn btn-primary">Scopri i Servizi</a>
+                        <a href="pages/contattaci.html" class="btn btn-secondary">Consulenza Gratuita</a>
+                    </div>
                 </div>
 
-                <div class="hero-graphic">
-                    <img src="assets/images/Logo Sfondato.webp" alt="Logo Parthenoweb" class="hero-img" />
+                <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="floating-card card-1">
+                        <img src="assets/images/Logo Sfondato.webp" alt="Parthenoweb Logo" class="hero-logo">
+                    </div>
                 </div>
-
             </div>
         </section>
-        <!-- SERVIZI -->
-        <section class="services">
+
+        <!-- Services Section Premium -->
+        <section class="services" id="services">
             <div class="container">
-                <div class="services-header">
-                    <h2>I NOSTRI SERVIZI</h2>
-                    <p>
-                        Ci occuperemo di tutto noi, dallo sviluppo del sito alla sua manutenzione.
-                    </p>
+                <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
+                    <h2>I Nostri Servizi</h2>
+                    <p>Soluzioni complete per la tua presenza digitale</p>
                 </div>
 
                 <div class="services-grid">
-                    <article class="service-card">
-                        <div class="service-icon-placeholder"><img src="assets/images/Icone Card/Icona Consulenza.png"
-                                alt="Consulenza" class="service-icon" /></div>
-                        <h3>Consulenza personalizzata</h3>
-                        <p>
-                            Il tuo sito web è come una camicia sartoriale, non esiste una taglia unica per tutti.
-                            Per questo motivo, prima di iniziare a lavorare su un progetto, ci prendiamo il tempo
-                            necessario per conoscere te, la tua attività e i tuoi obiettivi. Solo così potremo creare un
-                            sito web che sia davvero adatto alle tue esigenze.
-                        </p>
-                    </article>
+                    <!-- Service Card 1 -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="service-icon">
+                            <img src="assets/images/Icone Card/Icona Consulenza.png" alt="Consulenza">
+                        </div>
+                        <h3>Consulenza Strategica</h3>
+                        <p>Analisi approfondita del tuo business per definire la strategia digitale più efficace.</p>
+                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                    </div>
 
-                    <article class="service-card">
-                        <div class="service-icon-placeholder"><img src="assets/images/Icone Card/Icona web design.png"
-                                alt="Web Design" class="service-icon" /></div>
-                        <h3>Web Design &amp; UI/UX</h3>
-                        <p>
-                            Che tu abbia bisogno di un sito web moderno e professionale, o di un sito web che sia facile
-                            da navigare e facile da usare, possiamo aiutarti a creare un sito web che sia adatto alle
-                            tue esigenze.
-                        </p>
-                    </article>
+                    <!-- Service Card 2 -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-icon">
+                            <img src="assets/images/Icone Card/Icona web design.png" alt="Web Design">
+                        </div>
+                        <h3>Web Design & UI/UX</h3>
+                        <p>Design moderno e intuitivo che cattura l'attenzione e guida gli utenti.</p>
+                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                    </div>
 
-                    <article class="service-card">
-                        <div class="service-icon-placeholder"><img src="assets/images/Icone Card/Icona e-commerce.png"
-                                alt="E-Commerce" class="service-icon" /></div>
-                        <h3>E-Commerce</h3>
-                        <p>
-                            Secondo studi di settore, un e-commerce può generare fino al 15% di vendite aggiuntive.
-                        </p>
-                    </article>
+                    <!-- Service Card 3 -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-icon">
+                            <img src="assets/images/Icone Card/Icona e-commerce.png" alt="E-Commerce">
+                        </div>
+                        <h3>E-Commerce Solutions</h3>
+                        <p>Piattaforme e-commerce potenti per massimizzare le tue vendite online.</p>
+                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                    </div>
 
-                    <article class="service-card">
-                        <div class="service-icon-placeholder"><img
-                                src="assets/images/Icone Card/Icona Ottimizzazione.png" alt="SEO"
-                                class="service-icon" /></div>
-                        <h3>Ottimizzazione SEO &amp; Performance</h3>
-                        <p>
-                            Non cadere nella trappola del bel sito che non conosce NESSUNO, ci assicureremo di
-                            ottimizzare al meglio
-                            la tua presenza sul web e la tua performance nei vari motori di ricerca.
-                        </p>
-                    </article>
+                    <!-- Service Card 4 -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-icon">
+                            <img src="assets/images/Icone Card/Icona Ottimizzazione.png" alt="SEO">
+                        </div>
+                        <h3>SEO & Performance</h3>
+                        <p>Ottimizzazione per i motori di ricerca e velocità di caricamento superiore.</p>
+                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                    </div>
 
-                    <article class="service-card">
-                        <div class="service-icon-placeholder"><img
-                                src="assets/images/Icone Card/Icona Sviluppo Personalizzato.png" alt="Sviluppo"
-                                class="service-icon" /></div>
-                        <h3>Sviluppo Personalizzato &amp; Integrazioni</h3>
-                        <p>
-                            Hai delle esigenze specifiche? Possiamo integrare i tool di cui necessiti, o creare un
-                            applicativo Personalizzato per TE!
-                        </p>
-                    </article>
+                    <!-- Service Card 5 -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-icon">
+                            <img src="assets/images/Icone Card/Icona Sviluppo Personalizzato.png" alt="Sviluppo">
+                        </div>
+                        <h3>Sviluppo Personalizzato</h3>
+                        <p>Soluzioni custom sviluppate specificamente per le tue esigenze uniche.</p>
+                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                    </div>
 
-                    <article class="service-card">
-                        <div class="service-icon-placeholder"><img src="assets/images/Icone Card/Icona Manutenzione.png"
-                                alt="Manutenzione" class="service-icon" /></div>
-                        <h3>Manutenzione</h3>
-                        <p>
-                            Offriamo un servizio di manutenzione regolare per assicurare che il tuo sito web sia sempre
-                            al
-                            massimo delle sue capacità.
-                        </p>
-                    </article>
+                    <!-- Service Card 6 -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="service-icon">
+                            <img src="assets/images/Icone Card/Icona Manutenzione.png" alt="Manutenzione">
+                        </div>
+                        <h3>Supporto & Manutenzione</h3>
+                        <p>Assistenza continua per mantenere il tuo sito sempre aggiornato e performante.</p>
+                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Perché Sceglierci</h2>
+                    <p>Eccellenza in ogni dettaglio</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="0">
+                        <div class="feature-icon">🚀</div>
+                        <h4>Tecnologia Moderna</h4>
+                        <p>Utilizziamo le ultime tecnologie e framework per garantire performance e sicurezza.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon">🎯</div>
+                        <h4>Risultati Misurabili</h4>
+                        <p>Ogni progetto è orientato a KPI specifici e metriche di successo tracciabili.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">💡</div>
+                        <h4>Innovazione Continua</h4>
+                        <p>Restiamo sempre aggiornati con le ultime tendenze e best practices del settore.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">👥</div>
+                        <h4>Team Dedicato</h4>
+                        <p>Professionisti esperti e passionati dedicati al successo del tuo progetto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" data-aos="fade-up">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Pronto a Trasformare il Tuo Business?</h2>
+                    <p>Contattaci oggi per una consulenza gratuita e scopri come possiamo aiutare la tua azienda a raggiungere nuovi traguardi.</p>
+                    <a href="pages/contattaci.html" class="btn btn-primary btn-large">Inizia Oggi</a>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Cookie Banner -->
     <script src="js/cookie-banner.js"></script>
+    
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <!-- Scripts -->
+    <script src="js/scroll-effects.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/counter.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out-cubic',
+            once: true
+        });
+    </script>
 </body>
 
 </html>
