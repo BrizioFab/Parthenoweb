@@ -54,13 +54,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (navToggle && mainNav) {
         navToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
+            const isActive = mainNav.classList.contains('active');
+            if (isActive) {
+                mainNav.classList.remove('active');
+                navToggle.classList.remove('open');
+            } else {
+                mainNav.classList.add('active');
+                navToggle.classList.add('open');
+            }
         });
 
         // Close menu when a link is clicked
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 mainNav.classList.remove('active');
+                navToggle.classList.remove('open');
             });
         });
 
@@ -68,9 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('click', function(event) {
             const isClickInsideNav = mainNav.contains(event.target);
             const isClickOnToggle = navToggle.contains(event.target);
-            
             if (!isClickInsideNav && !isClickOnToggle) {
                 mainNav.classList.remove('active');
+                navToggle.classList.remove('open');
             }
         });
     }
