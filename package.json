@@ -1,0 +1,25 @@
+{
+  "name": "parhenoweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:playwright": "playwright test --project=chromium"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrizioFab/Parthenoweb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BrizioFab/Parthenoweb/issues"
+  },
+  "homepage": "https://github.com/BrizioFab/Parthenoweb#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.1"
+  }
+}

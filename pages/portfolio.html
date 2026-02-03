@@ -19,9 +19,153 @@
     <div id="navbar-placeholder"></div>
     <script src="../js/navbar.js"></script>
 
-    <h1>Portfolio</h1>
-    <p>Guarda i nostri lavori (Pagina in costruzione).</p>
+    <main>
+        <section class="hero small-hero" aria-hidden="false">
+            <div class="container">
+                <div class="hero-text" data-aos="fade-right">
+                    <h1>Portfolio</h1>
+                    <p>Progetti scelti che mostrano il nostro approccio strategico, il design curato e l'attenzione alle performance.</p>
+                </div>
+                <div class="hero-cta">
+                    <a href="../pages/contattaci.html" class="btn btn-primary">Contattaci</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>I Nostri Progetti</h2>
+                    <p>Selezione di lavori reali: web design, e-commerce, branding e ottimizzazione.</p>
+                </div>
+
+                <div class="portfolio-filters" role="tablist" aria-label="Filtri portfolio" data-aos="fade-up">
+                    <button class="filter-btn active" data-filter="all">Tutti</button>
+                    <button class="filter-btn" data-filter="web">Web Design</button>
+                    <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+                    <button class="filter-btn" data-filter="branding">Branding</button>
+                    <button class="filter-btn" data-filter="seo">SEO</button>
+                </div>
+
+                <div class="portfolio-grid" data-aos="fade-up">
+                    <!-- Project 1 -->
+                    <article class="project-card" data-category="web" tabindex="0" aria-labelledby="proj-1-title">
+                        <div class="project-image" style="background-image: linear-gradient(135deg, rgba(4,56,115,0.45), rgba(79,163,247,0.2));">
+                            <div class="project-tag">Web</div>
+                            <div class="project-image-label">Site A</div>
+                        </div>
+                        <div class="project-meta">
+                            <h3 id="proj-1-title">Sito Aziendale - Alpha</h3>
+                            <p>Design corporate e sistema di gestione contenuti su misura.</p>
+                            <div class="project-actions">
+                                <button class="btn btn-secondary view-btn" data-title="Sito Aziendale - Alpha" data-category="Web" data-desc="Design corporate, CMS personalizzato, performance ottimizzate." aria-controls="project-modal">Visualizza</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card" data-category="ecommerce" tabindex="0" aria-labelledby="proj-2-title">
+                        <div class="project-image" style="background-image: linear-gradient(135deg, rgba(79,163,247,0.35), rgba(160,230,101,0.12));">
+                            <div class="project-tag">E-Commerce</div>
+                            <div class="project-image-label">Shop B</div>
+                        </div>
+                        <div class="project-meta">
+                            <h3 id="proj-2-title">Shop - Beta</h3>
+                            <p>Piattaforma e-commerce con integrazione pagamenti e marketing automation.</p>
+                            <div class="project-actions">
+                                <button class="btn btn-secondary view-btn" data-title="Shop - Beta" data-category="E-Commerce" data-desc="PWA, integrazione gateway e-commerce e gestione ordini avanzata." aria-controls="project-modal">Visualizza</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card" data-category="branding" tabindex="0" aria-labelledby="proj-3-title">
+                        <div class="project-image" style="background-image: linear-gradient(135deg, rgba(160,230,101,0.3), rgba(79,163,247,0.12));">
+                            <div class="project-tag">Branding</div>
+                            <div class="project-image-label">Brand C</div>
+                        </div>
+                        <div class="project-meta">
+                            <h3 id="proj-3-title">Brand Identity - Gamma</h3>
+                            <p>Restyling completo con linee guida e materiali digitali.</p>
+                            <div class="project-actions">
+                                <button class="btn btn-secondary view-btn" data-title="Brand Identity - Gamma" data-category="Branding" data-desc="Logo, visual system e kit grafico per il lancio." aria-controls="project-modal">Visualizza</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="project-card" data-category="seo" tabindex="0" aria-labelledby="proj-4-title">
+                        <div class="project-image" style="background-image: linear-gradient(135deg, rgba(0,212,255,0.18), rgba(79,163,247,0.05));">
+                            <div class="project-tag">SEO</div>
+                            <div class="project-image-label">SEO D</div>
+                        </div>
+                        <div class="project-meta">
+                            <h3 id="proj-4-title">SEO & Performance - Delta</h3>
+                            <p>Ottimizzazione tecnica e strategia contenuti per crescita organica.</p>
+                            <div class="project-actions">
+                                <button class="btn btn-secondary view-btn" data-title="SEO & Performance - Delta" data-category="SEO" data-desc="Analisi, ottimizzazione e piano editoriale per crescita organica." aria-controls="project-modal">Visualizza</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article class="project-card" data-category="web" tabindex="0" aria-labelledby="proj-5-title">
+                        <div class="project-image" style="background-image: linear-gradient(135deg, rgba(4,56,115,0.4), rgba(160,230,101,0.06));">
+                            <div class="project-tag">Web</div>
+                            <div class="project-image-label">Portal E</div>
+                        </div>
+                        <div class="project-meta">
+                            <h3 id="proj-5-title">Portale - Epsilon</h3>
+                            <p>Piattaforma multi-utente con dashboard custom e integrazioni.</p>
+                            <div class="project-actions">
+                                <button class="btn btn-secondary view-btn" data-title="Portale - Epsilon" data-category="Web" data-desc="User flows, sicurezza e scalabilità." aria-controls="project-modal">Visualizza</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 6 -->
+                    <article class="project-card" data-category="branding" tabindex="0" aria-labelledby="proj-6-title">
+                        <div class="project-image" style="background-image: linear-gradient(135deg, rgba(79,163,247,0.25), rgba(4,56,115,0.12));">
+                            <div class="project-tag">Branding</div>
+                            <div class="project-image-label">Launch F</div>
+                        </div>
+                        <div class="project-meta">
+                            <h3 id="proj-6-title">Lancio - Zeta</h3>
+                            <p>Strategia di lancio digitale e posizionamento di mercato.</p>
+                            <div class="project-actions">
+                                <button class="btn btn-secondary view-btn" data-title="Lancio - Zeta" data-category="Branding" data-desc="Campagna integrata, landings e asset social." aria-controls="project-modal">Visualizza</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="project-modal-inner">
+                <button class="modal-close" aria-label="Chiudi">✕</button>
+                <h3 class="modal-title"></h3>
+                <p class="modal-category"></p>
+                <p class="modal-desc"></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cookie Banner -->
     <script src="../js/cookie-banner.js"></script>
+
+    <script src="../js/scroll-effects.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/particles.js"></script>
+    <script src="../js/counter.js"></script>
+    <script src="../js/portfolio.js"></script>
+    <script src="../js/carousel.js"></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out-cubic', once: true });
+    </script>
 </body>
 
 </html>
