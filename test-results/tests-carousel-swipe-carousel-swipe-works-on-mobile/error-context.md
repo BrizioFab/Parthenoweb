@@ -1,0 +1,133 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link "Logo Parthenoweb Parthenoweb" [ref=e6]:
+        - /url: index.html
+        - img "Logo Parthenoweb" [ref=e7]
+        - generic [ref=e8]: Parthenoweb
+      - button "Toggle menu" [ref=e9] [cursor=pointer]: ☰
+      - navigation [ref=e10]:
+        - link "Home" [ref=e11]:
+          - /url: index.html
+        - link "Portfolio" [ref=e12]:
+          - /url: pages/portfolio.html
+        - button "Contattaci" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - heading "Trasforma il tuo Business in Digitale" [level=1] [ref=e22]:
+          - text: Trasforma il tuo
+          - text: Business in Digitale
+        - paragraph [ref=e23]: Design innovativo, strategie mirate e tecnologie all'avanguardia per portare la tua azienda al livello successivo.
+        - generic [ref=e24]:
+          - link "Scopri i Servizi" [ref=e25] [cursor=pointer]:
+            - /url: "#services"
+          - link "Consulenza Gratuita" [ref=e26] [cursor=pointer]:
+            - /url: pages/contattaci.html
+      - img "Parthenoweb Logo" [ref=e29]
+    - generic [ref=e31]:
+      - generic:
+        - heading "I Nostri Servizi" [level=2]
+        - paragraph: Soluzioni complete per la tua presenza digitale
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - img "Consulenza"
+              - heading "Consulenza Strategica" [level=3]
+              - paragraph: Analisi approfondita del tuo business per definire la strategia digitale più efficace.
+              - link "Scopri di più →":
+                - /url: pages/contattaci.html
+            - generic:
+              - generic:
+                - img "Web Design"
+              - heading "Web Design & UI/UX" [level=3]
+              - paragraph: Design moderno e intuitivo che cattura l'attenzione e guida gli utenti.
+              - link "Scopri di più →":
+                - /url: pages/contattaci.html
+            - generic:
+              - generic:
+                - img "E-Commerce"
+              - heading "E-Commerce Solutions" [level=3]
+              - paragraph: Piattaforme e-commerce potenti per massimizzare le tue vendite online.
+              - link "Scopri di più →":
+                - /url: pages/contattaci.html
+            - generic:
+              - generic:
+                - img "SEO"
+              - heading "SEO & Performance" [level=3]
+              - paragraph: Ottimizzazione per i motori di ricerca e velocità di caricamento superiore.
+              - link "Scopri di più →":
+                - /url: pages/contattaci.html
+            - generic:
+              - generic:
+                - img "Sviluppo"
+              - heading "Sviluppo Personalizzato" [level=3]
+              - paragraph: Soluzioni custom sviluppate specificamente per le tue esigenze uniche.
+              - link "Scopri di più →":
+                - /url: pages/contattaci.html
+            - generic:
+              - generic:
+                - img "Manutenzione"
+              - heading "Supporto & Manutenzione" [level=3]
+              - paragraph: Assistenza continua per mantenere il tuo sito sempre aggiornato e performante.
+              - link "Scopri di più →":
+                - /url: pages/contattaci.html
+        - generic:
+          - button
+          - button
+          - button
+          - button
+          - button
+          - button
+    - generic [ref=e33]:
+      - generic:
+        - heading "Perché Sceglierci" [level=2]
+        - paragraph: Eccellenza in ogni dettaglio
+      - generic [ref=e34]:
+        - generic:
+          - generic: 🚀
+          - heading "Tecnologia Moderna" [level=4]
+          - paragraph: Utilizziamo le ultime tecnologie e framework per garantire performance e sicurezza.
+        - generic:
+          - generic: 🎯
+          - heading "Risultati Misurabili" [level=4]
+          - paragraph: Ogni progetto è orientato a KPI specifici e metriche di successo tracciabili.
+        - generic:
+          - generic: 💡
+          - heading "Innovazione Continua" [level=4]
+          - paragraph: Restiamo sempre aggiornati con le ultime tendenze e best practices del settore.
+        - generic:
+          - generic: 👥
+          - heading "Team Dedicato" [level=4]
+          - paragraph: Professionisti esperti e passionati dedicati al successo del tuo progetto.
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - heading "Pronto a Trasformare il Tuo Business?" [level=2]
+            - paragraph: Contattaci oggi per una consulenza gratuita e scopri come possiamo aiutare la tua azienda a raggiungere nuovi traguardi. La prima consulenza è gratuita e rispondiamo entro 24 ore.
+          - generic:
+            - link "Inizia oggi":
+              - /url: pages/contattaci.html
+              - text: Inizia Oggi
+            - link "Richiedi preventivo":
+              - /url: pages/contattaci.html
+              - text: Richiedi Preventivo
+            - generic:
+              - text: Risposta garantita entro
+              - strong: 24 ore
+              - text: • Consulenza gratuita
+  - generic [ref=e35]:
+    - generic [ref=e36]:
+      - heading "Rispetto della tua Privacy" [level=3] [ref=e37]
+      - paragraph [ref=e38]: Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo profilazione né tracciamento pubblicitario.
+    - generic [ref=e39]:
+      - link "Cookie Policy" [ref=e40]:
+        - /url: pages/cookies.html
+      - button "Accetta" [ref=e41] [cursor=pointer]
+```

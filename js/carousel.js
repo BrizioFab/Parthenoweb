@@ -80,25 +80,57 @@ document.addEventListener('DOMContentLoaded', () => {
     function onNext() { index = Math.min(slides().length - visible(), index + 1); update(); }
 
     // Touch handlers
-    let startX = 0, currentX = 0, dragging = false;
-    function onTouchStart(e) { startX = e.touches[0].clientX; dragging = true; wrapper.classList.add('dragging'); }
-    function onTouchMove(e) {
-        if (!dragging) return;
-        currentX = e.touches[0].clientX;
+    let startX = 0, currentX = 0, dragging = false, lastTranslate = 0, startTransform = 0;
+    function getPointerX(e) {
+        if (e.touches && e.touches.length) return e.touches[0].clientX;
+        if (typeof e.clientX === 'number') return e.clientX;
+        return 0;
+    }
+    function getCurrentTranslate() {
+        const style = getComputedStyle(track).transform;
+        if (style && style !== 'none') {
+            const match = style.match(/matrix\(1, 0, 0, 1, (-?\d+), 0\)/);
+            if (match) return parseFloat(match[1]);
+            const match3d = style.match(/matrix3d\(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, (-?\d+), 0, 0, 1\)/);
+            if (match3d) return parseFloat(match3d[1]);
+        }
+        return 0;
+    }
+    function onPointerDown(e) {
+        if (!isMobile()) return;
+        startX = getPointerX(e);
+        dragging = true;
+        wrapper.classList.add('dragging');
+        lastTranslate = 0;
+        startTransform = getCurrentTranslate();
+        track.style.transition = 'none';
+    }
+    function onPointerMove(e) {
+        if (!dragging || !isMobile()) return;
+        currentX = getPointerX(e);
         const dx = currentX - startX;
+        lastTranslate = dx;
         const s = slides();
         if (!s.length) return;
         const gap = parseFloat(getComputedStyle(track).gap) || 16;
         const slideWidth = s[0].getBoundingClientRect().width + gap;
-        track.style.transform = `translateX(${-index * slideWidth + dx}px)`;
+        track.style.transform = `translate3d(${-index * slideWidth + dx}px, 0, 0)`;
     }
-    function onTouchEnd() {
-        dragging = false; wrapper.classList.remove('dragging');
-        const dx = currentX - startX;
-        if (Math.abs(dx) > 60) {
+    function onPointerUp(e) {
+        if (!dragging || !isMobile()) return;
+        dragging = false;
+        wrapper.classList.remove('dragging');
+        track.style.transition = 'transform 0.35s cubic-bezier(.4,.7,.4,1)';
+        const dx = lastTranslate;
+        const s = slides();
+        const gap = parseFloat(getComputedStyle(track).gap) || 16;
+        const slideWidth = s[0].getBoundingClientRect().width + gap;
+        if (Math.abs(dx) > slideWidth * 0.25) {
             index = dx < 0 ? Math.min(slides().length - visible(), index + 1) : Math.max(0, index - 1);
         }
-        update();
+        slideTo(index);
+        setTimeout(() => { track.style.transition = ''; }, 400);
+        lastTranslate = 0;
     }
 
     function onKeydown(e) {
@@ -115,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startAutoplay() {
         stopAutoplay();
         autoplayTimer = setInterval(() => {
-            // advance, wrap to start when reaching end
+            if (!isMobile()) return;
             const s = slides();
             const maxIndex = Math.max(0, s.length - visible());
             index = (index >= maxIndex) ? 0 : index + 1;
@@ -140,14 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
         active = true;
         buildDots();
         update();
-        // named handlers so we can remove them later
-        if (prev) onPrevClick = () => { onPrev(); pauseAutoplayTemporarily(); };
-        if (next) onNextClick = () => { onNext(); pauseAutoplayTemporarily(); };
-        if (prev) prev.addEventListener('click', onPrevClick);
-        if (next) next.addEventListener('click', onNextClick);
-        wrapper.addEventListener('touchstart', onTouchStart, { passive: true });
-        wrapper.addEventListener('touchmove', onTouchMove, { passive: true });
-        wrapper.addEventListener('touchend', onTouchEnd);
+        // nessun prev/next
+        // Pointer events (universale: mouse, touch, pen)
+        wrapper.addEventListener('pointerdown', onPointerDown);
+        wrapper.addEventListener('pointermove', onPointerMove);
+        wrapper.addEventListener('pointerup', onPointerUp);
+        // Touch events (fallback per browser vecchi)
+        wrapper.addEventListener('touchstart', onPointerDown, { passive: true });
+        wrapper.addEventListener('touchmove', onPointerMove, { passive: true });
+        wrapper.addEventListener('touchend', onPointerUp);
         // pause autoplay during pointerdown / interaction
         wrapper.addEventListener('pointerdown', pauseAutoplayTemporarily);
         carousel.addEventListener('keydown', onKeydown);
