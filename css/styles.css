@@ -71,7 +71,12 @@ body {
 /* ===============================
    Typography & Utilities
 ================================ */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -143,6 +148,25 @@ a {
     left: 100%;
 }
 
+/* Ripple effect for buttons (created by JS) */
+.btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(0);
+    opacity: 0.9;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ripple-effect 0.6s ease-out forwards;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
 .btn-primary {
     background: var(--gradient-accent);
     color: #000;
@@ -190,19 +214,63 @@ a {
     padding: 0 2rem;
 }
 
+/* Force consistent header layout on all pages */
+.site-header .container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 80px !important;
+    padding: 0 2rem !important;
+}
+
+/* Make sure main-nav stays left/right aligned and not centered on other pages */
+.site-header .main-nav {
+    display: flex !important;
+    align-items: center !important;
+}
+
 .logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1.3rem;
+    /* Increased logo text size by 20% */
+    font-size: 1.56rem;
+    /* was 1.3rem */
     font-weight: 800;
-    height: 50px;
+    height: 80px;
+    /* keep navbar height consistent - use full header height for internal alignment */
 }
 
 .logo img {
-    height: 50px;
+    /* Increase image height by ~20% while respecting nav height */
+    height: 60px;
+    /* was 50px */
     width: auto;
     object-fit: contain;
+    transition: transform var(--transition-base);
+}
+
+/* Ensure navbar size doesn't change on small screens: cap logo size on narrow viewports */
+@media (max-width: 640px) {
+    .logo img {
+        height: 50px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+}
+
+/* Slightly increase nav link sizes (20% larger) without changing navbar height */
+.main-nav .nav-link {
+    font-size: 1.25rem;
+    /* up from default */
+    line-height: 1;
+}
+
+.nav-cta {
+    font-size: 1.05rem;
+    /* modest increase */
 }
 
 .logo-partheno {
@@ -215,6 +283,8 @@ a {
 .main-nav {
     display: flex;
     gap: 3rem;
+    align-items: center;
+    /* vertically center nav links */
 }
 
 .nav-link {
@@ -222,6 +292,10 @@ a {
     font-weight: 500;
     transition: color var(--transition-base);
     position: relative;
+    display: inline-flex;
+    /* ensure vertical centering */
+    align-items: center;
+    padding: 0.2rem 0;
 }
 
 .nav-link::after {
@@ -305,13 +379,27 @@ a {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(50px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(50px);
+    }
 }
 
 @keyframes float-reverse {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-50px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-50px);
+    }
 }
 
 .hero-particles {
@@ -346,7 +434,7 @@ a {
     color: var(--text-primary);
 }
 
-.hero-text > p {
+.hero-text>p {
     margin-bottom: 2.5rem;
     max-width: 500px;
     font-size: 1.2rem;
@@ -420,6 +508,16 @@ a {
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.2));
+    /* scale hero logo by 20% on larger viewports */
+    transform: scale(1.2);
+    transform-origin: center;
+    transition: transform var(--transition-base);
+}
+
+@media (max-width: 640px) {
+    .hero-logo {
+        transform: scale(1);
+    }
 }
 
 /* ===============================
@@ -462,7 +560,6 @@ a {
     backdrop-filter: blur(20px);
     transition: all var(--transition-base);
     overflow: hidden;
-    group: "service";
 }
 
 .service-card::before {
@@ -569,23 +666,32 @@ a {
 
 .feature-item {
     padding: 2rem;
-    background: rgba(26, 31, 46, 0.8);
-    border: 1px solid rgba(0, 212, 255, 0.1);
+    /* Brighter, subtler background for 'Perché Sceglierci' cards */
+    background: linear-gradient(135deg, rgba(79, 163, 247, 0.06) 0%, rgba(160, 230, 101, 0.03) 100%);
+    border: 1px solid rgba(79, 163, 247, 0.10);
     border-radius: var(--radius-lg);
     backdrop-filter: blur(10px);
     transition: all var(--transition-base);
     text-align: center;
+    color: var(--text-primary);
+    box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
 }
 
 .feature-item:hover {
-    background: rgba(26, 31, 46, 1);
-    border-color: rgba(0, 212, 255, 0.3);
-    transform: translateY(-5px);
+    background: linear-gradient(135deg, rgba(79, 163, 247, 0.10) 0%, rgba(160, 230, 101, 0.05) 100%);
+    border-color: rgba(79, 163, 247, 0.18);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 50px rgba(10, 20, 30, 0.45);
 }
 
 .feature-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
+}
+
+.feature-icon i {
+   font-size: 4rem;   /* dimensione più piccola, puoi cambiare a piacere */
+    color: #4FA3F7; /* colore dell'icona, puoi cambiare a piacere */
 }
 
 .feature-item h4 {
@@ -614,31 +720,101 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+    /* stronger layered gradient + radial highlight for emphasis */
+    background: radial-gradient(circle at 15% 30%, rgba(79, 163, 247, 0.12), transparent 18%), linear-gradient(135deg, rgba(79, 163, 247, 0.06) 0%, rgba(160, 230, 101, 0.03) 100%);
     z-index: 0;
+    transform: scale(1.02);
 }
 
 .cta-content {
     position: relative;
     z-index: 1;
-    text-align: center;
-    padding: 4rem;
-    background: rgba(26, 31, 46, 0.8);
-    border: 2px solid rgba(0, 212, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 3.5rem;
+    /* use the same subtler gradient but slightly stronger */
+    background: linear-gradient(135deg, rgba(79, 163, 247, 0.08) 0%, rgba(160, 230, 101, 0.04) 100%);
+    border: 1px solid rgba(79, 163, 247, 0.12);
     border-radius: var(--radius-xl);
-    backdrop-filter: blur(20px);
-}
-
-.cta-content h2 {
-    margin-bottom: 1rem;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 24px 80px rgba(10, 20, 30, 0.55);
     color: var(--text-primary);
 }
 
-.cta-content p {
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.cta-text h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.05;
+    color: var(--text-primary);
+}
+
+.cta-text p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 680px;
+}
+
+.cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-end;
+}
+
+.cta-note {
+    font-size: 0.92rem;
+    color: var(--text-tertiary);
+    text-align: right;
+}
+
+/* Enhanced primary CTA */
+.btn-primary.btn-large {
+    padding: 1.1rem 3rem;
+    font-size: 1.15rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 40px rgba(79, 163, 247, 0.28);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary.btn-large:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 18px 80px rgba(79, 163, 247, 0.44);
+}
+
+/* Keep focus visible for keyboard users but avoid scale to prevent enlargement on click/navigation */
+.btn-primary.btn-large:focus {
+    transform: translateY(-2px) scale(1);
+    box-shadow: 0 12px 50px rgba(79, 163, 247, 0.36);
+    outline: 3px solid rgba(79, 163, 247, 0.12);
+    outline-offset: 3px;
+}
+
+/* Prevent transient enlargement on click/navigation: use a subtle press state */
+.btn-primary.btn-large:active {
+    transform: translateY(0) scale(0.985) !important;
+    box-shadow: 0 6px 30px rgba(79, 163, 247, 0.18) !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 900px) {
+    .cta-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .cta-actions {
+        align-items: center;
+    }
+
+    .cta-note {
+        text-align: center;
+    }
 }
 
 /* ===============================
@@ -661,10 +837,6 @@ a {
 
     .hero-cta {
         flex-direction: column;
-    }
-
-    .main-nav {
-        display: none;
     }
 
     .nav-toggle {
@@ -715,6 +887,94 @@ a {
 }
 
 /* ===============================
+   Cookie Banner
+================================ */
+.cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: min(1100px, 95%);
+    max-width: 1100px;
+    background: rgba(6, 27, 54, 0.88);
+    color: var(--text-primary);
+    border: 1px solid rgba(79, 163, 247, 0.12);
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transition: transform var(--transition-base), opacity var(--transition-base);
+    opacity: 0;
+}
+
+.cookie-banner.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.cookie-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: calc(100% - 180px);
+}
+
+.cookie-content h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.cookie-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cookie-banner .nav-link {
+    color: var(--accent);
+    padding: 0;
+    border-bottom: none;
+}
+
+.btn-accept {
+    background: var(--gradient-accent);
+    border: none;
+    color: #000;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+@media (max-width: 640px) {
+    .cookie-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+    }
+
+    .cookie-actions {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .cookie-content {
+        max-width: 100%;
+    }
+}
+
+/* ===============================
    Animation Keyframes
 ================================ */
 @keyframes fadeInUp {
@@ -722,6 +982,7 @@ a {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -762,6 +1023,7 @@ a {
     }
 
     .main-nav {
+        display: flex;
         position: absolute !important;
         top: 80px;
         left: 0;
