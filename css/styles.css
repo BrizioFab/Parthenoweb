@@ -143,6 +143,22 @@ a {
     left: 100%;
 }
 
+/* Ripple effect for buttons (created by JS) */
+.btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    transform: scale(0);
+    opacity: 0.9;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ripple-effect 0.6s ease-out forwards;
+}
+
+@keyframes ripple-effect {
+    to { transform: scale(1); opacity: 0; }
+}
+
 .btn-primary {
     background: var(--gradient-accent);
     color: #000;
@@ -190,19 +206,53 @@ a {
     padding: 0 2rem;
 }
 
+/* Force consistent header layout on all pages */
+.site-header .container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 80px !important;
+    padding: 0 2rem !important;
+}
+
+/* Make sure main-nav stays left/right aligned and not centered on other pages */
+.site-header .main-nav {
+    display: flex !important;
+    align-items: center !important;
+}
+
 .logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1.3rem;
+    /* Increased logo text size by 20% */
+    font-size: 1.56rem; /* was 1.3rem */
     font-weight: 800;
-    height: 50px;
+    height: 80px; /* keep navbar height consistent - use full header height for internal alignment */
 }
 
 .logo img {
-    height: 50px;
+    /* Increase image height by ~20% while respecting nav height */
+    height: 60px; /* was 50px */
     width: auto;
     object-fit: contain;
+    transition: transform var(--transition-base);
+}
+
+/* Ensure navbar size doesn't change on small screens: cap logo size on narrow viewports */
+@media (max-width: 640px) {
+    .logo img { height: 50px; }
+    .logo { font-size: 1.3rem; }
+}
+
+/* Slightly increase nav link sizes (20% larger) without changing navbar height */
+.main-nav .nav-link {
+    font-size: 1.25rem; /* up from default */
+    line-height: 1;
+}
+
+.nav-cta {
+    font-size: 1.05rem; /* modest increase */
 }
 
 .logo-partheno {
@@ -424,6 +474,14 @@ a {
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.2));
+    /* scale hero logo by 20% on larger viewports */
+    transform: scale(1.2);
+    transform-origin: center;
+    transition: transform var(--transition-base);
+}
+
+@media (max-width: 640px) {
+    .hero-logo { transform: scale(1); }
 }
 
 /* ===============================
@@ -678,22 +736,29 @@ a {
     font-size: 1.15rem;
     border-radius: 999px;
     box-shadow: 0 8px 40px rgba(79,163,247,0.28);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    animation: cta-pulse 4s ease-in-out infinite;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.btn-primary.btn-large:hover,
-.btn-primary.btn-large:focus {
+.btn-primary.btn-large:hover {
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 18px 80px rgba(79,163,247,0.44);
-    animation-play-state: paused;
 }
 
-@keyframes cta-pulse {
-    0% { box-shadow: 0 8px 40px rgba(79,163,247,0.22); transform: translateY(0); }
-    50% { box-shadow: 0 18px 80px rgba(79,163,247,0.36); transform: translateY(-2px); }
-    100% { box-shadow: 0 8px 40px rgba(79,163,247,0.22); transform: translateY(0); }
+/* Keep focus visible for keyboard users but avoid scale to prevent enlargement on click/navigation */
+.btn-primary.btn-large:focus {
+    transform: translateY(-2px) scale(1);
+    box-shadow: 0 12px 50px rgba(79,163,247,0.36);
+    outline: 3px solid rgba(79,163,247,0.12);
+    outline-offset: 3px;
 }
+
+/* Prevent transient enlargement on click/navigation: use a subtle press state */
+.btn-primary.btn-large:active {
+    transform: translateY(0) scale(0.985) !important;
+    box-shadow: 0 6px 30px rgba(79,163,247,0.18) !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
 
 /* Responsive: stack on smaller screens */
 @media (max-width: 900px) {
