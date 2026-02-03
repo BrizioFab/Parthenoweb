@@ -8,230 +8,284 @@ document.addEventListener('DOMContentLoaded', () => {
     const next = carousel.querySelector('.carousel-next');
     const dotsWrap = carousel.querySelector('.carousel-dots');
 
-    let index = 0;
-    let active = false;
-    let onPrevClick = null, onNextClick = null;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID;
+    let currentIndex = 1; // Start at 1 because 0 is a clone
+    let slidesArray = [];
+    let originalSlidesCount = 0;
+    let autoPlayInterval;
+    let isTransitioning = false;
+
+    // Configuration
+    const AUTOPLAY_DELAY = 2500;
+    const TRANSITION_DURATION_MS = 500;
+    const TRANSITION_CSS = `transform ${TRANSITION_DURATION_MS}ms cubic-bezier(0.2, 0.8, 0.2, 1)`; // Smooth & Delicate
 
     const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
 
-    function slides() { return Array.from(track.children); }
+    // --- SETUP & CLONES ---
+    function setupSlides() {
+        // Clear potential existing clones if any (idempotency)
+        const existingClones = track.querySelectorAll('.carousel-clone');
+        existingClones.forEach(el => el.remove());
 
-    function buildDots() {
-        dotsWrap.innerHTML = '';
-        slides().forEach((_, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'dot';
-            btn.setAttribute('aria-label', `Vai al servizio ${i + 1}`);
-            btn.addEventListener('click', () => { index = i; update(); pauseAutoplayTemporarily(); });
-            dotsWrap.appendChild(btn);
-        });
-    }
+        const originalSlides = Array.from(track.children);
+        originalSlidesCount = originalSlides.length;
 
-    function visible() {
-        const s = slides();
-        if (!s.length) return 1;
-        const sWidth = s[0].getBoundingClientRect().width;
-        const w = wrapper.clientWidth;
-        return Math.max(1, Math.floor(w / (sWidth + 16)));
-    }
+        if (originalSlidesCount === 0) return;
 
-    function updateButtons() {
-        if (!prev || !next) return;
-        if (!isMobile()) { prev.hidden = true; next.hidden = true; return; }
-        prev.hidden = index <= 0;
-        next.hidden = index >= slides().length - visible();
-    }
+        // Clone First and Last
+        const firstClone = originalSlides[0].cloneNode(true);
+        const lastClone = originalSlides[originalSlidesCount - 1].cloneNode(true);
 
-    function updateDots() {
-        if (!isMobile()) { dotsWrap.innerHTML = ''; return; }
-        const dots = Array.from(dotsWrap.children);
-        dots.forEach((d, i) => d.classList.toggle('active', i === index));
-    }
+        firstClone.classList.add('carousel-clone');
+        lastClone.classList.add('carousel-clone');
 
-    function slideTo(i) {
-        if (!isMobile()) { track.style.transform = ''; return; }
-        const s = slides();
-        if (!s.length) return;
-        const sRect = s[0].getBoundingClientRect();
-        const gap = parseFloat(getComputedStyle(track).gap) || 16;
-        const slideWidth = sRect.width + gap;
-        track.style.transform = `translateX(-${Math.round(i * slideWidth)}px)`;
-    }
+        // Add clones to DOM
+        track.appendChild(firstClone);
+        track.insertBefore(lastClone, track.firstChild);
 
-    function update() {
-        if (!isMobile()) {
-            index = 0;
-            track.style.transform = '';
-            updateButtons();
-            updateDots();
-            return;
-        }
+        slidesArray = Array.from(track.children);
 
-        const s = slides();
-        const maxIndex = Math.max(0, s.length - visible());
-        index = Math.min(Math.max(0, index), maxIndex);
-        slideTo(index);
-        updateButtons();
+        // Reset index to 1 (first real slide)
+        currentIndex = 1;
+
+        updatePosition(false);
+        buildDots();
         updateDots();
     }
 
-    // Event handlers (kept named so we can add/remove)
-    function onPrev() {
-        const s = slides();
-        const maxIndex = Math.max(0, s.length - visible());
-        index = (index - 1 < 0) ? maxIndex : index - 1;
-        update();
-    }
-    function onNext() {
-        const s = slides();
-        const maxIndex = Math.max(0, s.length - visible());
-        index = (index + 1 > maxIndex) ? 0 : index + 1;
-        update();
-    }
+    function buildDots() {
+        dotsWrap.innerHTML = '';
+        if (originalSlidesCount <= 1) return;
 
-    // Touch handlers
-    let startX = 0, currentX = 0, dragging = false, lastTranslate = 0, startTransform = 0;
-    function getPointerX(e) {
-        if (e.touches && e.touches.length) return e.touches[0].clientX;
-        if (typeof e.clientX === 'number') return e.clientX;
-        return 0;
-    }
-    function getCurrentTranslate() {
-        const style = getComputedStyle(track).transform;
-        if (style && style !== 'none') {
-            const match = style.match(/matrix\(1, 0, 0, 1, (-?\d+), 0\)/);
-            if (match) return parseFloat(match[1]);
-            const match3d = style.match(/matrix3d\(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, (-?\d+), 0, 0, 1\)/);
-            if (match3d) return parseFloat(match3d[1]);
+        for (let i = 0; i < originalSlidesCount; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'dot';
+            btn.dataset.index = i;
+            btn.setAttribute('aria-label', `Vai al servizio ${i + 1}`);
+            btn.addEventListener('click', () => {
+                if (!isMobile()) return;
+                currentIndex = i + 1; // Map 0-based dot to 1-based slide
+                setPositionByIndex();
+                stopAutoplay();
+                startAutoplay();
+            });
+            dotsWrap.appendChild(btn);
         }
-        return 0;
     }
-    function onPointerDown(e) {
-        if (!isMobile()) return;
-        startX = getPointerX(e);
-        dragging = true;
-        wrapper.classList.add('dragging');
-        lastTranslate = 0;
-        startTransform = getCurrentTranslate();
-        track.style.transition = 'none';
-    }
-    function onPointerMove(e) {
-        if (!dragging || !isMobile()) return;
-        currentX = getPointerX(e);
-        const dx = currentX - startX;
-        lastTranslate = dx;
-        const s = slides();
-        if (!s.length) return;
-        const gap = parseFloat(getComputedStyle(track).gap) || 16;
-        const slideWidth = s[0].getBoundingClientRect().width + gap;
-        track.style.transform = `translate3d(${-index * slideWidth + dx}px, 0, 0)`;
-    }
-    function onPointerUp(e) {
-        if (!dragging || !isMobile()) return;
-        dragging = false;
-        wrapper.classList.remove('dragging');
-        track.style.transition = 'transform 0.35s cubic-bezier(.4,.7,.4,1)';
-        const dx = lastTranslate;
-        const s = slides();
-        const gap = parseFloat(getComputedStyle(track).gap) || 16;
-        const slideWidth = s[0].getBoundingClientRect().width + gap;
 
-        if (Math.abs(dx) > slideWidth * 0.25) {
-            const maxIndex = Math.max(0, slides().length - visible());
-            if (dx < 0) {
-                // Swipe Left (Next)
-                index = (index + 1 > maxIndex) ? 0 : index + 1;
-            } else {
-                // Swipe Right (Prev)
-                index = (index - 1 < 0) ? maxIndex : index - 1;
+    function updateDots() {
+        const dots = Array.from(dotsWrap.children);
+        dots.forEach(d => d.classList.remove('active'));
+
+        // Calculate 'Real' Index
+        // currentIndex 0 (CloneLast) -> real index: last
+        // currentIndex N+1 (CloneFirst) -> real index: 0
+        let realIndex = currentIndex - 1;
+        if (realIndex < 0) realIndex = originalSlidesCount - 1;
+        if (realIndex >= originalSlidesCount) realIndex = 0;
+
+        if (dots[realIndex]) dots[realIndex].classList.add('active');
+    }
+
+    // --- POSITIONING ---
+    function getSlideWidth() {
+        if (!slidesArray.length) return 0;
+        const rect = slidesArray[0].getBoundingClientRect();
+        // Include gap if present
+        const style = window.getComputedStyle(track);
+        const gap = parseFloat(style.gap) || 0;
+        return rect.width + gap;
+    }
+
+    function setPositionByIndex(animate = true) {
+        if (!isMobile()) {
+            track.style.transform = 'none';
+            track.style.transition = 'none';
+            return;
+        }
+
+        const width = getSlideWidth();
+        currentTranslate = currentIndex * -width;
+        prevTranslate = currentTranslate;
+
+        if (animate) {
+            track.style.transition = TRANSITION_CSS;
+            isTransitioning = true;
+        } else {
+            track.style.transition = 'none';
+            isTransitioning = false;
+        }
+
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        updateDots();
+    }
+
+    function updatePosition(animate = true) {
+        setPositionByIndex(animate);
+    }
+
+
+    // --- TRANSITION LOOPS ---
+    track.addEventListener('transitionend', () => {
+        isTransitioning = false;
+
+        // Teleport Logic
+        if (!slidesArray[currentIndex]) return;
+
+        if (slidesArray[currentIndex].classList.contains('carousel-clone')) {
+            track.style.transition = 'none';
+
+            if (currentIndex === 0) {
+                // We are at CloneLast -> Jump to RealLast
+                currentIndex = slidesArray.length - 2;
+            } else if (currentIndex === slidesArray.length - 1) {
+                // We are at CloneFirst -> Jump to RealFirst
+                currentIndex = 1;
             }
+
+            const width = getSlideWidth();
+            currentTranslate = currentIndex * -width;
+            prevTranslate = currentTranslate;
+            requestAnimationFrame(() => {
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            });
         }
-        slideTo(index);
-        setTimeout(() => { track.style.transition = ''; }, 400);
-        lastTranslate = 0;
+    });
+
+    // --- MOVING ---
+    function slideNext() {
+        if (currentIndex >= slidesArray.length - 1) return;
+        currentIndex++;
+        setPositionByIndex(true);
     }
 
-    function onKeydown(e) {
-        if (e.key === 'ArrowLeft') onPrev();
-        if (e.key === 'ArrowRight') onNext();
+    function slidePrev() {
+        if (currentIndex <= 0) return;
+        currentIndex--;
+        setPositionByIndex(true);
     }
 
-    // Autoplay controls
-    let autoplayTimer = null;
-    let autoplayDelay = 2500; // ms
-    let resumeDelay = 5000; // ms after user interaction
-    let resumeTimer = null;
-
-    function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(() => {
+    // --- TOUCH HANDLING ---
+    function touchStart(index) {
+        return function (event) {
             if (!isMobile()) return;
-            onNext(); // Re-use loop logic
-        }, autoplayDelay);
+            isDragging = true;
+            stopAutoplay();
+            startPos = getPositionX(event);
+            animationID = requestAnimationFrame(animation);
+            track.style.transition = 'none'; // Immediate response
+        }
     }
 
+    function touchEnd() {
+        if (!isMobile()) return;
+        isDragging = false;
+        cancelAnimationFrame(animationID);
 
-    function stopAutoplay() {
-        if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
-        if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
-    }
+        const movedBy = currentTranslate - prevTranslate;
+        const width = getSlideWidth();
 
-    function pauseAutoplayTemporarily() {
-        stopAutoplay();
-        // resume after inactivity
-        resumeTimer = setTimeout(() => startAutoplay(), resumeDelay);
-    }
+        // Threshold to snap
+        if (movedBy < -width * 0.2) {
+            slideNext();
+        } else if (movedBy > width * 0.2) {
+            slidePrev();
+        } else {
+            setPositionByIndex(true); // Snap back
+        }
 
-    function activate() {
-        if (active) return;
-        active = true;
-        buildDots();
-        update();
-        // nessun prev/next
-        // Pointer events (universale: mouse, touch, pen)
-        wrapper.addEventListener('pointerdown', onPointerDown);
-        wrapper.addEventListener('pointermove', onPointerMove);
-        wrapper.addEventListener('pointerup', onPointerUp);
-        // Touch events (fallback per browser vecchi)
-        wrapper.addEventListener('touchstart', onPointerDown, { passive: true });
-        wrapper.addEventListener('touchmove', onPointerMove, { passive: true });
-        wrapper.addEventListener('touchend', onPointerUp);
-        // pause autoplay during pointerdown / interaction
-        wrapper.addEventListener('pointerdown', pauseAutoplayTemporarily);
-        carousel.addEventListener('keydown', onKeydown);
-        carousel.tabIndex = 0;
-        // start autoplay on activate
         startAutoplay();
     }
 
-    function deactivate() {
-        if (!active) return;
-        active = false;
-        index = 0;
-        track.style.transform = '';
-        dotsWrap.innerHTML = '';
-        if (prev && onPrevClick) prev.removeEventListener('click', onPrevClick);
-        if (next && onNextClick) next.removeEventListener('click', onNextClick);
-        wrapper.removeEventListener('touchstart', onTouchStart);
-        wrapper.removeEventListener('touchmove', onTouchMove);
-        wrapper.removeEventListener('touchend', onTouchEnd);
-        wrapper.removeEventListener('pointerdown', pauseAutoplayTemporarily);
-        carousel.removeEventListener('keydown', onKeydown);
-        if (carousel.hasAttribute('tabindex')) carousel.removeAttribute('tabindex');
+    function touchMove(event) {
+        if (isDragging && isMobile()) {
+            const currentPosition = getPositionX(event);
+            const currentMove = currentPosition - startPos;
+            currentTranslate = prevTranslate + currentMove;
+        }
+    }
+
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    function animation() {
+        if (isDragging) {
+            track.style.transform = `translateX(${currentTranslate}px)`;
+            requestAnimationFrame(animation);
+        }
+    }
+
+    // --- AUTOPLAY ---
+    function startAutoplay() {
         stopAutoplay();
-        if (resumeTimer) clearTimeout(resumeTimer);
-        updateButtons();
+        autoPlayInterval = setInterval(() => {
+            if (isMobile()) slideNext();
+        }, AUTOPLAY_DELAY);
     }
 
-    // Init depending on viewport and handle changes
-    function check() {
-        if (isMobile()) activate(); else deactivate();
-        update();
+    function stopAutoplay() {
+        clearInterval(autoPlayInterval);
     }
 
-    let resizeTimer = null;
-    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(check, 120); });
+    // --- EVENTS ---
+    // Use closure to access fresh variables if needed, but here simple references work
+    // because currentIndex is module-scope. 
+    // However, for touchStart we wrapped it, let's unwrap to keep it simple
 
-    // initial
-    check();
+    wrapper.addEventListener('touchstart', (e) => touchStart()(e), { passive: true });
+    wrapper.addEventListener('touchend', touchEnd);
+    wrapper.addEventListener('touchmove', touchMove, { passive: true });
+
+    wrapper.addEventListener('mousedown', (e) => touchStart()(e));
+    wrapper.addEventListener('mouseup', touchEnd);
+    wrapper.addEventListener('mouseleave', () => { if (isDragging) touchEnd() });
+    wrapper.addEventListener('mousemove', touchMove);
+
+    // Prev/Next Buttons (if visible)
+    if (prev) prev.addEventListener('click', () => { stopAutoplay(); slidePrev(); startAutoplay(); });
+    if (next) next.addEventListener('click', () => { stopAutoplay(); slideNext(); startAutoplay(); });
+
+    // Initialization & Resize
+    function init() {
+        if (isMobile()) {
+            // Setup if not already setup (check for clones)
+            // But resize might need re-calc of widths -> updatePosition
+            if (slidesArray.length === 0 || slidesArray.length === originalSlidesCount) {
+                setupSlides();
+            } else {
+                updatePosition(false);
+            }
+            startAutoplay();
+        } else {
+            // Desktop: Clean up
+            track.style.transform = 'none';
+            track.style.transition = 'none';
+            stopAutoplay();
+
+            const existingClones = track.querySelectorAll('.carousel-clone');
+            existingClones.forEach(el => el.remove());
+            slidesArray = [];
+            // We set slidesArray to empty so next Mobile Init triggers setupSlides
+            // But we must NOT lose originalSlidesCount tracking? 
+            // setupSlides re-reads from DOM. 
+            // When we remove clones, DOM returns to original state. Perfect.
+        }
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            init();
+        }, 200);
+    });
+
+    // Need to wait for layout/CSS
+    setTimeout(init, 100);
 });
