@@ -1,3 +1,23 @@
+/**
+ * CAROUSEL TOUCH-FRIENDLY CON LOOP INFINITO
+ * =========================================
+ * 
+ * Sistema di carosello mobile con:
+ * - Clonazione slide per loop infinito fluido
+ * - Swipe touch ottimizzato per mobile
+ * - Autoplay con intervallo 2.5s
+ * - Pallini di navigazione sincronizzati
+ * 
+ * LOGICA CLONI:
+ * - Prima slide reale → clonata alla fine
+ * - Ultima slide reale → clonata all'inizio
+ * - Permette transizioni fluide senza 'salti' visivi
+ * - Teleport invisibile quando si raggiunge un clone
+ * 
+ * @author Parthenoweb Team
+ * @version 3.0
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     const carousel = document.querySelector('.services-carousel');
     if (!carousel) return;

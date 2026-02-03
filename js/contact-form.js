@@ -1,11 +1,24 @@
-// Contact Form Handler with Validation & Feedback
+/**
+ * GESTIONE FORM CONTATTI CON VALIDAZIONE
+ * =======================================
+ * 
+ * - Integrazione Formspree per invio email
+ * - Validazione in tempo reale (email, telefono)
+ * - Feedback visivo su campi (rosso/azzurro)
+ * - Loading state durante invio
+ * - Messaggi success/error per utente
+ * 
+ * NOTA: Richiede form.action impostato in HTML su endpoint Formspree
+ * 
+ * @author Parthenoweb Team
+ */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
 
     if (form) {
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             // Get form data
@@ -63,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputs = form?.querySelectorAll('input, textarea');
     if (inputs) {
         inputs.forEach(input => {
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 if (!this.value.trim()) {
                     this.style.borderColor = '#ff6464';
                 } else {
@@ -71,20 +84,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 this.style.borderColor = '#00d4ff';
             });
         });
     }
 });
 
-// Email validation
+// Email validation - formato standard
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// Phone validation (Italian format)
+// Phone validation - formato italiano
 function isValidPhone(phone) {
     const re = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
     return re.test(phone.replace(/\s/g, ''));

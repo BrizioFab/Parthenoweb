@@ -1,4 +1,17 @@
-// Counter Animation
+/**
+ * ANIMAZIONE COUNTER CON INTERSECTION OBSERVER
+ * =============================================
+ * 
+ * - Conta da 0 al numero target con animazione smooth
+ * - Trigger basato su scroll (IntersectionObserver)
+ * - requestAnimationFrame per performance ottimali
+ * - Attivazione unica alla prima visualizzazione
+ * 
+ * NOTA: Elementi richiedono attributo data-target="numero"
+ * 
+ * @author Parthenoweb Team
+ */
+
 class CounterAnimation {
     constructor() {
         this.counters = document.querySelectorAll('[data-target]');
@@ -29,9 +42,9 @@ class CounterAnimation {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const current = Math.floor(start + (target - start) * progress);
-                
+
                 counter.textContent = current;
-                
+
                 if (progress < 1) {
                     requestAnimationFrame(animate);
                 } else {

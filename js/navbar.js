@@ -1,3 +1,16 @@
+/**
+ * NAVBAR DINAMICA CON MENU RESPONSIVE
+ * ====================================
+ * 
+ * - Genera navbar da JavaScript per consistenza multi-pagina
+ * - Detection automatica percorso (root vs /pages/)
+ * - Hamburger menu per mobile (< 768px)
+ * - Auto-close menu al click su link
+ * - Click fuori per chiudere menu mobile
+ * 
+ * @author Parthenoweb Team
+ */
+
 document.addEventListener('DOMContentLoaded', function () {
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
     if (!navbarPlaceholder) return;
@@ -53,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mainNav = document.querySelector('.main-nav');
 
     if (navToggle && mainNav) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function () {
             const isActive = mainNav.classList.contains('active');
             if (isActive) {
                 mainNav.classList.remove('active');
@@ -73,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const isClickInsideNav = mainNav.contains(event.target);
             const isClickOnToggle = navToggle.contains(event.target);
             if (!isClickInsideNav && !isClickOnToggle) {
