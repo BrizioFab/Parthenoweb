@@ -1,3 +1,15 @@
+/**
+ * BANNER COOKIE CONSENT
+ * ======================
+ * 
+ * - Banner consenso cookie (solo cookie tecnici)
+ * - Salvataggio preferenza in localStorage
+ * - Percorsi relativi dinamici (root / pages/)
+ * - Auto-show con delay per user experience
+ * 
+ * @author Parthenoweb Team
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     // Check if user already accepted
     if (localStorage.getItem('cookiesAccepted')) {

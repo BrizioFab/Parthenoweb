@@ -12,11 +12,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Icone-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-pap1V+Fj9aQhT28Qd2+gL0XPOz+pEN6p+1eV0vU1x+F1p0Hhhe+VQWwP8+p0XU2wXy6+Z/jN1UpFZBt/eJ+F8A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="css/fixes.css">
+    
     <!-- Favicon -->
     <link rel=" icon" type="image/x-icon" href="assets/images/Favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Favicon/favicon-32x32.png">
@@ -80,66 +77,73 @@
                     <p>Soluzioni complete per la tua presenza digitale</p>
                 </div>
 
-                <div class="services-grid">
-                    <!-- Service Card 1 -->
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
-                        <div class="service-icon">
-                            <img src="assets/images/Icone Card/Icona Consulenza.png" alt="Consulenza">
-                        </div>
-                        <h3>Consulenza Strategica</h3>
-                        <p>Analisi approfondita del tuo business per definire la strategia digitale più efficace.</p>
-                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
-                    </div>
+                <div class="services-carousel" data-aos="fade-up">
+                    <button class="carousel-prev" aria-label="Servizi precedenti" hidden>‹</button>
+                    <div class="carousel-track-wrapper">
+                        <div class="services-grid carousel-track">
+                            <!-- Service Card 1 -->
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                                <div class="service-icon">
+                                    <img src="assets/images/Icone Card/Icona Consulenza.png" alt="Consulenza">
+                                </div>
+                                <h3>Consulenza Strategica</h3>
+                                <p>Analisi approfondita del tuo business per definire la strategia digitale più efficace.</p>
+                                <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                            </div>
 
-                    <!-- Service Card 2 -->
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-icon">
-                            <img src="assets/images/Icone Card/Icona web design.png" alt="Web Design">
-                        </div>
-                        <h3>Web Design & UI/UX</h3>
-                        <p>Design moderno e intuitivo che cattura l'attenzione e guida gli utenti.</p>
-                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
-                    </div>
+                            <!-- Service Card 2 -->
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="service-icon">
+                                    <img src="assets/images/Icone Card/Icona web design.png" alt="Web Design">
+                                </div>
+                                <h3>Web Design & UI/UX</h3>
+                                <p>Design moderno e intuitivo che cattura l'attenzione e guida gli utenti.</p>
+                                <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                            </div>
 
-                    <!-- Service Card 3 -->
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="service-icon">
-                            <img src="assets/images/Icone Card/Icona e-commerce.png" alt="E-Commerce">
-                        </div>
-                        <h3>E-Commerce Solutions</h3>
-                        <p>Piattaforme e-commerce potenti per massimizzare le tue vendite online.</p>
-                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
-                    </div>
+                            <!-- Service Card 3 -->
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="service-icon">
+                                    <img src="assets/images/Icone Card/Icona e-commerce.png" alt="E-Commerce">
+                                </div>
+                                <h3>E-Commerce Solutions</h3>
+                                <p>Piattaforme e-commerce potenti per massimizzare le tue vendite online.</p>
+                                <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                            </div>
 
-                    <!-- Service Card 4 -->
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="service-icon">
-                            <img src="assets/images/Icone Card/Icona Ottimizzazione.png" alt="SEO">
-                        </div>
-                        <h3>SEO & Performance</h3>
-                        <p>Ottimizzazione per i motori di ricerca e velocità di caricamento superiore.</p>
-                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
-                    </div>
+                            <!-- Service Card 4 -->
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="service-icon">
+                                    <img src="assets/images/Icone Card/Icona Ottimizzazione.png" alt="SEO">
+                                </div>
+                                <h3>SEO & Performance</h3>
+                                <p>Ottimizzazione per i motori di ricerca e velocità di caricamento superiore.</p>
+                                <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                            </div>
 
-                    <!-- Service Card 5 -->
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="service-icon">
-                            <img src="assets/images/Icone Card/Icona Sviluppo Personalizzato.png" alt="Sviluppo">
-                        </div>
-                        <h3>Sviluppo Personalizzato</h3>
-                        <p>Soluzioni custom sviluppate specificamente per le tue esigenze uniche.</p>
-                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
-                    </div>
+                            <!-- Service Card 5 -->
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                                <div class="service-icon">
+                                    <img src="assets/images/Icone Card/Icona Sviluppo Personalizzato.png" alt="Sviluppo">
+                                </div>
+                                <h3>Sviluppo Personalizzato</h3>
+                                <p>Soluzioni custom sviluppate specificamente per le tue esigenze uniche.</p>
+                                <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                            </div>
 
-                    <!-- Service Card 6 -->
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="service-icon">
-                            <img src="assets/images/Icone Card/Icona Manutenzione.png" alt="Manutenzione">
+                            <!-- Service Card 6 -->
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                                <div class="service-icon">
+                                    <img src="assets/images/Icone Card/Icona Manutenzione.png" alt="Manutenzione">
+                                </div>
+                                <h3>Supporto & Manutenzione</h3>
+                                <p>Assistenza continua per mantenere il tuo sito sempre aggiornato e performante.</p>
+                                <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
+                            </div>
                         </div>
-                        <h3>Supporto & Manutenzione</h3>
-                        <p>Assistenza continua per mantenere il tuo sito sempre aggiornato e performante.</p>
-                        <a href="pages/contattaci.html" class="service-link">Scopri di più →</a>
                     </div>
+                    <button class="carousel-next" aria-label="Servizi successivi" hidden>›</button>
+                    <div class="carousel-dots" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
@@ -208,6 +212,7 @@
     <script src="js/animations.js"></script>
     <script src="js/particles.js"></script>
     <script src="js/counter.js"></script>
+    <script src="js/carousel.js"></script>
 
     <script>
         // Initialize AOS
@@ -217,6 +222,8 @@
             once: true
         });
     </script>
+
+    <script src="js/fixes.js"></script>
 </body>
 
 </html>

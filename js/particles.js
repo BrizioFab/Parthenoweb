@@ -1,11 +1,23 @@
-// Particle System for Hero Background
+/**
+ * SISTEMA PARTICELLE PER BACKGROUND HERO
+ * =======================================
+ * 
+ * - Generazione dinamica particelle luminose
+ * - Animazione CSS fluida (float verticale)
+ * - Dimensioni e timing randomizzati
+ * - Responsive al resize
+ * 
+ * NOTA: Richiede elemento #particles come container
+ * 
+ * @author Parthenoweb Team
+ */
 
 class ParticleSystem {
     constructor(containerId, particleCount = 30) {
         this.container = document.getElementById(containerId);
         this.particleCount = particleCount;
         this.particles = [];
-        
+
         if (this.container) {
             this.init();
         }
@@ -20,7 +32,7 @@ class ParticleSystem {
     createParticle() {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        
+
         const size = Math.random() * 3 + 1;
         const duration = Math.random() * 20 + 20;
         const delay = Math.random() * 10;
@@ -85,7 +97,7 @@ if (!document.getElementById('particle-animation-style')) {
 // Initialize particle system when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     const particleSystem = new ParticleSystem('particles', 40);
-    
+
     // Recreate particles on window resize for responsiveness
     let resizeTimer;
     window.addEventListener('resize', () => {

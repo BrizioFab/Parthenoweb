@@ -1,4 +1,15 @@
-// Advanced Animations & Interactions
+/**
+ * ANIMAZIONI AVANZATE E INTERAZIONI
+ * ==================================
+ * 
+ * - Smooth scroll con offset per navbar
+ * - Parallax effect su gradienti hero
+ * - Fade hero durante scroll
+ * - Effetto ripple su bottoni al click
+ * - Chiusura automatica menu mobile
+ * 
+ * @author Parthenoweb Team
+ */
 
 // Smooth Scroll Enhancement
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -25,7 +36,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallaxElements = document.querySelectorAll('.hero-gradient-1, .hero-gradient-2');
-    
+
     parallaxElements.forEach((element, index) => {
         const speed = (index + 1) * 0.5;
         element.style.transform = `translateY(${scrolled * speed}px)`;
@@ -48,7 +59,7 @@ serviceCards.forEach((card, index) => {
 
 // Button Ripple Effect
 document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -61,7 +72,7 @@ document.querySelectorAll('.btn').forEach(button => {
         ripple.classList.add('ripple');
 
         this.appendChild(ripple);
-        
+
         setTimeout(() => ripple.remove(), 600);
     });
 });
@@ -69,7 +80,7 @@ document.querySelectorAll('.btn').forEach(button => {
 // Mobile Menu Toggle (if exists)
 const navToggle = document.querySelector('.nav-toggle');
 if (navToggle) {
-    navToggle.addEventListener('click', function() {
+    navToggle.addEventListener('click', function () {
         const mainNav = document.querySelector('.main-nav');
         if (mainNav) {
             mainNav.classList.toggle('active');
@@ -86,5 +97,3 @@ document.querySelectorAll('.nav-link').forEach(link => {
         }
     });
 });
-
-console.log('Animations initialized');
