@@ -1063,6 +1063,7 @@ body:not(.aos-init) .service-card {
         justify-content: flex-start;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
+        align-items: stretch; /* ADDED: make cards same height */
     }
     .carousel-track.dragging {
         transition: none;
@@ -1201,6 +1202,9 @@ body:not(.aos-init) .service-card {
     }
     .services-grid.carousel-track .service-card {
         min-width: calc(100% - 1rem);
+        height: auto; /* Ensure flex takes over */
+        display: flex; /* Flex column for inner alignment if needed */
+        flex-direction: column;
     }
     .carousel-track-wrapper { padding-bottom: 0.5rem; }
 }
@@ -1223,7 +1227,7 @@ body:not(.aos-init) .service-card {
     cursor: pointer;
     padding: 0.5rem 1rem;
     transition: all var(--transition-base);
-    z-index: 999;
+    z-index: 10000; /* Ensure toggle is above menu */
 }
 
 .nav-toggle:hover {
@@ -1237,24 +1241,26 @@ body:not(.aos-init) .service-card {
 
     .main-nav {
         display: flex;
-        position: absolute !important;
+        position: fixed !important; /* Changed to fixed for better stability */
         top: 80px;
         left: 0;
         width: 100%;
-        background: rgba(15, 20, 25, 0.98);
+        background: rgba(4, 56, 115, 0.98); /* Improved background color consistency */
         backdrop-filter: blur(20px);
-        border-bottom: none;
+        border-bottom: 2px solid rgba(79, 163, 247, 0.2);
         flex-direction: column !important;
         gap: 0 !important;
-        padding: 2rem 0;
+        padding: 0;
         max-height: 0;
         overflow: hidden;
-        transition: max-height var(--transition-base);
-        z-index: 99;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 9999; /* Boost z-index */
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
 
     .main-nav.active {
-        max-height: 500px;
+        max-height: 100vh; /* Allow full height */
+        padding-bottom: 2rem;
     }
 
     .nav-link {

@@ -76,8 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event handlers (kept named so we can add/remove)
-    function onPrev() { index = Math.max(0, index - 1); update(); }
-    function onNext() { index = Math.min(slides().length - visible(), index + 1); update(); }
+    function onPrev() {
+        const s = slides();
+        const maxIndex = Math.max(0, s.length - visible());
+        index = (index - 1 < 0) ? maxIndex : index - 1;
+        update();
+    }
+    function onNext() {
+        const s = slides();
+        const maxIndex = Math.max(0, s.length - visible());
+        index = (index + 1 > maxIndex) ? 0 : index + 1;
+        update();
+    }
 
     // Touch handlers
     let startX = 0, currentX = 0, dragging = false, lastTranslate = 0, startTransform = 0;
@@ -125,8 +135,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const s = slides();
         const gap = parseFloat(getComputedStyle(track).gap) || 16;
         const slideWidth = s[0].getBoundingClientRect().width + gap;
+
         if (Math.abs(dx) > slideWidth * 0.25) {
-            index = dx < 0 ? Math.min(slides().length - visible(), index + 1) : Math.max(0, index - 1);
+            const maxIndex = Math.max(0, slides().length - visible());
+            if (dx < 0) {
+                // Swipe Left (Next)
+                index = (index + 1 > maxIndex) ? 0 : index + 1;
+            } else {
+                // Swipe Right (Prev)
+                index = (index - 1 < 0) ? maxIndex : index - 1;
+            }
         }
         slideTo(index);
         setTimeout(() => { track.style.transition = ''; }, 400);
@@ -134,13 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onKeydown(e) {
-        if (e.key === 'ArrowLeft') { index = Math.max(0, index - 1); update(); }
-        if (e.key === 'ArrowRight') { index = Math.min(slides().length - visible(), index + 1); update(); }
+        if (e.key === 'ArrowLeft') onPrev();
+        if (e.key === 'ArrowRight') onNext();
     }
 
     // Autoplay controls
     let autoplayTimer = null;
-    let autoplayDelay = 4500; // ms
+    let autoplayDelay = 2500; // ms
     let resumeDelay = 5000; // ms after user interaction
     let resumeTimer = null;
 
@@ -148,10 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopAutoplay();
         autoplayTimer = setInterval(() => {
             if (!isMobile()) return;
-            const s = slides();
-            const maxIndex = Math.max(0, s.length - visible());
-            index = (index >= maxIndex) ? 0 : index + 1;
-            update();
+            onNext(); // Re-use loop logic
         }, autoplayDelay);
     }
 
