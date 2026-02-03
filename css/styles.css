@@ -152,7 +152,7 @@ a {
 .btn .ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255,255,255,0.12);
     transform: scale(0);
     opacity: 0.9;
     pointer-events: none;
@@ -161,10 +161,7 @@ a {
 }
 
 @keyframes ripple-effect {
-    to {
-        transform: scale(1);
-        opacity: 0;
-    }
+    to { transform: scale(1); opacity: 0; }
 }
 
 .btn-primary {
@@ -234,17 +231,14 @@ a {
     align-items: center;
     gap: 0.75rem;
     /* Increased logo text size by 20% */
-    font-size: 1.56rem;
-    /* was 1.3rem */
+    font-size: 1.56rem; /* was 1.3rem */
     font-weight: 800;
-    height: 80px;
-    /* keep navbar height consistent - use full header height for internal alignment */
+    height: 80px; /* keep navbar height consistent - use full header height for internal alignment */
 }
 
 .logo img {
     /* Increase image height by ~20% while respecting nav height */
-    height: 60px;
-    /* was 50px */
+    height: 60px; /* was 50px */
     width: auto;
     object-fit: contain;
     transition: transform var(--transition-base);
@@ -252,25 +246,18 @@ a {
 
 /* Ensure navbar size doesn't change on small screens: cap logo size on narrow viewports */
 @media (max-width: 640px) {
-    .logo img {
-        height: 50px;
-    }
-
-    .logo {
-        font-size: 1.3rem;
-    }
+    .logo img { height: 50px; }
+    .logo { font-size: 1.3rem; }
 }
 
 /* Slightly increase nav link sizes (20% larger) without changing navbar height */
 .main-nav .nav-link {
-    font-size: 1.25rem;
-    /* up from default */
+    font-size: 1.25rem; /* up from default */
     line-height: 1;
 }
 
 .nav-cta {
-    font-size: 1.05rem;
-    /* modest increase */
+    font-size: 1.05rem; /* modest increase */
 }
 
 .logo-partheno {
@@ -283,8 +270,7 @@ a {
 .main-nav {
     display: flex;
     gap: 3rem;
-    align-items: center;
-    /* vertically center nav links */
+    align-items: center; /* vertically center nav links */
 }
 
 .nav-link {
@@ -292,8 +278,7 @@ a {
     font-weight: 500;
     transition: color var(--transition-base);
     position: relative;
-    display: inline-flex;
-    /* ensure vertical centering */
+    display: inline-flex; /* ensure vertical centering */
     align-items: center;
     padding: 0.2rem 0;
 }
@@ -515,9 +500,7 @@ a {
 }
 
 @media (max-width: 640px) {
-    .hero-logo {
-        transform: scale(1);
-    }
+    .hero-logo { transform: scale(1); }
 }
 
 /* ===============================
@@ -721,7 +704,7 @@ a {
     width: 100%;
     height: 100%;
     /* stronger layered gradient + radial highlight for emphasis */
-    background: radial-gradient(circle at 15% 30%, rgba(79, 163, 247, 0.12), transparent 18%), linear-gradient(135deg, rgba(79, 163, 247, 0.06) 0%, rgba(160, 230, 101, 0.03) 100%);
+    background: radial-gradient(circle at 15% 30%, rgba(79,163,247,0.12), transparent 18%), linear-gradient(135deg, rgba(79,163,247,0.06) 0%, rgba(160,230,101,0.03) 100%);
     z-index: 0;
     transform: scale(1.02);
 }
@@ -775,27 +758,27 @@ a {
     padding: 1.1rem 3rem;
     font-size: 1.15rem;
     border-radius: 999px;
-    box-shadow: 0 8px 40px rgba(79, 163, 247, 0.28);
+    box-shadow: 0 8px 40px rgba(79,163,247,0.28);
     transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .btn-primary.btn-large:hover {
     transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 18px 80px rgba(79, 163, 247, 0.44);
+    box-shadow: 0 18px 80px rgba(79,163,247,0.44);
 }
 
 /* Keep focus visible for keyboard users but avoid scale to prevent enlargement on click/navigation */
 .btn-primary.btn-large:focus {
     transform: translateY(-2px) scale(1);
-    box-shadow: 0 12px 50px rgba(79, 163, 247, 0.36);
-    outline: 3px solid rgba(79, 163, 247, 0.12);
+    box-shadow: 0 12px 50px rgba(79,163,247,0.36);
+    outline: 3px solid rgba(79,163,247,0.12);
     outline-offset: 3px;
 }
 
 /* Prevent transient enlargement on click/navigation: use a subtle press state */
 .btn-primary.btn-large:active {
     transform: translateY(0) scale(0.985) !important;
-    box-shadow: 0 6px 30px rgba(79, 163, 247, 0.18) !important;
+    box-shadow: 0 6px 30px rgba(79,163,247,0.18) !important;
     transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
@@ -808,13 +791,9 @@ a {
         align-items: center;
     }
 
-    .cta-actions {
-        align-items: center;
-    }
+    .cta-actions { align-items: center; }
 
-    .cta-note {
-        text-align: center;
-    }
+    .cta-note { text-align: center; }
 }
 
 /* ===============================
@@ -906,7 +885,7 @@ a {
     align-items: center;
     justify-content: space-between;
     z-index: 10000;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     transition: transform var(--transition-base), opacity var(--transition-base);
     opacity: 0;
 }
@@ -923,55 +902,18 @@ a {
     max-width: calc(100% - 180px);
 }
 
-.cookie-content h3 {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--text-primary);
-}
+.cookie-content h3 { margin:0; font-size:1rem; color:var(--text-primary); }
+.cookie-content p { margin:0; font-size:0.95rem; color:var(--text-secondary); }
 
-.cookie-content p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-}
+.cookie-actions { display:flex; gap:0.75rem; align-items:center; justify-content:flex-end; }
 
-.cookie-actions {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.cookie-banner .nav-link {
-    color: var(--accent);
-    padding: 0;
-    border-bottom: none;
-}
-
-.btn-accept {
-    background: var(--gradient-accent);
-    border: none;
-    color: #000;
-    padding: 0.6rem 1rem;
-    border-radius: 999px;
-    cursor: pointer;
-}
+.cookie-banner .nav-link { color: var(--accent); padding:0; border-bottom:none; }
+.btn-accept { background:var(--gradient-accent); border:none; color:#000; padding:0.6rem 1rem; border-radius:999px; cursor:pointer; }
 
 @media (max-width: 640px) {
-    .cookie-banner {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 1rem;
-    }
-
-    .cookie-actions {
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .cookie-content {
-        max-width: 100%;
-    }
+    .cookie-banner { flex-direction: column; align-items:stretch; padding:1rem; }
+    .cookie-actions { justify-content:space-between; width:100%; }
+    .cookie-content { max-width:100%; }
 }
 
 /* ===============================
