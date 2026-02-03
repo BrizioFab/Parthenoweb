@@ -53,14 +53,19 @@
                         Compila il modulo e verrai ricontattato da un nostro consulente nel più breve tempo possibile.
                     </p>
 
-                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/mbdoybwo" method="POST">
+                    <form class="contact-form" id="contact-form" action="/invia-email" method="POST">
                         <input type="text" name="nome" placeholder="Nome e Cognome" required>
-                        <input type="tel" name="telefono" placeholder="Numero di telefono" required>
+                        <input type="tel" name="telefono" placeholder="Numero di telefono">
                         <input type="email" name="email" placeholder="Indirizzo email" required>
                         <textarea name="descrizione" placeholder="Descrivi il tuo problema o la tua richiesta..."
                             rows="4" required></textarea>
                         <button type="submit">INVIA RICHIESTA</button>
-                        <div id="form-message"></div>
+                        {% if success %}
+                        <div id="form-message" style="color: green; margin-top: 10px;">
+                            Richiesta inviata con successo! Ti ricontatteremo a breve.
+                        </div>
+                        {% endif %}
+
                     </form>
                 </div>
 
