@@ -16,9 +16,7 @@ templates = Jinja2Templates(directory="../pages")
 
 
 
-@app.get("/contact", response_class=HTMLResponse)
-def get_contact_page(request: Request):
-    return templates.TemplateResponse("contattaci.html", {"request": request})
+
 
 # Rotta POST: 
 @app.post("/invia-email")
