@@ -9,3 +9,5 @@ test('services section is present and cards are visible', async ({ page }) => {
   await expect(cards).toHaveCount(6);
   await expect(cards.first()).toBeVisible();
 });
+
+// Testing Github

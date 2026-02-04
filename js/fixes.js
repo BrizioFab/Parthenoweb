@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.service-card');
     if (!cards || !cards.length) return;
 
@@ -26,3 +26,5 @@ document.addEventListener('DOMContentLoaded', function() {
         cards.forEach(c => { c.style.opacity = '1'; c.style.transform = 'none'; });
     }
 });
+
+// Testing Github

@@ -62,3 +62,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const counter = new CounterAnimation();
     counter.init();
 });
+
+// Testing Github

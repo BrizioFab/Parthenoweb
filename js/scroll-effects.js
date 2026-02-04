@@ -1,12 +1,12 @@
 // Scroll Effects - Fade in cards on scroll
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const observerOptions = {
         threshold: 0.15,
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('fade-in');
@@ -23,3 +23,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Testing Github
