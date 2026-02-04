@@ -6,9 +6,9 @@ from email_utils import send_email
 from mangum import Mangum
 
 app = FastAPI(
-    docs_url=None,    # disabilita /docs
-    redoc_url=None,   # disabilita /redoc
-    openapi_url=None  # opzionale: disabilita il JSON OpenAPI
+   # docs_url=None,    # disabilita /docs
+   # redoc_url=None,   # disabilita /redoc
+   # openapi_url=None  # opzionale: disabilita il JSON OpenAPI
 )
 
 
