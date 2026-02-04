@@ -13,7 +13,7 @@ app = FastAPI(
 
 
 
-templates = Jinja2Templates(directory="../../pages")
+templates = Jinja2Templates(directory="../pages")
 
 
 
