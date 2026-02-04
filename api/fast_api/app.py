@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from email_utils import send_email
+from mangum import Mangum
 
 app = FastAPI(
     docs_url=None,    # disabilita /docs
@@ -12,7 +13,7 @@ app = FastAPI(
 
 
 
-templates = Jinja2Templates(directory="../pages")
+templates = Jinja2Templates(directory="../../pages")
 
 
 
@@ -39,3 +40,5 @@ async def handle_contact_form(
         "contattaci.html", 
         {"request": request, "success": success}
     )
+
+handler = Mangum(app)

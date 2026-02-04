@@ -1,18 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "fast_api/app.py",
-      "use": "@vercel/python"
+  "functions": {
+    "api/app.py": {
+      "runtime": "python3.9"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/fast_api/app.py"
-    }
-  ],
-  "env": {
-    "PORT": "8000"
   }
-}   
+}
+
