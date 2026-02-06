@@ -1,2 +1,6 @@
-{}
+{
+	"rewrites": [
+		{ "source": "/invia-email", "destination": "/api/invia-email" }
+	]
+}
 
