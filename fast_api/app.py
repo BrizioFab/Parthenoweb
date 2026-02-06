@@ -1,9 +1,6 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
 from fast_api.email_utils import send_email
-from mangum import Mangum
 
 app = FastAPI(
    # docs_url=None,    # disabilita /docs
@@ -40,5 +37,3 @@ async def handle_contact_form(
         "contattaci.html", 
         {"request": request, "success": success}
     )
-
-handler = Mangum(app)

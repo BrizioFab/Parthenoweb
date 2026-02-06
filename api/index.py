@@ -1,3 +1,6 @@
+from fast_api.app import app
+
+# ASGI entrypoint for Vercel — export `app` so the platform serves it.
 from mangum import Mangum
 from fast_api.app import app
 

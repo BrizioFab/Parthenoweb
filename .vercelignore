@@ -1,0 +1,9 @@
+# Vercel ignore rules
+node_modules/
+tests/
+test-results/
+*.pyc
+__pycache__/
+.env
+.vscode/
+.DS_Store
