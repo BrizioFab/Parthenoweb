@@ -52,8 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         formMessage.style.display = 'none';
                     }, 5000);
                 } else {
-                    // Error
-                    showMessage('✗ Si è verificato un errore. Riprova più tardi.', 'error');
+                    // Error - try to get error message from response
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMessage = errorData.message || 'Si è verificato un errore. Riprova più tardi.';
+                    showMessage(`✗ ${errorMessage}`, 'error');
+                    console.error('Response status:', response.status);
+                    console.error('Response data:', errorData);
                     button.textContent = originalText;
                     button.disabled = false;
                 }

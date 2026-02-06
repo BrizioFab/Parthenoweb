@@ -1,6 +1,4 @@
 {
-	"rewrites": [
-		{ "source": "/invia-email", "destination": "/api/invia-email" }
-	]
+	"buildCommand": "pip install -r requirements.txt"
 }
 

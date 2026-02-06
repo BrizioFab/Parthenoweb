@@ -1,3 +1,5 @@
+from mangum import Mangum
 from fast_api.app import app
 
-# ASGI entrypoint exposing the existing FastAPI `app` at /api/invia-email
+# ASGI entrypoint for /api/invia-email
+handler = Mangum(app)
