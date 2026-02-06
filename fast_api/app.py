@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import JSONResponse
 from .email_utils import send_email
 
 app = FastAPI(
@@ -28,12 +29,8 @@ async def handle_contact_form(
     try:
         # Passiamo tutti i dati alla funzione email
         send_email(nome, telefono, email, descrizione)
-        success = True
+        return JSONResponse({"success": True, "message": "Email inviata."}, status_code=200)
     except Exception as e:
+        # Log dell'eccezione per debug su Vercel
         print(f"Errore invio email: {e}")
-        success = False
-
-    return templates.TemplateResponse(
-        "contattaci.html", 
-        {"request": request, "success": success}
-    )
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)

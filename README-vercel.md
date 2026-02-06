@@ -33,3 +33,14 @@ uvicorn api.index:app --reload --port 8000
 ```
 
 Apri `http://localhost:8000` per verificare il funzionamento.
+
+Variabili d'ambiente per l'invio email
+
+Imposta queste variabili nel pannello Project > Environment Variables di Vercel (o localmente nel tuo `.env` durante lo sviluppo):
+
+- `EMAIL_ADDRESS` - Indirizzo email dal quale inviare (es. parthenoweb@gmail.com)
+- `EMAIL_PASSWORD` - Password dell'account o password per app (consigliata per Gmail)
+- `EMAIL_HOST` - (opzionale) SMTP host, default `smtp.gmail.com`
+- `EMAIL_PORT` - (opzionale) Porta SMTP, default `587`
+
+Nota: per Gmail devi usare una "App password" se hai l'autenticazione a due fattori abilitata; evita di mettere password in chiaro nel repo.
