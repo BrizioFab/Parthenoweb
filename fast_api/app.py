@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-from fast_api.email_utils import send_email
+from .email_utils import send_email
 
 app = FastAPI(
    # docs_url=None,    # disabilita /docs
