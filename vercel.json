@@ -1,9 +1,4 @@
 {
-  "buildCommand": "uv pip install -r requirements.txt",
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "python@3.11"
-    }
-  }
+  "buildCommand": "uv pip install -r requirements.txt"
 }
 
