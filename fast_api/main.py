@@ -55,6 +55,17 @@ async def home(request: Request):
     })
 
 
+@app.get("/portfolio", response_class=HTMLResponse)
+async def portfolio(request: Request):
+    """Portfolio page"""
+    return templates.TemplateResponse("portfolio.html", {
+        "request": request,
+        "page": "portfolio",
+        "page_title": "Portfolio",
+        "user_accepted_cookies": request.cookies.get("cookiesAccepted")
+    })
+
+
 @app.get("/contatti", response_class=HTMLResponse)
 async def contatti_get(request: Request):
     """Contact page (GET)"""
