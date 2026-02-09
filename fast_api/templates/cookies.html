@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Cookie Policy{% endblock %}
+
+{% block content %}
+<section class="cookies-section">
+    <div class="container">
+        <h1>Cookie Policy</h1>
+        
+        <div class="cookies-content">
+            <h2>Informazioni sui Cookie</h2>
+            <p>Il nostro sito utilizza cookie tecnici essenziali per il corretto funzionamento e per garantirti la migliore esperienza possibile.</p>
+
+            <h3>Cookie Tecnici</h3>
+            <p>Questi cookie sono necessari per le funzionalità di base del sito, come la navigazione e l'accesso alle risorse protette. Senza questi cookie, il sito non può funzionare correttamente.</p>
+
+            <h3>Nessun Tracciamento Pubblicitario</h3>
+            <p>Non utilizziamo cookie per il tracciamento pubblicitario, l'analisi del comportamento o la profilazione. La tua privacy è importante per noi.</p>
+
+            <h3>Gestione dei Cookie</h3>
+            <p>Puoi gestire le tue preferenze di cookie modificando le impostazioni del tuo browser. La maggior parte dei browser ti consente di rifiutare cookie e di avere un indicazione quando viene impostato un cookie.</p>
+
+            <h3>Contatti</h3>
+            <p>Per domande sulla nostra politica sui cookie, contattaci a <a href="mailto:parthenoweb@gmail.com">parthenoweb@gmail.com</a></p>
+        </div>
+
+        <div class="cookies-actions">
+            <a href="/" class="btn btn-primary">Torna a Home</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.cookies-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #02183b 0%, #043873 50%, #011029 100%);
+    color: #fff;
+    min-height: 60vh;
+}
+
+.cookies-content {
+    max-width: 800px;
+    line-height: 1.8;
+}
+
+.cookies-content h2, .cookies-content h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #00d4ff;
+}
+
+.cookies-content p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.cookies-actions {
+    text-align: center;
+    margin-top: 50px;
+}
+</style>
+{% endblock %}

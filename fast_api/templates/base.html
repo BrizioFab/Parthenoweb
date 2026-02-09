@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Parthenoweb{% endblock %} - Web Design & Development Professionali</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Soluzioni web premium per il tuo business. Design, sviluppo e strategie digitali.">
+
+    <!-- Font Awesome (icone) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/assets/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/fixes.css">
+    {% block extra_css %}{% endblock %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<body>
+    <!-- NAVBAR (server-rendered) -->
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="container" style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
+                <a href="/" class="logo">
+                    <img src="/static/assets/images/logo-sfondato.webp" alt="Logo Parthenoweb" class="logo-img" />
+                    <span class="logo-text">
+                        <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
+                    </span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+                <nav class="main-nav">
+                    <a href="/" class="nav-link {% if page == 'home' %}active{% endif %}">Home</a>
+                    <a href="/portfolio" class="nav-link {% if page == 'portfolio' %}active{% endif %}">Portfolio</a>
+                    <a href="/contatti" class="nav-cta">Contattaci</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- COOKIE BANNER (server-rendered) -->
+    {% if not user_accepted_cookies %}
+    <div id="cookieBanner" class="cookie-banner visible">
+        <div class="cookie-content">
+            <h3>Rispetto della tua Privacy</h3>
+            <p>Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo profilazione né tracciamento pubblicitario.</p>
+        </div>
+        <div class="cookie-actions">
+            <a href="/cookies" class="nav-link">Cookie Policy</a>
+            <button id="acceptCookies" class="btn-accept">Accetta</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MINIMAL JAVASCRIPT (UI effects only) -->
+    <script src="/static/js/navbar-toggle.js"></script>
+    <script src="/static/js/cookies.js"></script>
+    <script src="/static/js/animations.js"></script>
+    <script src="/static/js/carousel.js"></script>
+    <script src="/static/js/particles.js"></script>
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script>
+        AOS.init();
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

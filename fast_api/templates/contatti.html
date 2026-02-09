@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Contatti - Consulenza Gratuita{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/contatti.css">
+{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <div class="contact-wrapper">
+
+        <!-- COLONNA SINISTRA -->
+        <div class="contact-left">
+            <div class="hero-text">
+                <h1>
+                    <span class="text-blue">Ottieni subito</span><br>
+                    la tua <span class="text-green">Consulenza Gratuita!</span>
+                </h1>
+            </div>
+
+            <p class="contact-subtitle">
+                Piccola o grande che sia, la tua azienda apprezzerà il nostro aiuto finanziario
+                e le nostre consulenze aziendali! Siamo felici quando anche i nostri clienti lo sono...
+            </p>
+
+            <div class="contact-info">
+                <p>📞 +39 3770920451</p>
+                <p>📧 <a href="mailto:parthenoweb@gmail.com">parthenoweb@gmail.com</a></p>
+            </div>
+        </div>
+
+        <!-- COLONNA DESTRA -->
+        <div class="cta-box">
+            <h2>CONSULENZA GRATUITA</h2>
+
+            <p>
+                Compila il modulo e verrai ricontattato da un nostro consulente nel più breve tempo possibile.
+            </p>
+
+            <!-- Message Display -->
+            {% if success %}
+            <div class="form-message success">
+                ✓ Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo presto.
+            </div>
+            {% elif error %}
+            <div class="form-message error">
+                ✗ {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- Contact Form -->
+            <form class="contact-form" id="contact-form" method="POST" action="/contatti" enctype="multipart/form-data">
+                {% if errors %}
+                <div class="form-errors">
+                    {% for error in errors %}
+                    <p class="error-text">• {{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <input 
+                    type="text" 
+                    name="nome" 
+                    placeholder="Nome e Cognome" 
+                    required
+                    value="{{ form_data.get('nome', '') }}"
+                    pattern="[a-zA-Zà-ùÀ-Ù\s]{2,100}"
+                    title="Inserisci un nome valido (solo lettere e spazi)">
+
+                <input 
+                    type="tel" 
+                    name="telefono" 
+                    placeholder="Numero di telefono"
+                    value="{{ form_data.get('telefono', '') }}"
+                    pattern="[0-9\s\+\-]{5,20}"
+                    title="Inserisci un numero valido">
+
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Indirizzo email" 
+                    required
+                    value="{{ form_data.get('email', '') }}"
+                    title="Inserisci un email valido">
+
+                <textarea 
+                    name="descrizione" 
+                    placeholder="Descrivi il tuo problema o la tua richiesta..."
+                    rows="4" 
+                    required
+                    minlength="10"
+                    maxlength="1000">{{ form_data.get('descrizione', '') }}</textarea>
+
+                <button type="submit" id="submit-btn">INVIA RICHIESTA</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
+    if (e.target.method === 'POST') {
+        // HTML form with server-side validation will handle submission normally
+        return;
+    }
+});
+</script>
+{% endblock %}
