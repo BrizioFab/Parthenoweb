@@ -2,7 +2,7 @@
   "buildCommand": "uv pip install --system -r requirements.txt",
   "functions": {
     "fast_api/**": {
-      "runtime": "python3.10"
+      "runtime": "python@3.10"
     }
   }
 }
