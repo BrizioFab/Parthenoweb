@@ -1,4 +1,14 @@
 {
     "chat.agent.maxRequests": 100,
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "chat.tools.terminal.autoApprove": {
+        "/^git add requirements\\.txt ; git commit -m \"Fix: downgrade python-multipart to 0\\.0\\.21 for Python 3\\.9 compatibility on Vercel\" ; git push$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^git add vercel\\.json ; git commit -m \"Configure vercel\\.json to use Python 3\\.10 runtime for FastAPI functions\" ; git push$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }
