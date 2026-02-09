@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from .email_utils import send_email
+from email_utils import send_email
 
 app = FastAPI(
-   # docs_url=None,    # disabilita /docs
-   # redoc_url=None,   # disabilita /redoc
+   #docs_url=None,    # disabilita /docs
+   #redoc_url=None,   # disabilita /redoc
    # openapi_url=None  # opzionale: disabilita il JSON OpenAPI
 )
 
