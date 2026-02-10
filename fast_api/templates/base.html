@@ -7,7 +7,7 @@ comune a TUTTE le pagine (navbar, header, footer, cookie banner).
 
 COME FUNZIONA:
 1. Ogni pagina (home.html, contatti.html, etc.) EREDITA da questo template
-2. Le pagine figlie sovrescrivono {% block content %} con il loro contenuto
+2. Le pagine figlie sovrescrivono il blocco "content" con il loro contenuto
 3. Gli elementi comuni (navbar, cookie banner) sono renderizzati qui
 
 PAGINE CHE EREDITATION DA QUESTO:
@@ -35,7 +35,7 @@ MODIFICA QUESTO FILE QUANDO:
     <meta charset="UTF-8">
     
     <!-- TITLE: Titolo visibile nel tab del browser (SEO) -->
-    <!-- {% block title %} = ogni pagina può sovrascrivere il titolo -->
+    <!-- BLOCK TITLE: ogni pagina può sovrascrivere il titolo -->
     <title>{% block title %}Parthenoweb{% endblock %} - Web Design & Development Professionali</title>
     
     <!-- META: Viewport per responsive design (mobile-friendly) -->
@@ -109,7 +109,7 @@ MODIFICA QUESTO FILE QUANDO:
                 <button class="nav-toggle" aria-label="Toggle menu">☰</button>
                 
                 <!-- NAVIGATION MENU (Link pagine) -->
-                <!-- {% if page == 'home' %}active{% endif %} -->
+                <!-- Esempio: evidenzia il link attivo con la classe "active" -->
                 <!-- → Evidenzia il link della pagina corrente -->
                 <nav class="main-nav">
                     <a href="/" class="nav-link {% if page == 'home' %}active{% endif %}">Home</a>
@@ -124,7 +124,7 @@ MODIFICA QUESTO FILE QUANDO:
     <!-- ========================================================================
          CONTENUTO PRINCIPALE (Variabile per ogni pagina)
          ======================================================================== -->
-    <!-- {% block content %} = placeholder che ogni pagina riempie -->
+    <!-- BLOCK CONTENT: placeholder che ogni pagina riempie -->
     <!-- Le pagine figlie (home.html, contatti.html, etc.) sovrascrivono questo -->
     <main>
         {% block content %}{% endblock %}

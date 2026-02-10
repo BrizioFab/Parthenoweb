@@ -44,7 +44,7 @@ class FormValidator:
     
     @staticmethod
     def validate_nome(nome: str) -> Optional[str]:
-        """
+        r"""
         Valida il campo NOME del form
         
         REGOLE:
@@ -93,7 +93,7 @@ class FormValidator:
     
     @staticmethod
     def validate_email(email: str) -> Optional[str]:
-        """
+        r"""
         Valida il campo EMAIL del form
         
         REGOLE:
@@ -142,7 +142,7 @@ class FormValidator:
     
     @staticmethod
     def validate_telefono(telefono: Optional[str]) -> Optional[str]:
-        """
+        r"""
         Valida il campo TELEFONO del form (FACOLTATIVO)
         
         REGOLE:
