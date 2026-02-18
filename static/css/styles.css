@@ -1072,6 +1072,7 @@ body:not(.aos-init) .service-card {
 
 
 @media (max-width: 900px) {
+
     /* Nasconde il logo hero su mobile */
     .hero-visual {
         display: none;
@@ -1083,12 +1084,14 @@ body:not(.aos-init) .service-card {
         gap: 0.6rem;
     }
 
+    /* DENTRO @media (max-width: 900px) — sostituisci SOLO queste due regole: */
+
     .services-carousel .splide__pagination__page {
         display: block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.35);
+        width: 24px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.25);
         border: none;
         padding: 0;
         margin: 0;
@@ -1096,12 +1099,13 @@ body:not(.aos-init) .service-card {
         flex-shrink: 0;
         opacity: 1;
         transform: none;
-        transition: background 0.3s, transform 0.3s;
+        transition: background 0.3s, width 0.3s;
     }
 
     .services-carousel .splide__pagination__page.is-active {
+        width: 40px;
         background: var(--accent);
-        transform: scale(1.35);
+        transform: none;
         opacity: 1;
     }
 
@@ -1125,6 +1129,7 @@ body:not(.aos-init) .service-card {
 }
 
 @media (min-width: 901px) {
+
     /* Quando Splide è destroy:true, splide__list diventa una normale ul.
        La griglia CSS la trasforma in layout a colonne. */
     .services-carousel .splide__list {
