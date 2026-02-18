@@ -113,8 +113,9 @@ a {
     font-weight: 600;
     font-size: 1.05rem;
     cursor: pointer;
-    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    border: none;
+    transition: color 0.2s ease;
+    border: 2px solid transparent;
+    background: transparent;
     text-decoration: none;
     gap: 0.5rem;
 }
@@ -138,22 +139,22 @@ a {
 }
 
 .btn-primary {
-    background: var(--accent);
-    color: #000;
+    color: var(--text-primary);
+    border-color: var(--accent);
 }
 
 .btn-primary:hover {
-    background: #3994f2;
+    color: var(--accent);
 }
 
 .btn-secondary {
-    border: 2px solid var(--accent);
-    color: var(--accent);
+    border: 2px solid rgba(185, 203, 230, 0.6);
+    color: var(--text-secondary);
     background: transparent;
 }
 
 .btn-secondary:hover {
-    background: rgba(79, 163, 247, 0.12);
+    color: var(--accent);
 }
 
 .btn-large {
@@ -272,17 +273,16 @@ a {
 .nav-cta {
     padding: 0.7rem 1.8rem;
     border-radius: 999px;
-    background: var(--gradient-accent);
-    color: #000;
+    background: transparent;
+    color: var(--text-primary);
     font-weight: 600;
-    border: none;
+    border: 2px solid var(--accent);
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: color var(--transition-base);
 }
 
 .nav-cta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    color: var(--accent);
 }
 
 
@@ -765,27 +765,7 @@ a {
 .btn-primary.btn-large {
     padding: 1.1rem 3rem;
     font-size: 1.15rem;
-    border-radius: 999px;
-    box-shadow: 0 8px 40px rgba(79, 163, 247, 0.28);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.btn-primary.btn-large:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 18px 80px rgba(79, 163, 247, 0.44);
-}
-
-.btn-primary.btn-large:focus {
-    transform: translateY(-2px) scale(1);
-    box-shadow: 0 12px 50px rgba(79, 163, 247, 0.36);
-    outline: 3px solid rgba(79, 163, 247, 0.12);
-    outline-offset: 3px;
-}
-
-.btn-primary.btn-large:active {
-    transform: translateY(0) scale(0.985) !important;
-    box-shadow: 0 6px 30px rgba(79, 163, 247, 0.18) !important;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    border-radius: 12px;
 }
 
 
@@ -848,11 +828,7 @@ a {
         font-size: 1rem;
         min-height: 48px;
         min-width: 48px;
-        transition: transform 0.2s ease;
-    }
-
-    .btn:active {
-        transform: scale(0.98);
+        transition: color 0.2s ease;
     }
 
     .btn-large {
@@ -981,12 +957,16 @@ a {
 }
 
 .btn-accept {
-    background: var(--gradient-accent);
-    border: none;
-    color: #000;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--text-primary);
     padding: 0.6rem 1rem;
     border-radius: 999px;
     cursor: pointer;
+}
+
+.btn-accept:hover {
+    color: var(--accent);
 }
 
 @media (max-width: 640px) {
@@ -1254,23 +1234,23 @@ body:not(.aos-init) .service-card {
     .main-nav .nav-cta {
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 1.1rem 2.5rem;
+        justify-content: flex-start;
+        padding: 1.1rem 2rem;
         font-size: 1.05rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        margin: 0.6rem 1.25rem;
-        width: calc(100% - 2.5rem);
+        font-weight: 500;
+        letter-spacing: 0;
+        text-transform: none;
+        margin: 0;
+        width: 100%;
         box-sizing: border-box;
-        color: #000;
+        color: var(--text-secondary);
         text-decoration: none;
-        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-        border-radius: 12px;
+        background: transparent;
+        border-radius: 0;
         border: none;
         min-height: 48px;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        transition: color 0.2s ease;
+        box-shadow: none;
     }
 
     .main-nav .nav-link::after {
@@ -1280,28 +1260,25 @@ body:not(.aos-init) .service-card {
 
     .main-nav .nav-link:hover,
     .main-nav .nav-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 50px rgba(0, 212, 255, 0.5);
+        color: var(--accent);
+        background: transparent;
+        transform: none;
+        box-shadow: none;
     }
 
     /* ── Link della pagina attiva ── */
     .main-nav .nav-link.active {
-        color: #000;
-        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        color: var(--text-secondary);
+        background: transparent;
         border-left: none;
     }
 
     /* Animazione al click */
     .main-nav .nav-link:active,
     .main-nav .nav-cta:active {
-        transform: translateY(-1px);
-        box-shadow: 0 12px 40px rgba(0, 212, 255, 0.35);
+        color: var(--accent);
+        background: transparent;
+        transform: none;
+        box-shadow: none;
     }
-}
-
-.nav-cta {
-    margin: 0;
-    width: 100%;
-    border-radius: 0;
-    text-align: left;
 }
