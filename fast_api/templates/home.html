@@ -163,5 +163,119 @@
         </div>
     </div>
 </section>
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // ═══════════════════════════════════════
+    // HAMBURGER MENU
+    // ═══════════════════════════════════════
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav = document.querySelector('.main-nav');
 
+    if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            this.classList.toggle('open');
+            mainNav.classList.toggle('active');
+
+            // Cambia icona hamburger ↔ X
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
+
+        // Chiudi menu al click su un link
+        mainNav.querySelectorAll('.nav-link, .nav-cta').forEach(function (link) {
+            link.addEventListener('click', function () {
+                navToggle.classList.remove('open');
+                mainNav.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            });
+        });
+
+        // Chiudi menu al click fuori
+        document.addEventListener('click', function (e) {
+            if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
+                navToggle.classList.remove('open');
+                mainNav.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            }
+        });
+    }
+
+    // ═══════════════════════════════════════
+    // CAROUSEL MOBILE (servizi)
+    // ═══════════════════════════════════════
+    const track = document.querySelector('.carousel-track');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    if (track && dotsContainer) {
+        const cards = track.querySelectorAll('.service-card');
+        let current = 0;
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        // Crea dots
+        cards.forEach(function (_, i) {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', 'Vai al servizio ' + (i + 1));
+            dot.addEventListener('click', function () { goTo(i); });
+            dotsContainer.appendChild(dot);
+        });
+
+        function goTo(index) {
+            if (index < 0) index = 0;
+            if (index >= cards.length) index = cards.length - 1;
+            current = index;
+            const card = cards[current];
+            const offset = card.offsetLeft - (track.parentElement.offsetWidth - card.offsetWidth) / 2;
+            track.style.transform = 'translateX(' + (-offset) + 'px)';
+            dotsContainer.querySelectorAll('.dot').forEach(function (d, i) {
+                d.classList.toggle('active', i === current);
+            });
+        }
+
+        // Swipe touch
+        track.addEventListener('touchstart', function (e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.classList.add('dragging');
+        }, { passive: true });
+
+        track.addEventListener('touchmove', function (e) {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', function () {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('dragging');
+            const diff = startX - currentX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) goTo(current + 1);
+                else goTo(current - 1);
+            }
+        });
+
+        // Bottoni prev/next
+        const prev = document.querySelector('.carousel-prev');
+        const next = document.querySelector('.carousel-next');
+        if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
+        if (next) next.addEventListener('click', function () { goTo(current + 1); });
+    }
+});
+</script>
 {% endblock %}

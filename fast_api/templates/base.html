@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
-   
+
     <title>{% block title %}Parthenoweb{% endblock %} - Web Design & Development Professionali</title>
-    
-  
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-  
+
+
     <meta name="description"
         content="Soluzioni web premium per il tuo business. Design, sviluppo e strategie digitali.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -29,25 +30,27 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css">
 </head>
+
 <body>
     <header class="site-header">
         <div class="nav-container">
-            <div class="container" style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
+            <div class="container"
+                style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
                 <a href="/" class="logo">
                     <img src="/static/assets/images/logo-sfondato.webp" alt="Logo Parthenoweb" class="logo-img" />
                     <span class="logo-text">
-                    
+
                         <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
                     </span>
                 </a>
-                
-                
+
+
                 <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-                
-              
+
+
                 <nav class="main-nav">
                     <a href="/" class="nav-link {% if page == 'home' %}active{% endif %}">Home</a>
-                    
+
                     <a href="/contatti" class="nav-cta">Contattaci</a>
                 </nav>
             </div>
@@ -58,17 +61,18 @@
         {% block content %}{% endblock %}
     </main>
 
-    
+
     {% if not user_accepted_cookies %}
     <div id="cookieBanner" class="cookie-banner visible">
         <div class="cookie-content">
             <h3>Rispetto della tua Privacy</h3>
-            <p>Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo profilazione né tracciamento pubblicitario.</p>
+            <p>Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo
+                profilazione né tracciamento pubblicitario.</p>
         </div>
         <div class="cookie-actions">
-          
+
             <a href="/cookies" class="nav-link">Cookie Policy</a>
-        
+
             <button id="acceptCookies" class="btn-accept">Accetta</button>
         </div>
     </div>
@@ -77,19 +81,19 @@
     <script src="/static/js/navbar-toggle.js"></script>
 
     <script src="/static/js/cookies.js"></script>
-    
+
 
     <script src="/static/js/animations.js"></script>
-    
+
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script>
     <script src="/static/js/carousel.js"></script>
-    
+
     <script src="/static/js/particles.js"></script>
 
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    
+
 
     <script>
         AOS.init();
@@ -97,6 +101,7 @@
 
 
     {% block extra_js %}{% endblock %}
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>
