@@ -1117,11 +1117,11 @@ body:not(.aos-init) .service-card {
     }
 
     .services-carousel .splide__pagination__page.is-active {
-        width: 8px;
-        height: 8px;
-        background: var(--accent);
-        transform: none;
-        opacity: 1;
+        width: 8px !important;
+        height: 8px !important;
+        background: var(--accent) !important;
+        transform: none !important;
+        opacity: 1 !important;
     }
 
     /* Spazio sotto per i dots */
