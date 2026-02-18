@@ -1101,16 +1101,17 @@ body:not(.aos-init) .service-card {
 
     .services-carousel .splide__pagination__page {
         display: block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        border: none;
-        padding: 0;
-        margin: 0;
-        flex-shrink: 0;
-        opacity: 1;
-        transform: none;
+        width: 8px !important;
+        height: 8px !important;
+        min-width: 8px !important;
+        min-height: 8px !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.3) !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
         transition: background 0.3s;
         cursor: pointer;
     }
