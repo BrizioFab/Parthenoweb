@@ -172,60 +172,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
-
-        var navToggle = document.querySelector('.nav-toggle');
-        var mainNav = document.querySelector('.main-nav');
-
-        if (navToggle && mainNav) {
-
-            function closeMenu() {
-                navToggle.classList.remove('open');
-                mainNav.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-                var icon = navToggle.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            }
-
-            function openMenu() {
-                navToggle.classList.add('open');
-                mainNav.classList.add('active');
-                navToggle.setAttribute('aria-expanded', 'true');
-                var icon = navToggle.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                }
-            }
-
-            navToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (mainNav.classList.contains('active')) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            });
-
-            var allNavLinks = mainNav.querySelectorAll('.nav-link, .nav-cta');
-            for (var i = 0; i < allNavLinks.length; i++) {
-                allNavLinks[i].addEventListener('click', closeMenu);
-            }
-
-            document.addEventListener('click', function (e) {
-                if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
-                    closeMenu();
-                }
-            });
-
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') closeMenu();
-            });
-        }
-
-
+        // ═══════════════════════════════════════
+        // SOLO CAROUSEL - NIENTE HAMBURGER QUI
+        // ═══════════════════════════════════════
         var track = document.querySelector('.carousel-track');
         var dotsContainer = document.querySelector('.carousel-dots');
 
