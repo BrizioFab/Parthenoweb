@@ -1087,70 +1087,46 @@ body:not(.aos-init) .service-card {
     /* DENTRO @media (max-width: 900px) — sostituisci SOLO queste due regole: */
 
     /* ── Pagination dots: pallini rotondi piccoli ── */
+    /* ── Pagination: pallini tondi piccoli ── */
     .services-carousel .splide__pagination {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 6px;
-        bottom: 0.5rem;
+        gap: 8px;
+        bottom: 0;
         padding: 0;
+        margin-top: 1.5rem;
+        /* ← stacca dai card */
     }
 
     .services-carousel .splide__pagination__page {
         display: block;
-        width: 6px;
-        /* ← uguale all'altezza = cerchio */
-        height: 6px;
-        /* ← uguale alla larghezza */
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        /* ← cerchio perfetto, non 999px */
-        background: rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.3);
         border: none;
         padding: 0;
         margin: 0;
-        box-sizing: border-box;
         flex-shrink: 0;
         opacity: 1;
         transform: none;
-        transition: background 0.3s, transform 0.3s;
+        transition: background 0.3s;
         cursor: pointer;
     }
 
     .services-carousel .splide__pagination__page.is-active {
         width: 8px;
-        /* ← leggermente più grande */
         height: 8px;
         background: var(--accent);
         transform: none;
         opacity: 1;
     }
 
-    /* ── Slide centrata: una card per volta ── */
-    .services-carousel .splide__track {
-        overflow: hidden;
-    }
-
-    .services-carousel .splide__slide {
-        display: flex;
-        justify-content: center;
-        /* ← centra la card orizzontalmente */
-        align-items: stretch;
-        padding: 0 0.5rem;
-    }
-
-    .services-carousel .splide__slide .service-card {
-        width: 100%;
-        max-width: 400px;
-        /* ← limita larghezza per centratura pulita */
-        box-sizing: border-box;
-        margin: 0 auto;
-        /* ← centra dentro la slide */
-        height: 100%;
-    }
-
     /* Spazio sotto per i dots */
     .services-carousel {
-        padding-bottom: 2.5rem;
+        padding-bottom: 3.5rem;
+        /* ← più spazio sotto */
     }
 }
 
