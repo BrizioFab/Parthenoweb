@@ -9,8 +9,6 @@
 {% block content %}
 <section class="contact-section">
     <div class="contact-wrapper">
-
-       
         <div class="contact-left">
             <div class="hero-text">
                 <h1>
@@ -25,19 +23,11 @@
             </p>
 
             <div class="contact-info">
-    <p>
-        📞
-        <a href="tel:+393770920451">Chiama</a>
-        <a href="https://wa.me/393770920451" target="_blank">WhatsApp</a>
-    </p>
+                <p>📞 +39 3770920451</p>
+                <p>📧 <a href="mailto:parthenoweb@gmail.com">parthenoweb@gmail.com</a></p>
+            </div>
+        </div>
 
-    <p>
-        📧
-        <a href="mailto:parthenoweb@gmail.com">parthenoweb@gmail.com</a>
-    </p>
-</div>
-
-       
         <div class="cta-box">
             <h2>CONSULENZA GRATUITA</h2>
 
@@ -45,7 +35,6 @@
                 Compila il modulo e verrai ricontattato da un nostro consulente nel più breve tempo possibile.
             </p>
 
-  
             {% if success %}
             <div class="form-message success">
                 ✓ Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo presto.
@@ -55,7 +44,6 @@
                 ✗ {{ error }}
             </div>
             {% endif %}
-
 
             <form class="contact-form" id="contact-form" method="POST" action="/contatti" enctype="multipart/form-data">
                 {% if errors %}
@@ -102,7 +90,6 @@
                 <button type="submit" id="submit-btn">INVIA RICHIESTA</button>
             </form>
         </div>
-
     </div>
 </section>
 {% endblock %}
@@ -111,7 +98,6 @@
 <script>
 document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
     if (e.target.method === 'POST') {
-
         return;
     }
 });
