@@ -1296,24 +1296,27 @@ body:not(.aos-init) .service-card {
     }
 
     .main-nav .nav-link:hover,
-    .main-nav .nav-cta:hover,
-    .main-nav .nav-link:active,
-    .main-nav .nav-cta:active {
+    .main-nav .nav-cta:hover {
         color: var(--accent);
         background: rgba(79, 163, 247, 0.08);
+        transform: none;
+        box-shadow: none;
     }
 
     /* ── Link della pagina attiva ── */
     .main-nav .nav-link.active {
-        color: var(--accent);
-        background: rgba(79, 163, 247, 0.06);
-        border-left: 3px solid var(--accent);
+        color: var(--text-secondary);
+        background: transparent;
+        border-left: none;
     }
 
     /* Piccola animazione al click */
     .main-nav .nav-link:active,
     .main-nav .nav-cta:active {
+        color: var(--accent);
+        background: rgba(79, 163, 247, 0.08);
         transform: scale(0.98);
+        box-shadow: none;
     }
 }
 
