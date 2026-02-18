@@ -1083,10 +1083,9 @@ body:not(.aos-init) .service-card {
     /* Quando Splide è destroy:true, splide__list diventa una normale ul.
        La griglia CSS la trasforma in layout a colonne. */
     .services-carousel .splide__list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
-        /* Override flex di Splide */
         flex-wrap: wrap;
         transform: none !important;
     }
