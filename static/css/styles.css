@@ -1088,8 +1088,8 @@ body:not(.aos-init) .service-card {
 
     .services-carousel .splide__pagination__page {
         display: block;
-        width: 24px;
-        height: 6px;
+        width: 14px;
+        height: 4px;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.25);
         border: none;
@@ -1103,7 +1103,7 @@ body:not(.aos-init) .service-card {
     }
 
     .services-carousel .splide__pagination__page.is-active {
-        width: 40px;
+        width: 24px;
         background: var(--accent);
         transform: none;
         opacity: 1;
