@@ -652,7 +652,7 @@ a {
     background: linear-gradient(135deg, rgba(79, 163, 247, 0.10) 0%, rgba(160, 230, 101, 0.05) 100%);
     border-color: rgba(79, 163, 247, 0.18);
     box-shadow: 0 12px 50px rgba(10, 20, 30, 0.45);
-    transform: translateY(-6px) scale(1.05);
+    transform: scale(1.1);
 }
 
 .feature-icon {
