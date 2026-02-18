@@ -642,9 +642,15 @@ a {
     box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
     transform: translateY(0) scale(1);
 
-    transition: none !important;
-    -webkit-transition: none !important;
-    animation: none !important;
+    /* Animazione VELOCE: 0.1s invece di 0.3-0.5s */
+    transition: transform 0.1s ease-out,
+                background 0.1s ease-out,
+                border-color 0.1s ease-out,
+                box-shadow 0.1s ease-out !important;
+    -webkit-transition: transform 0.1s ease-out,
+                        background 0.1s ease-out,
+                        border-color 0.1s ease-out,
+                        box-shadow 0.1s ease-out !important;
 }
 
 .feature-item:hover {
@@ -652,7 +658,10 @@ a {
     border-color: rgba(79, 163, 247, 0.18) !important;
     box-shadow: 0 12px 50px rgba(10, 20, 30, 0.45) !important;
     transform: translateY(-8px) scale(1.08) !important;
-    transition: none !important;
+    transition: transform 0.1s ease-out,
+                background 0.1s ease-out,
+                border-color 0.1s ease-out,
+                box-shadow 0.1s ease-out !important;
 }
 .feature-icon {
     font-size: 3rem;
