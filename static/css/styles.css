@@ -209,8 +209,8 @@ a {
 }
 
 .site-header .main-nav {
-    display: flex !important;
-    align-items: center !important;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
@@ -1128,9 +1128,9 @@ body:not(.aos-init) .service-card {
     }
 
     .carousel-track .service-card {
-        flex: 0 0 100%;
-        min-width: 100%;
-        margin: 0;
+        flex: 0 0 calc(100% - 2rem);
+        min-width: calc(100% - 2rem);
+        margin: 0 1rem;
         box-sizing: border-box;
         align-self: stretch;
         touch-action: pan-x;
@@ -1273,11 +1273,14 @@ body:not(.aos-init) .service-card {
 }
 
 .carousel-dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
     border: none;
+    padding: 0;
+    flex-shrink: 0;
+    display: block;
     transition: transform .2s ease, background .2s ease;
 }
 
@@ -1296,28 +1299,6 @@ body:not(.aos-init) .service-card {
     .carousel-track-wrapper {
         padding-bottom: 0.5rem;
         min-height: 420px;
-    }
-
-    .services-grid.carousel-track {
-        justify-content: center;
-    }
-
-    .services-grid.carousel-track .service-card {
-        min-width: calc(100% - 1rem);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        padding: 2rem;
-    }
-
-    .carousel-track .service-card p {
-        flex-grow: 1;
-    }
-
-    .service-card h3 {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
     }
 }
 
@@ -1365,46 +1346,48 @@ body:not(.aos-init) .service-card {
 
     .main-nav {
         display: flex;
-        position: fixed !important;
+        position: fixed;
         top: 80px;
         left: 0;
         width: 100%;
         background: rgba(4, 56, 115, 0.98);
         backdrop-filter: blur(20px);
         border-bottom: 2px solid rgba(79, 163, 247, 0.2);
-        flex-direction: column !important;
-        gap: 0 !important;
+        flex-direction: column;
+        gap: 0;
         padding: 0;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
-        visibility: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 9999;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .main-nav.active {
-        max-height: 100vh;
-        visibility: visible;
-        padding: 1rem 0;
+        max-height: 300px;
     }
 
-    .nav-link {
+    .nav-link,
+    .nav-cta {
         display: block;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(0, 212, 255, 0.05);
+        padding: 1.1rem 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.08);
         width: 100%;
-        transition: all var(--transition-base);
+        box-sizing: border-box;
+        color: var(--text-primary);
+        text-decoration: none;
     }
 
-    .nav-link:hover {
-        background: rgba(0, 212, 255, 0.05);
-        padding-left: 2.5rem;
+    .nav-link:hover,
+    .nav-cta:hover {
+        background: rgba(79, 163, 247, 0.1);
     }
 
     .nav-cta {
-        margin: 1rem 1.5rem;
-        width: calc(100% - 3rem);
-        padding: 0.9rem 1.8rem;
+        margin: 0;
+        width: 100%;
+        border-radius: 0;
+        text-align: left;
     }
 }
