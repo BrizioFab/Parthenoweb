@@ -10,7 +10,7 @@
 <section class="contact-section">
     <div class="contact-wrapper">
 
-        
+        <!-- COLONNA SINISTRA -->
         <div class="contact-left">
             <div class="hero-text">
                 <h1>
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        
+        <!-- COLONNA DESTRA -->
         <div class="cta-box">
             <h2>CONSULENZA GRATUITA</h2>
 
@@ -38,7 +38,7 @@
                 Compila il modulo e verrai ricontattato da un nostro consulente nel più breve tempo possibile.
             </p>
 
-            
+            <!-- Message Display -->
             {% if success %}
             <div class="form-message success">
                 ✓ Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo presto.
@@ -49,7 +49,7 @@
             </div>
             {% endif %}
 
-            
+            <!-- Contact Form -->
             <form class="contact-form" id="contact-form" method="POST" action="/contatti" enctype="multipart/form-data">
                 {% if errors %}
                 <div class="form-errors">

@@ -1,16 +1,16 @@
-
+/* Fixes: fallback to show service cards if AOS isn't initialized */
 body:not(.aos-init) .service-card {
     opacity: 1 !important;
     transform: none !important;
 }
 
-
+/* Ensure fade-in animation class has correct rule in case of earlier typo */
 .service-card.fade-in {
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
-
+/* Additional minor tweaks for carousel visibility */
 .services-carousel { visibility: visible; }
 .carousel-track { min-height: 1px; }
 
-
+/* Testing Github */

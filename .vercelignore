@@ -1,3 +1,4 @@
+# Vercel ignore rules
 node_modules/
 tests/
 test_*.py

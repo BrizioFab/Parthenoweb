@@ -78,18 +78,18 @@ class FormValidator:
         --------
         None se valido, altrimenti messaggio errore
         """
-                                  
+        # Controlla lunghezza base
         if not nome or len(nome.strip()) < 2:
             return "Il nome deve avere almeno 2 caratteri"
         if len(nome) > 100:
             return "Il nome non può superare 100 caratteri"
         
-                                                                   
-                                                      
+        # Controlla che contiene SOLO lettere e spazi (con accenti)
+        # to match: caratteri italiani, accenti, spazi
         if not re.match(r"^[a-zA-Zà-ùÀ-Ù\s]{2,100}$", nome):
             return "Il nome può contenere solo lettere e spazi"
         
-        return None             
+        return None  # Tutto OK!
     
     @staticmethod
     def validate_email(email: str) -> Optional[str]:
@@ -130,7 +130,7 @@ class FormValidator:
         if not email:
             return "L'email è obbligatoria"
         
-                                             
+        # Pattern email RFC 5322 semplificato
         pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
         if not re.match(pattern, email):
             return "Inserisci un'email valida"
@@ -138,7 +138,7 @@ class FormValidator:
         if len(email) > 120:
             return "L'email non può superare 120 caratteri"
         
-        return None             
+        return None  # Tutto OK!
     
     @staticmethod
     def validate_telefono(telefono: Optional[str]) -> Optional[str]:
@@ -180,25 +180,25 @@ class FormValidator:
         --------
         None se valido (incluso se vuoto), altrimenti messaggio errore
         """
-                                                     
+        # Se vuoto/None: è facoltativo, quindi valido
         if not telefono or telefono.strip() == "":
-            return None                           
+            return None  # VALIDO - è facoltativo!
         
         telefono = telefono.strip()
         
-                                                 
+        # Se presente, controlla lunghezza minima
         if len(telefono) < 5:
             return "Il telefono deve avere almeno 5 cifre"
         
-                                     
+        # Controlla lunghezza massima
         if len(telefono) > 20:
             return "Il telefono non può superare 20 caratteri"
         
-                                                               
+        # Controlla che contiene SOLO numeri, spazi, +, -, (, )
         if not re.match(r"^[0-9\s\+\-\(\)]{5,20}$", telefono):
             return "Il telefono può contenere solo numeri, spazi e simboli +, -, ()"
         
-        return None             
+        return None  # Tutto OK!
     
     @staticmethod
     def validate_descrizione(descrizione: str) -> Optional[str]:
@@ -233,7 +233,7 @@ class FormValidator:
         if len(descrizione) > 1000:
             return "La descrizione non può superare 1000 caratteri"
         
-        return None             
+        return None  # Tutto OK!
     
     @staticmethod
     def validate_all(nome: str, email: str, descrizione: str, telefono: Optional[str] = None) -> List[str]:
@@ -265,33 +265,35 @@ class FormValidator:
         ESEMPIO D'USO:
         errors = FormValidator.validate_all("Giovanni", "user@example.com", "Mi...", "+39123456789")
         if errors:
+            # Mostra errori
             for err in errors:
                 print(f"❌ {err}")
         else:
+            # Tutto OK, procedi
             print("✅ Form valido!")
         """
         errors = []
         
-                     
+        # Valida nome
         err = FormValidator.validate_nome(nome)
         if err:
             errors.append(err)
         
-                      
+        # Valida email
         err = FormValidator.validate_email(email)
         if err:
             errors.append(err)
         
-                                       
+        # Valida telefono (facoltativo)
         if telefono:
             err = FormValidator.validate_telefono(telefono)
             if err:
                 errors.append(err)
         
-                            
+        # Valida descrizione
         err = FormValidator.validate_descrizione(descrizione)
         if err:
             errors.append(err)
         
-                                                  
+        # Ritorna lista errori (vuota se tutto OK)
         return errors

@@ -1,4 +1,4 @@
-                      
+#!/usr/bin/env python3
 """
 Controllo link locali per file .html nel progetto.
 Stampa link rotti e suggerisce correzioni relative.
@@ -20,7 +20,7 @@ checked = 0
 
 skip_dirs = {'node_modules', '.venv', 'venv', '__pycache__', '.git'}
 for dirpath, dirnames, filenames in os.walk(ROOT):
-                                                             
+    # modify dirnames in-place to skip large/unneeded folders
     dirnames[:] = [d for d in dirnames if d not in skip_dirs]
     for fname in filenames:
         if not fname.lower().endswith('.html'):
@@ -34,7 +34,7 @@ for dirpath, dirnames, filenames in os.walk(ROOT):
             href = m.group(1).strip()
             checked += 1
             if not href or href.startswith('#'):
-                                                          
+                # Anchor within page — check id if present
                 if href.startswith('#'):
                     anchor = href[1:]
                     if anchor and anchor not in ids:
@@ -42,30 +42,30 @@ for dirpath, dirnames, filenames in os.walk(ROOT):
                 continue
             if href.startswith(skip_schemes):
                 continue
-                                   
+            # Resolve relative path
             if href.startswith('/'):
-                                                                       
+                # First try resolving as static file under project root
                 target = os.path.join(ROOT, href.lstrip('/'))
-                                                                                                           
+                # If not exists, try mapping to api endpoint file (e.g. /invia-email -> api/invia-email.py)
                 if not os.path.exists(target):
                     api_try = os.path.join(ROOT, 'api', href.lstrip('/') + '.py')
                     if os.path.exists(api_try):
                         target = api_try
             else:
                 target = os.path.normpath(os.path.join(dirpath, href))
-                                                
+            # If query string or fragment, strip
             target = target.split('#')[0].split('?')[0]
             if not os.path.exists(target):
                 broken.append((rel_fpath, href, os.path.relpath(target, ROOT)))
 
-                                                                                  
-                                                                     
+# Additional check: verify common API endpoints referenced by forms or script URLs
+# For example check for '/invia-email' -> look for api/invia-email.py
 api_checks = [('/invia-email', os.path.join(ROOT, 'api', 'invia-email.py'))]
 for endpoint, path in api_checks:
     if not os.path.exists(path):
         broken.append(('project-root', endpoint, os.path.relpath(path, ROOT)))
 
-               
+# Print results
 print('Checked references:', checked)
 if not broken:
     print('Nessun link locale rotto trovato.')
@@ -75,5 +75,5 @@ print('\nLink rotti trovati:')
 for src_file, href, target in broken:
     print(f'- File: {src_file}  ->  href/action: "{href}"  -> risolto in: {target}')
 
-                                 
+# Exit with non-zero for CI usage
 sys.exit(2)

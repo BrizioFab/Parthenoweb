@@ -68,16 +68,16 @@ def send_email(nome: str, telefono: str, sender_email: str, message: str):
     EMAIL_PASSWORD = tuaapppassword1234
     """
     
-                                                          
-                                                
+    # STEP 1: Leggi credenziali dalle variabili d'ambiente
+    # Se non sono impostate, usa default (Gmail)
     EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
     EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
 
     EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
-                                            
-                                                   
+    # Valida che credenziali siano impostate
+    # Se mancano, lancia errore chiaro per il debug
     if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
         raise RuntimeError(
             "❌ Credenziali email non configurate!\n"
@@ -87,17 +87,17 @@ def send_email(nome: str, telefono: str, sender_email: str, message: str):
             "Link: https://myaccount.google.com/apppasswords"
         )
 
-                                                         
+    # STEP 2: Crea oggetto EmailMessage (standard Python)
     msg = EmailMessage()
     
-                                                            
-    msg["Subject"] = f"Parthenoweb - {nome}"                             
-    msg["From"] = f"{nome} <{EMAIL_ADDRESS}>"                         
-    msg["To"] = EMAIL_ADDRESS                                                
-    msg["Reply-To"] = sender_email                                                  
+    # Imposta intestazione email (visibile nel client email)
+    msg["Subject"] = f"Parthenoweb - {nome}"  # Oggetto con nome mittente
+    msg["From"] = f"{nome} <{EMAIL_ADDRESS}>"  # Mittente visualizzato
+    msg["To"] = EMAIL_ADDRESS                   # Destinatario (la tua email)
+    msg["Reply-To"] = sender_email              # Quando rispondi, va a client email
 
-                                                        
-                                      
+    # STEP 3: Crea corpo del messaggio in testo semplice
+    # Mostra tutti i dati del contatto
     msg.set_content(
         f"Dettagli contatto:\n"
         f"Nome: {nome}\n"
@@ -106,17 +106,17 @@ def send_email(nome: str, telefono: str, sender_email: str, message: str):
         f"Messaggio:\n{message}"
     )
 
-                                      
-                                                                     
+    # STEP 4: Connessione SMTP e invio
+    # with: context manager che chiude la connessione automaticamente
     with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
-                                               
-        server.starttls()                        
+        # SMTP di Gmail richiede TLS encryption
+        server.starttls()  # Abilita crittografia
         
-                               
+        # Login con credenziali
         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         
-                            
+        # Invia il messaggio
         server.send_message(msg)
     
-                                                           
-                                                
+    # Se arriviamo qui, email è stata inviata con successo!
+    # Non return niente (return None di default)

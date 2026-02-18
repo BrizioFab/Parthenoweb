@@ -18,7 +18,7 @@ DA MODIFICARE SOLO SE:
 4. Cambi nome app → modifica campo 'title' in FastAPI()
 """
 
-                         
+# IMPORT LIBRERIE ESTERNE
 from fastapi import FastAPI, Request, Form, Response
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -27,62 +27,62 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from pathlib import Path
 
-                                              
-from .email_utils import send_email                                       
-from .validators import FormValidator                              
+# IMPORT MODULI LOCALI (dalla stessa cartella)
+from .email_utils import send_email  # Funzione per inviare email via SMTP
+from .validators import FormValidator  # Classe per validare i form
 
-                                                                              
-                                 
-                                                                              
-                                                           
-                                                                   
+# ============================================================================
+# CONFIGURAZIONE PERCORSI (paths)
+# ============================================================================
+# Questi percorsi puntano alle cartelle statiche e template
+# Vengono calcolati automaticamente in base alla posizione del file
 
-BASE_DIR = Path(__file__).parent.parent                                
-STATIC_DIR = BASE_DIR / "static"                                         
-TEMPLATES_DIR = Path(__file__).parent / "templates"                          
+BASE_DIR = Path(__file__).parent.parent  # Cartella radice del progetto
+STATIC_DIR = BASE_DIR / "static"         # Cartella per CSS, JS, immagini
+TEMPLATES_DIR = Path(__file__).parent / "templates"  # Cartella template HTML
 
-                                                                              
-                                        
-                                                                              
-                                                       
+# ============================================================================
+# CREAZIONE E CONFIGURAZIONE APP FASTAPI
+# ============================================================================
+# FastAPI è il framework web che gestisce le rotte HTTP
 app = FastAPI(
-    title="Parthenoweb",                                           
-    description="Web Design & Development",                   
-    version="1.0.0"                                              
+    title="Parthenoweb",             # Nome app (visibile in /docs)
+    description="Web Design & Development",  # Descrizione app
+    version="1.0.0"                  # Versione dell'applicazione
 )
 
-                                                                              
-                                                 
-                                                                              
-                                                                   
-                                                                         
-                                                   
+# ============================================================================
+# MIDDLEWARE CORS (Cross-Origin Resource Sharing)
+# ============================================================================
+# Permette richieste da qualsiasi dominio (utile per API pubbliche)
+# MODIFICA: se vuoi restringere solo a certi domini, cambia allow_origins
+# Attualmente: allow_origins=["*"] = permetti TUTTO
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],                                        
-    allow_credentials=True,                                        
-    allow_methods=["*"],                                                   
-    allow_headers=["*"],                                            
+    allow_origins=["*"],             # * = qualsiasi provenienza
+    allow_credentials=True,          # Accetta cookie e credenziali
+    allow_methods=["*"],             # Accetta GET, POST, PUT, DELETE, etc.
+    allow_headers=["*"],             # Accetta qualsiasi header HTTP
 )
 
-                                                                              
-                                        
-                                                                              
-                                                          
-                                                               
+# ============================================================================
+# MOUNT FILE STATICI (CSS, JS, immagini)
+# ============================================================================
+# Serve la cartella /static come /static/... per il client
+# Esempio: /static/css/styles.css → file: static/css/styles.css
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-                                                                              
-                                
-                                                                              
-                                                                        
+# ============================================================================
+# SETUP TEMPLATE ENGINE (Jinja2)
+# ============================================================================
+# Jinja2 è il motore per renderizzare template HTML con variabili Python
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
-                                                                              
-                                        
-                                                                              
-                                                                 
+# ============================================================================
+# ROTTE PAGINE PRINCIPALI (GET requests)
+# ============================================================================
+# Ogni rotta GET renderizza un template HTML e lo invia al client
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
@@ -101,10 +101,6 @@ async def home(request: Request):
     DA MODIFICARE: se cambi il nome del template o i campi
     """
     return templates.TemplateResponse("home.html", {
-        "request": request,                                       
-        "page": "home",                                                 
-        "page_title": "Home",                                         
-        "user_accepted_cookies": request.cookies.get("cookiesAccepted")                
         "request": request,              # Obbligatorio per Jinja2
         "page": "home",                  # Identificatore univoco pagina
         "page_title": "Home",            # Titolo visibile nel browser
@@ -134,24 +130,24 @@ async def contatti_get(request: Request):
         "page": "contatti",
         "page_title": "Contatti",
         "user_accepted_cookies": request.cookies.get("cookiesAccepted"),
-        "form_data": {},                             
-        "errors": None,                                 
-        "success": False,                                   
-        "error": None                                            
+        "form_data": {},                 # Form vuoto
+        "errors": None,                  # Nessun errore
+        "success": False,                # Email non inviata
+        "error": None                    # Nessun errore generico
     })
 
 
-                                                                              
-                                                           
-                                                                              
+# ============================================================================
+# FORM CONTATTI - POST (invio email con validazione server)
+# ============================================================================
 
 @app.post("/contatti", response_class=HTMLResponse)
 async def contatti_post(
     request: Request,
-    nome: str = Form(...),                                                                
-    email: str = Form(...),                           
-    telefono: str = Form(default=""),                                        
-    descrizione: str = Form(...)                      
+    nome: str = Form(...),              # Obbligatorio: viene dal form <input name="nome">
+    email: str = Form(...),             # Obbligatorio
+    telefono: str = Form(default=""),   # Facoltativo (default stringa vuota)
+    descrizione: str = Form(...)        # Obbligatorio
 ):
     """
     FORM CONTATTI - Processa invio form e invia email
@@ -174,7 +170,7 @@ async def contatti_post(
     - Se vuoi cambiare validazione, modifica validators.py
     - Se vuoi cambiare email, modifica email_utils.py
     """
-                                                       
+    # STEP 1: Raccogli i dati dal form in un dictionary
     form_data = {
         "nome": nome,
         "email": email,
@@ -182,45 +178,45 @@ async def contatti_post(
         "descrizione": descrizione
     }
     
-                                                           
-                                                                   
+    # STEP 2: Valida i campi usando la classe FormValidator
+    # validate_all() ritorna una lista di errori (vuota = tutto OK)
     errors = FormValidator.validate_all(nome, email, descrizione, telefono or None)
     
-                                                                   
+    # STEP 3: Se ci sono errori, mostra form con errori evidenziati
     if errors:
         return templates.TemplateResponse("contatti.html", {
             "request": request,
             "page": "contatti",
             "page_title": "Contatti",
             "user_accepted_cookies": request.cookies.get("cookiesAccepted"),
-            "form_data": form_data,                                         
-            "errors": errors,                                  
+            "form_data": form_data,      # Mantieni i dati scritti dall'user
+            "errors": errors,             # Mostra lista errori
             "success": False,
             "error": None
         })
     
-                                               
+    # STEP 4: Se valido, tenta di inviare email
     try:
-                                              
-                                                                         
+        # Funzione importata da email_utils.py
+        # Legge EMAIL_ADDRESS e EMAIL_PASSWORD dalle variabili d'ambiente
         send_email(nome, telefono or None, email, descrizione)
         
-                                                                            
+        # STEP 5a: Email inviata con successo - mostra messaggio di successo
         response = templates.TemplateResponse("contatti.html", {
             "request": request,
             "page": "contatti",
             "page_title": "Contatti",
             "user_accepted_cookies": request.cookies.get("cookiesAccepted"),
-            "form_data": {},                                            
+            "form_data": {},              # Form vuoto (cancella i dati)
             "errors": None,
-            "success": True,                                
+            "success": True,              # Flag di successo
             "error": None
         })
-                                                                 
+        # Imposta cookie accettazione cookie (expires tra 1 anno)
         response.set_cookie("cookiesAccepted", "true", max_age=60*60*24*365)
         return response
         
-                                                                         
+    # STEP 5b: Errore nell'invio email (problemi SMTP, credenziali, etc.)
     except Exception as e:
         error_msg = f"Errore nell'invio della richiesta: {str(e)}"
         print(f"✗ Error sending email: {e}")
@@ -230,16 +226,16 @@ async def contatti_post(
             "page": "contatti",
             "page_title": "Contatti",
             "user_accepted_cookies": request.cookies.get("cookiesAccepted"),
-            "form_data": form_data,                               
+            "form_data": form_data,      # Mantieni i dati scritti
             "errors": None,
             "success": False,
-            "error": error_msg                                   
+            "error": error_msg           # Mostra errore generico
         })
 
 
-                                                                              
-                                                    
-                                                                              
+# ============================================================================
+# PAGINA INFORMAZIONI (Cookie Policy, Privacy, etc.)
+# ============================================================================
 
 @app.get("/cookies", response_class=HTMLResponse)
 async def cookies(request: Request):
@@ -259,9 +255,9 @@ async def cookies(request: Request):
     })
 
 
-                                                                              
-                                                
-                                                                              
+# ============================================================================
+# API ENDPOINTS (per JavaScript / AJAX requests)
+# ============================================================================
 
 @app.post("/api/cookies/accept")
 async def accept_cookies(response: Response):
@@ -284,9 +280,9 @@ async def accept_cookies(response: Response):
     return {"status": "ok"}
 
 
-                                                                              
-                                                          
-                                                                              
+# ============================================================================
+# ENDPOINT LEGACY (Compatibilità con integrazioni vecchie)
+# ============================================================================
 
 @app.post("/invia-email")
 async def invia_email_legacy(
@@ -310,17 +306,17 @@ async def invia_email_legacy(
     
     DA ELIMARE: quando non serve più compatibilità
     """
-                         
+    # Valida i dati input
     errors = FormValidator.validate_all(nome, email, descrizione, telefono or None)
     
-                                        
+    # Se errori: ritorna JSON con errori
     if errors:
         return {
             "success": False,
             "message": "Validazione fallita: " + "; ".join(errors)
         }
     
-                                  
+    # Se valido: tenta invio email
     try:
         send_email(nome, telefono or None, email, descrizione)
         return {

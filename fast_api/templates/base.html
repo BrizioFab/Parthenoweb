@@ -1,108 +1,142 @@
 <!DOCTYPE html>
+<!--
+TEMPLATE BASE - Layout generico per tutte le pagine del sito
+==========================================================
+Questo è il template "padre" che contiene la struttura HTML
+comune a TUTTE le pagine (navbar, header, footer, cookie banner).
 
+COME FUNZIONA:
+1. Ogni pagina (home.html, contatti.html, etc.) EREDITA da questo template
+2. Le pagine figlie sovrescrivono il blocco "content" con il loro contenuto
+3. Gli elementi comuni (navbar, cookie banner) sono renderizzati qui
+
+PAGINE CHE EREDITANO DA QUESTO:
+✓ home.html
+✓ contatti.html
+✓ cookies.html
+
+VEDI ANCHE:
+- home.html → contenuto homepage
+- contatti.html → form contatti
+- main.py → rotte che rendono questi template
+
+MODIFICA QUESTO FILE QUANDO:
+- Aggiungi script globali (es. analytics, tracking)
+- Cambi struttura navbar
+- Cambi cookie banner
+- Aggiungi nuovi font o librerie CSS/JS esterne
+-->
 
 <html lang="it">
-
+<!-- SEZIONE HEAD: Metadati, CSS, script di configurazione -->
 <head>
-    
+    <!-- CHARSET: Specifica che il sito usa UTF-8 (supporta accenti italiani) -->
     <meta charset="UTF-8">
     
-    
-    
+    <!-- TITLE: Titolo visibile nel tab del browser (SEO) -->
+    <!-- BLOCK TITLE: ogni pagina può sovrascrivere il titolo -->
     <title>{% block title %}Parthenoweb{% endblock %} - Web Design & Development Professionali</title>
     
-    
+    <!-- META: Viewport per responsive design (mobile-friendly) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    
+    <!-- META DESCRIPTION: Testo mostrato nei risultati Google (SEO) -->
     <meta name="description"
         content="Soluzioni web premium per il tuo business. Design, sviluppo e strategie digitali.">
 
-    
+    <!-- EXTERNAL LIBRARY: Font Awesome per icone (es: icone social, frecce) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    
-    
+    <!-- FAVICON: Icona mostrata nel tab del browser -->
+    <!-- Diversi formati per diversi browser/dispositivi -->
     <link rel="icon" type="image/x-icon" href="/static/assets/images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/images/favicon/apple-touch-icon.png">
     <link rel="manifest" href="/static/site.webmanifest">
 
-    
-    
+    <!-- CSS PRINCIPALE: Stili del sito -->
+    <!-- DA MODIFICARE: static/css/styles.css contiene tutto il design -->
     <link rel="stylesheet" href="/static/css/styles.css">
     
-    
+    <!-- CSS FIXES: Patch per problemi browser compatibility -->
     <link rel="stylesheet" href="/static/css/fixes.css">
     
-    
+    <!-- BLOCK EXTRA_CSS: Le pagine possono aggiungere CSS custom -->
     {% block extra_css %}{% endblock %}
 
-    
-    
+    <!-- GOOGLE FONTS: Font "Inter" e "Space Mono" -->
+    <!-- Caricate da Google CDN per performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
-    
-    
+    <!-- AOS LIBRARY: Libreria per animazioni scroll (fade-in effects) -->
+    <!-- Vedi: animations.js per la configurazione -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
-
+<!-- BODY: Contenuto principale (visibile nel browser) -->
 <body>
     
-    
-    
-    
-    
+    <!-- ========================================================================
+         NAVBAR / HEADER (Barra di navigazione)
+         ======================================================================== -->
+    <!-- RUOLO: Menu di navigazione visibile in cima a tutte le pagine -->
+    <!-- CONTIENE: Logo + Link menu + Bottone contatti -->
+    <!-- DA MODIFICARE: se aggiungi nuovi link al menu -->
     
     <header class="site-header">
         <div class="nav-container">
             <div class="container" style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
                 
-                
-                
+                <!-- LOGO SITO: Immagine logo + testo "Parthenoweb" -->
+                <!-- LINK PRINCIPALE: Cliccare il logo torna sempre alla home -->
                 <a href="/" class="logo">
                     <img src="/static/assets/images/logo-sfondato.webp" alt="Logo Parthenoweb" class="logo-img" />
                     <span class="logo-text">
-                        
+                        <!-- Logo testo: "Partheno" + "web" con colori diversi -->
                         <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
                     </span>
                 </a>
                 
-                
-                
+                <!-- MENU TOGGLE BUTTON (per mobile) -->
+                <!-- Visibile solo su dispositivi piccoli, nascosto su desktop -->
                 <button class="nav-toggle" aria-label="Toggle menu">☰</button>
                 
-                
-                
-                
+                <!-- NAVIGATION MENU (Link pagine) -->
+                <!-- Esempio: evidenzia il link attivo con la classe "active" -->
+                <!-- → Evidenzia il link della pagina corrente -->
                 <nav class="main-nav">
                     <a href="/" class="nav-link {% if page == 'home' %}active{% endif %}">Home</a>
-                    
+                    <!-- Link "Contattaci" ha stile diverso (CTA - Call To Action) -->
                     <a href="/contatti" class="nav-cta">Contattaci</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    
-    
-    
+    <!-- ========================================================================
+         CONTENUTO PRINCIPALE (Variabile per ogni pagina)
+         ======================================================================== -->
+    <!-- BLOCK CONTENT: placeholder che ogni pagina riempie -->
+    <!-- Le pagine figlie (home.html, contatti.html, etc.) sovrascrivono questo -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    
-    
-    
-    
-    
+    <!-- ========================================================================
+         COOKIE BANNER (Notifica privacy)
+         ======================================================================== -->
+    <!-- MOSTRA SOLO SE: l'utente NON ha ancora accettato i cookie -->
+    <!-- LOGICA: if not user_accepted_cookies -->
+    <!-- SERVER: main.py passa user_accepted_cookies = rilegge il cookie -->
+    <!-- COMANDI:
+         - Click "Accetta" → javascript setta il cookie e rinomina il banner
+         - Click "Cookie Policy" → va a /cookies -->
     
     {% if not user_accepted_cookies %}
     <div id="cookieBanner" class="cookie-banner visible">
@@ -111,42 +145,44 @@
             <p>Utilizziamo solo cookie tecnici essenziali per il corretto funzionamento del sito. Non effettuiamo profilazione né tracciamento pubblicitario.</p>
         </div>
         <div class="cookie-actions">
-            
+            <!-- Link a pagina policy (legale) -->
             <a href="/cookies" class="nav-link">Cookie Policy</a>
-            
+            <!-- Bottone per accettare (trigger JavaScript in cookies.js) -->
             <button id="acceptCookies" class="btn-accept">Accetta</button>
         </div>
     </div>
     {% endif %}
 
+    <!-- ========================================================================
+         JAVASCRIPT GLOBALE (Eseguito su tutte le pagine)
+         ======================================================================== -->
+    <!-- NOTA: Carica file DOPO il body per performance (DOM pronto) -->
     
-    
-    
-    
+    <!-- Navbar toggle per menu mobile -->
     <script src="/static/js/navbar-toggle.js"></script>
     
-    
+    <!-- Cookie banner: gestisce accettazione e impostazione cookie -->
     <script src="/static/js/cookies.js"></script>
     
-    
+    <!-- Animazioni generiche (fade-in, scroll effects) -->
     <script src="/static/js/animations.js"></script>
     
-    
+    <!-- Carousel/slider (per portfolio o hero images) -->
     <script src="/static/js/carousel.js"></script>
     
-    
+    <!-- Particle.js: effetto particelle animate (background del sito) -->
     <script src="/static/js/particles.js"></script>
 
-    
-    
+    <!-- EXTERNAL LIBRARY: AOS (Animate On Scroll) per fade-in scrolling -->
+    <!-- https://michalsnik.github.io/aos/ -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     
-    
+    <!-- INIZIALIZZA AOS: attiva le animazioni quando l'user scrolla -->
     <script>
         AOS.init();
     </script>
 
-    
+    <!-- BLOCK EXTRA_JS: Le pagine possono aggiungere JS custom -->
     {% block extra_js %}{% endblock %}
     
 </body>
