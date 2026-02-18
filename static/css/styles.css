@@ -641,9 +641,7 @@ a {
     color: var(--text-primary);
     box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
     transform: translateY(0) scale(1);
-    transition: background 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+    transition: none;
 }
 
 .feature-item:hover {
