@@ -253,33 +253,4 @@ document.querySelectorAll('.btn').forEach(button => {
     });
 });
 
-// =====================================================================
-// EFFETTO 6: MOBILE MENU TOGGLE [DEPRECATED - vedi navbar-toggle.js]
-// =====================================================================
-/**
- * NOTA: Questo codice è mantenuto per compatibilità,
- * ma la logica principale è in navbar-toggle.js.
- * Se stai modificando il comportamento del menu, modifica navbar-toggle.js!
- */
-const navToggle = document.querySelector('.nav-toggle');
-if (navToggle) {
-    navToggle.addEventListener('click', function () {
-        const mainNav = document.querySelector('.main-nav');
-        if (mainNav) {
-            mainNav.classList.toggle('active');
-        }
-    });
-}
-
-// Chiudi il menu mobile quando l'utente clicca un link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        const mainNav = document.querySelector('.main-nav');
-        if (mainNav) {
-            mainNav.classList.remove('active');
-        }
-    });
-});
-
-
 // Testing Github

@@ -33,67 +33,74 @@
 
 // Aspetta che DOM sia pronto prima di cercare elementi
 document.addEventListener('DOMContentLoaded', function () {
-    
-    // STEP 1: Trova gli elementi DOM necessari
     const navToggle = document.querySelector('.nav-toggle');  // Bottone hamburger
-    const mainNav = document.querySelector('.main-nav');      // Menu navigatione
-    
-    // Se uno dei due elementi non esiste, esci (non lanciare errori)
-    if (navToggle && mainNav) {
-        
-        // ====================================================================
-        // EVENT 1: Click sul bottone hamburger → Toggle menu open/close
-        // ====================================================================
-        navToggle.addEventListener('click', function (e) {
-            // Prevenisci che il click si propaghi verso elementi padre
-            // Altrimenti il click outside chiude subito il menu
-            e.stopPropagation();
-            
-            // Controlla se menu è già aperto (ha classe 'active')
-            const isActive = mainNav.classList.contains('active');
-            
-            if (isActive) {
-                // Menu è aperto → chiudilo
-                mainNav.classList.remove('active');
-                navToggle.classList.remove('open');  // Cambia stile bottone
-            } else {
-                // Menu è chiuso → aprilo
-                mainNav.classList.add('active');
-                navToggle.classList.add('open');     // Cambia stile bottone
-            }
-        });
+    const mainNav = document.querySelector('.main-nav');      // Menu navigazione
 
-        // ====================================================================
-        // EVENT 2: Click su link del menu → Chiudi menu automaticamente
-        // ====================================================================
-        // Quando user clicca un link (es: Home, Portfolio), il menu si chiude
-        // Così non rimane aperto dopo il click
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                navToggle.classList.remove('open');
-            });
-        });
+    if (!navToggle || !mainNav) return;
+    if (navToggle.dataset.bound === 'true') return;
+    navToggle.dataset.bound = 'true';
 
-        // ====================================================================
-        // EVENT 3: Click FUORI dal menu → Chiudi il menu
-        // ====================================================================
-        // Se user clicca su qualsiasi altro elemento della page, il menu chiude
-        // Questo migliora UX su mobile
-        document.addEventListener('click', function (event) {
-            // Controlla se il click è DENTRO il menu
-            const isClickInsideNav = mainNav.contains(event.target);
-            
-            // Controlla se il click è SUL bottone toggle
-            const isClickOnToggle = navToggle.contains(event.target);
-            
-            // Se click NON è dentro il menu E NON è sul toggle
-            // allora chiudi il menu
-            if (!isClickInsideNav && !isClickOnToggle) {
-                mainNav.classList.remove('active');
-                navToggle.classList.remove('open');
-            }
-        });
+    const icon = navToggle.querySelector('i');
+
+    function openMenu() {
+        navToggle.classList.add('open');
+        navToggle.setAttribute('aria-expanded', 'true');
+        mainNav.classList.add('active');
+        mainNav.setAttribute('aria-hidden', 'false');
+        if (icon) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        }
     }
+
+    function closeMenu() {
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        mainNav.classList.remove('active');
+        mainNav.setAttribute('aria-hidden', 'true');
+        if (icon) {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
+
+    function toggleMenu(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (mainNav.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    // EVENT 1: Click sul bottone hamburger → Toggle menu open/close
+    navToggle.addEventListener('click', toggleMenu);
+
+    // EVENT 2: Click su link del menu → Chiudi menu automaticamente
+    mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // EVENT 3: Click FUORI dal menu → Chiudi il menu
+    document.addEventListener('click', function (event) {
+        if (!mainNav.classList.contains('active')) return;
+
+        const isClickInsideNav = mainNav.contains(event.target);
+        const isClickOnToggle = navToggle.contains(event.target);
+
+        if (!isClickInsideNav && !isClickOnToggle) {
+            closeMenu();
+        }
+    });
+
+    // EVENT 4: ESC → Chiudi menu
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && mainNav.classList.contains('active')) {
+            closeMenu();
+        }
+    });
 });
 

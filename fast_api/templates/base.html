@@ -53,7 +53,7 @@
                 </a>
 
                 <!-- Hamburger: usa icona Font Awesome, NON testo -->
-                <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false">
+                <button class="nav-toggle" type="button" aria-label="Apri menu" aria-expanded="false" aria-controls="mainNav">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -111,77 +111,7 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>AOS.init();</script>
 
-    <!-- ═══════════════════════════════════════ -->
-    <!-- HAMBURGER MENU - UNICO SCRIPT          -->
-    <!-- ═══════════════════════════════════════ -->
-    <script>
-        (function () {
-            'use strict';
-
-            var navToggle = document.querySelector('.nav-toggle');
-            var mainNav = document.querySelector('.main-nav');
-
-            if (!navToggle || !mainNav) return;
-
-            var icon = navToggle.querySelector('i');
-
-            function openMenu() {
-                navToggle.classList.add('open');
-                navToggle.setAttribute('aria-expanded', 'true');
-                mainNav.classList.add('active');
-                if (icon) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                }
-            }
-
-            function closeMenu() {
-                navToggle.classList.remove('open');
-                navToggle.setAttribute('aria-expanded', 'false');
-                mainNav.classList.remove('active');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            }
-
-            // Toggle al click
-            navToggle.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (mainNav.classList.contains('active')) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            });
-
-            // Chiudi al click sui link del menu
-            var links = mainNav.querySelectorAll('.nav-link, .nav-cta');
-            for (var i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', function () {
-                    closeMenu();
-                });
-            }
-
-            // Chiudi al click fuori
-            document.addEventListener('click', function (e) {
-                if (mainNav.classList.contains('active')) {
-                    if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
-                        closeMenu();
-                    }
-                }
-            });
-
-            // Chiudi con ESC
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-                    closeMenu();
-                }
-            });
-
-        })();
-    </script>
+    <script src="/static/js/navbar-toggle.js"></script>
 
     {% block extra_js %}{% endblock %}
 
