@@ -43,34 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Se banner non esiste (user ha già accettato), esci dalla funzione
     if (!banner) return;
 
-    // STEP 2: Trova il bottone "Accetta"
+    // STEP 2: Assicurati che il banner sia visibile (non nasconderlo al caricamento)
+    // Il server lo mostra già con classe 'visible', non toccare la visibilità qui
+    banner.classList.add('visible');
+
+    // STEP 3: Trova il bottone "Accetta"
     const acceptBtn = document.getElementById('acceptCookies');
     
     // Se bottone non esiste, esci
     if (!acceptBtn) return;
 
-    // STEP 3: Aggiungi event listener al bottone "Accetta"
+    // STEP 4: Aggiungi event listener al bottone "Accetta"
     acceptBtn.addEventListener('click', () => {
-        // STEP 3a: Salva flag su localStorage (client-side persistence)
-        // Questo fa sì che se l'utente ricarica la page, il banner non riappare
         localStorage.setItem('cookiesAccepted', 'true');
         
-        // STEP 3b: Chiama API server per impostare cookie HTTP
-        // Endpoint: POST /api/cookies/accept (definito in main.py)
-        // Questo imposta il cookie lato server per 1 anno
         fetch('/api/cookies/accept', { method: 'POST' })
-            .catch(() => {
-                // Se fetch fallisce (niente connessione), ignora silenziosamente
-                // L'utente ha comunque accettato (localStorage), quindi OK
-            });
+            .catch(() => {});
         
-        // STEP 3c: Nascondi il banner con transizione CSS
-        // Rimuove classe 'visible' che mostra il banner
-        // La classe 'visible' ha una transizione fade-out
         banner.classList.remove('visible');
         
-        // STEP 3d: Rimuovi il banner dal DOM dopo 500ms
-        // Aspetta che l'animazione fade finisca, poi elimina l'elemento
         setTimeout(() => {
             banner.remove();
         }, 500);
