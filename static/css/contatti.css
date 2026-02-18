@@ -117,11 +117,25 @@
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
 }
 
 .contact-info a:hover {
     text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
     transform: translateX(5px);
+}
+
+.contact-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.mail-icon {
+    filter: brightness(0) invert(1);
 }
 
 /* Right Column - Form */
