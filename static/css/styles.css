@@ -1077,25 +1077,31 @@ body:not(.aos-init) .service-card {
         display: none;
     }
 
-    /* ---- Override dots Splide: colori del sito ---- */
+    /* ---- Override dots Splide: cerchi indicatori ---- */
     .services-carousel .splide__pagination {
         bottom: -1.5rem;
+        gap: 0.6rem;
     }
 
     .services-carousel .splide__pagination__page {
+        display: block;
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.35);
         border: none;
-        opacity: 1;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
         flex-shrink: 0;
+        opacity: 1;
+        transform: none;
         transition: background 0.3s, transform 0.3s;
     }
 
     .services-carousel .splide__pagination__page.is-active {
         background: var(--accent);
-        transform: scale(1.3);
+        transform: scale(1.35);
         opacity: 1;
     }
 
