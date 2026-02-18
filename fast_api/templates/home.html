@@ -49,7 +49,8 @@
                                 <img src="/static/assets/images/icone-card/icona-consulenza.png" alt="Consulenza">
                             </div>
                             <h3>Consulenza Strategica</h3>
-                            <p>Analisi approfondita del tuo business per definire la strategia digitale più efficace.</p>
+                            <p>Analisi approfondita del tuo business per definire la strategia digitale più efficace.
+                            </p>
                             <a href="/contatti" class="service-link">Scopri di più →</a>
                         </div>
                     </li>
@@ -90,7 +91,8 @@
                     <li class="splide__slide">
                         <div class="service-card">
                             <div class="service-icon">
-                                <img src="/static/assets/images/icone-card/icona-sviluppo-personalizzato.png" alt="Sviluppo">
+                                <img src="/static/assets/images/icone-card/icona-sviluppo-personalizzato.png"
+                                    alt="Sviluppo">
                             </div>
                             <h3>Sviluppo Personalizzato</h3>
                             <p>Soluzioni custom sviluppate specificamente per le tue esigenze uniche.</p>
@@ -160,8 +162,7 @@
                     raggiungere nuovi traguardi. La prima consulenza è gratuita e rispondiamo entro 24 ore.</p>
             </div>
             <div class="cta-actions">
-                <a href="/contatti" class="btn btn-primary btn-large"
-                    aria-label="Inizia oggi">Inizia Oggi</a>
+                <a href="/contatti" class="btn btn-primary btn-large" aria-label="Inizia oggi">Inizia Oggi</a>
                 <div class="cta-note">Risposta garantita entro <strong>24 ore</strong> • Consulenza gratuita
                 </div>
             </div>
@@ -169,117 +170,125 @@
     </div>
 </section>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // ═══════════════════════════════════════
-    // HAMBURGER MENU
-    // ═══════════════════════════════════════
-    const navToggle = document.querySelector('.nav-toggle');
-    const mainNav = document.querySelector('.main-nav');
+    document.addEventListener('DOMContentLoaded', function () {
 
-    if (navToggle && mainNav) {
-        navToggle.addEventListener('click', function (e) {
-            e.stopPropagation();
-            this.classList.toggle('open');
-            mainNav.classList.toggle('active');
 
-            // Cambia icona hamburger ↔ X
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            }
-        });
+        var navToggle = document.querySelector('.nav-toggle');
+        var mainNav = document.querySelector('.main-nav');
 
-        // Chiudi menu al click su un link
-        mainNav.querySelectorAll('.nav-link, .nav-cta').forEach(function (link) {
-            link.addEventListener('click', function () {
+        if (navToggle && mainNav) {
+
+            function closeMenu() {
                 navToggle.classList.remove('open');
                 mainNav.classList.remove('active');
-                const icon = navToggle.querySelector('i');
+                navToggle.setAttribute('aria-expanded', 'false');
+                var icon = navToggle.querySelector('i');
                 if (icon) {
-                    icon.classList.add('fa-bars');
                     icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+
+            function openMenu() {
+                navToggle.classList.add('open');
+                mainNav.classList.add('active');
+                navToggle.setAttribute('aria-expanded', 'true');
+                var icon = navToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            }
+
+            navToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (mainNav.classList.contains('active')) {
+                    closeMenu();
+                } else {
+                    openMenu();
                 }
             });
-        });
 
-        // Chiudi menu al click fuori
-        document.addEventListener('click', function (e) {
-            if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
-                navToggle.classList.remove('open');
-                mainNav.classList.remove('active');
-                const icon = navToggle.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
+            var allNavLinks = mainNav.querySelectorAll('.nav-link, .nav-cta');
+            for (var i = 0; i < allNavLinks.length; i++) {
+                allNavLinks[i].addEventListener('click', closeMenu);
             }
-        });
-    }
 
-    // ═══════════════════════════════════════
-    // CAROUSEL MOBILE (servizi)
-    // ═══════════════════════════════════════
-    const track = document.querySelector('.carousel-track');
-    const dotsContainer = document.querySelector('.carousel-dots');
-    if (track && dotsContainer) {
-        const cards = track.querySelectorAll('.service-card');
-        let current = 0;
-        let startX = 0;
-        let currentX = 0;
-        let isDragging = false;
+            document.addEventListener('click', function (e) {
+                if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
+                    closeMenu();
+                }
+            });
 
-        // Crea dots
-        cards.forEach(function (_, i) {
-            const dot = document.createElement('button');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.setAttribute('aria-label', 'Vai al servizio ' + (i + 1));
-            dot.addEventListener('click', function () { goTo(i); });
-            dotsContainer.appendChild(dot);
-        });
-
-        function goTo(index) {
-            if (index < 0) index = 0;
-            if (index >= cards.length) index = cards.length - 1;
-            current = index;
-            const card = cards[current];
-            const offset = card.offsetLeft - (track.parentElement.offsetWidth - card.offsetWidth) / 2;
-            track.style.transform = 'translateX(' + (-offset) + 'px)';
-            dotsContainer.querySelectorAll('.dot').forEach(function (d, i) {
-                d.classList.toggle('active', i === current);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMenu();
             });
         }
 
-        // Swipe touch
-        track.addEventListener('touchstart', function (e) {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            track.classList.add('dragging');
-        }, { passive: true });
 
-        track.addEventListener('touchmove', function (e) {
-            if (!isDragging) return;
-            currentX = e.touches[0].clientX;
-        }, { passive: true });
+        var track = document.querySelector('.carousel-track');
+        var dotsContainer = document.querySelector('.carousel-dots');
 
-        track.addEventListener('touchend', function () {
-            if (!isDragging) return;
-            isDragging = false;
-            track.classList.remove('dragging');
-            const diff = startX - currentX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) goTo(current + 1);
-                else goTo(current - 1);
+        if (track && dotsContainer) {
+            var cards = track.querySelectorAll('.service-card');
+            var current = 0;
+            var startX = 0;
+            var currentX = 0;
+            var isDragging = false;
+
+            for (var j = 0; j < cards.length; j++) {
+                var dot = document.createElement('button');
+                dot.classList.add('dot');
+                if (j === 0) dot.classList.add('active');
+                dot.setAttribute('aria-label', 'Vai al servizio ' + (j + 1));
+                dot.dataset.index = j;
+                dot.addEventListener('click', function () {
+                    goTo(parseInt(this.dataset.index, 10));
+                });
+                dotsContainer.appendChild(dot);
             }
-        });
 
-        // Bottoni prev/next
-        const prev = document.querySelector('.carousel-prev');
-        const next = document.querySelector('.carousel-next');
-        if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
-        if (next) next.addEventListener('click', function () { goTo(current + 1); });
-    }
-});
+            function goTo(index) {
+                if (index < 0) index = 0;
+                if (index >= cards.length) index = cards.length - 1;
+                current = index;
+                var card = cards[current];
+                var offset = card.offsetLeft - (track.parentElement.offsetWidth - card.offsetWidth) / 2;
+                track.style.transform = 'translateX(' + (-offset) + 'px)';
+                var dots = dotsContainer.querySelectorAll('.dot');
+                for (var k = 0; k < dots.length; k++) {
+                    dots[k].classList.toggle('active', k === current);
+                }
+            }
+
+            track.addEventListener('touchstart', function (e) {
+                startX = e.touches[0].clientX;
+                currentX = startX;
+                isDragging = true;
+                track.classList.add('dragging');
+            }, { passive: true });
+
+            track.addEventListener('touchmove', function (e) {
+                if (!isDragging) return;
+                currentX = e.touches[0].clientX;
+            }, { passive: true });
+
+            track.addEventListener('touchend', function () {
+                if (!isDragging) return;
+                isDragging = false;
+                track.classList.remove('dragging');
+                var diff = startX - currentX;
+                if (Math.abs(diff) > 50) {
+                    goTo(diff > 0 ? current + 1 : current - 1);
+                }
+            });
+
+            var prev = document.querySelector('.carousel-prev');
+            var next = document.querySelector('.carousel-next');
+            if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
+            if (next) next.addEventListener('click', function () { goTo(current + 1); });
+        }
+
+    });
 </script>
 {% endblock %}
