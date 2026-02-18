@@ -105,6 +105,10 @@ async def home(request: Request):
         "page": "home",                                                 
         "page_title": "Home",                                         
         "user_accepted_cookies": request.cookies.get("cookiesAccepted")                
+        "request": request,              # Obbligatorio per Jinja2
+        "page": "home",                  # Identificatore univoco pagina
+        "page_title": "Home",            # Titolo visibile nel browser
+        "user_accepted_cookies": request.cookies.get("cookiesAccepted")  # Leggi cookie
     })
 
 
