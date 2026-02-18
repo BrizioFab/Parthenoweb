@@ -641,10 +641,10 @@ a {
     color: var(--text-primary);
     box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
     transform: translateY(0) scale(1);
-    transition: transform 0.15s ease-out,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: transform 0.08s ease-out,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .feature-item:hover {
