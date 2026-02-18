@@ -618,9 +618,8 @@ a {
     gap: 1rem;
 }
 
-/* ===============================
-   Features Section
-================================ */
+
+/* FEATURES */
 .features {
     padding: 6rem 0;
     background: linear-gradient(180deg, rgba(0, 212, 255, 0.03) 0%, transparent 100%);
@@ -641,18 +640,15 @@ a {
     text-align: center;
     color: var(--text-primary);
     box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
-
-    transform: scale(1);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.35s, border-color 0.35s;
+    transition: all 0.3s ease;
+    will-change: transform;
 }
 
 .feature-item:hover {
     background: linear-gradient(135deg, rgba(79, 163, 247, 0.10) 0%, rgba(160, 230, 101, 0.05) 100%);
     border-color: rgba(79, 163, 247, 0.18);
     box-shadow: 0 12px 50px rgba(10, 20, 30, 0.45);
-    transform: scale(1.1);
+    transform: translateY(-6px) scale(1.05);
 }
 
 .feature-icon {
@@ -661,7 +657,7 @@ a {
 }
 
 .feature-icon i {
-   font-size: 4rem;   
+    font-size: 4rem;   
     color: #4FA3F7; 
 }
 
