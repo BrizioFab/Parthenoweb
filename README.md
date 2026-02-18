@@ -21,15 +21,8 @@ python start_dev_server.py
 
 Applicazione disponibile su: `http://localhost:8000`
 
-## Test
-
-```bash
-python test_integration.py
-```
-
 ## Struttura principale
 
 - `fast_api/` → backend FastAPI, template e logica server
 - `static/` → risorse statiche (CSS, JavaScript, immagini)
 - `start_dev_server.py` → script di avvio locale
-- `test_integration.py` → test di integrazione

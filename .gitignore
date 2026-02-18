@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+test_*.py
+tests/

@@ -1,9 +1,11 @@
 # Vercel ignore rules
 node_modules/
 tests/
+test_*.py
 test-results/
 *.pyc
 __pycache__/
 .env
 .vscode/
 .DS_Store
+backup/

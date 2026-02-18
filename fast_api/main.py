@@ -5,7 +5,6 @@ Server principale che gestisce tutte le rotte del sito web.
 
 ROTTE PRINCIPALI:
 - GET  /            → Homepage (home.html)
-- GET  /portfolio   → Pagina portfolio (portfolio.html)
 - GET  /contatti    → Form contatti - visualizzazione (contatti.html)
 - POST /contatti    → Form contatti - invio email con validazione
 - GET  /cookies     → Pagina cookie policy (cookies.html)
@@ -106,24 +105,6 @@ async def home(request: Request):
         "page": "home",                  # Identificatore univoco pagina
         "page_title": "Home",            # Titolo visibile nel browser
         "user_accepted_cookies": request.cookies.get("cookiesAccepted")  # Leggi cookie
-    })
-
-
-@app.get("/portfolio", response_class=HTMLResponse)
-async def portfolio(request: Request):
-    """
-    PAGINA PORTFOLIO - Mostra i tuoi lavori e progetti
-    
-    PERCORSO: GET /portfolio
-    TEMPLATE: portfolio.html
-    
-    DA MODIFICARE: per aggiungere filtri o struttura progetti diversa
-    """
-    return templates.TemplateResponse("portfolio.html", {
-        "request": request,
-        "page": "portfolio",
-        "page_title": "Portfolio",
-        "user_accepted_cookies": request.cookies.get("cookiesAccepted")
     })
 
 
