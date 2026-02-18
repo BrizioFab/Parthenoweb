@@ -641,7 +641,10 @@ a {
     color: var(--text-primary);
     box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
     transform: translateY(0) scale(1);
-    transition: none;
+
+    transition: none !important;
+    -webkit-transition: none !important;
+    animation: none !important;
 }
 
 .feature-item:hover {
@@ -649,8 +652,8 @@ a {
     border-color: rgba(79, 163, 247, 0.18) !important;
     box-shadow: 0 12px 50px rgba(10, 20, 30, 0.45) !important;
     transform: translateY(-8px) scale(1.08) !important;
+    transition: none !important;
 }
-
 .feature-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
