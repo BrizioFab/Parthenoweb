@@ -1102,19 +1102,24 @@ body:not(.aos-init) .service-card {
     transform: none;
     transition: background 0.3s, transform 0.3s;
 }
+.services-carousel .splide__track {
+    display: flex;
+    justify-content: center;
+}
 
+.services-carousel .splide__list {
+    justify-content: center;
+}
 .services-carousel .splide__pagination__page.is-active {
     background: var(--accent);
     transform: scale(1.35);
     opacity: 1;
 }
 
-    /* Ogni slide occupa la larghezza completa ed è ben distanziata */
     .services-carousel .splide__slide {
         padding: 0 0.25rem;
     }
 
-    /* Card dentro la slide: dimensioni uniformi */
     .services-carousel .splide__slide .service-card {
         width: 100%;
         box-sizing: border-box;
