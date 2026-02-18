@@ -10,12 +10,3 @@ body:not(.aos-init) .service-card {
 .services-carousel { visibility: visible; }
 .carousel-track { min-height: 1px; }
 
-.feature-item {
-  transform: scale(1);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.feature-item:hover {
-  transform: translateY(-6px) scale(1.05);
-}

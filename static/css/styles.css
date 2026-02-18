@@ -618,9 +618,7 @@ a {
     gap: 1rem;
 }
 
-/* ===============================
-   Features Section
-================================ */
+
 .features {
     padding: 6rem 0;
     background: linear-gradient(180deg, rgba(0, 212, 255, 0.03) 0%, transparent 100%);
@@ -641,11 +639,11 @@ a {
     text-align: center;
     color: var(--text-primary);
     box-shadow: 0 6px 30px rgba(10, 20, 30, 0.35);
-
-    transform: scale(1);
+    
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                 box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.35s, border-color 0.35s;
+                background 0.35s, 
+                border-color 0.35s;
 }
 
 .feature-item:hover {
