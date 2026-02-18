@@ -1,0 +1,139 @@
+/* Backup CSS: usa le variabili CSS globali definite in static/css/styles.css */
+/* ===============================
+   Portfolio
+================================ */
+.portfolio {
+    padding: 6rem 0;
+}
+
+.portfolio-filters {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid rgba(79, 163, 247, 0.12);
+    color: var(--text-secondary);
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.filter-btn.active {
+    background: var(--gradient-accent);
+    color: #000;
+    box-shadow: 0 8px 30px rgba(79, 163, 247, 0.12);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, rgba(79, 163, 247, 0.06) 0%, rgba(160, 230, 101, 0.03) 100%);
+    border: 1px solid rgba(79, 163, 247, 0.08);
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    overflow: hidden;
+}
+
+.project-image {
+    height: 170px;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    position: relative;
+}
+
+.project-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 999px;
+}
+
+.project-image-label {
+    font-size: 1rem;
+}
+
+.project-meta h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.project-meta p {
+    margin: 0 0.75rem 0 0;
+    color: var(--text-secondary);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(10, 20, 30, 0.45);
+}
+
+.project-card:focus {
+    outline: 3px solid rgba(79, 163, 247, 0.12);
+    outline-offset: 6px;
+    transform: translateY(-6px);
+}
+
+.project-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn:focus {
+    outline: 3px solid rgba(79, 163, 247, 0.12);
+    outline-offset: 3px;
+}
+
+/* Modal */
+.project-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10050;
+}
+
+.project-modal[aria-hidden="false"] {
+    display: flex;
+}
+
+.project-modal-inner {
+    background: linear-gradient(135deg, rgba(79, 163, 247, 0.06), rgba(160, 230, 101, 0.04));
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    max-width: 720px;
+    width: calc(100% - 3rem);
+    box-shadow: 0 30px 100px rgba(10, 20, 30, 0.6);
+}
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
