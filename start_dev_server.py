@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 """
 Development server for Parthenoweb FastAPI application
 Run: python start_dev_server.py

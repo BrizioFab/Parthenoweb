@@ -1,7 +1,5 @@
-/* Backup CSS: usa le variabili CSS globali definite in static/css/styles.css */
-/* ===============================
-   Portfolio
-================================ */
+
+
 .portfolio {
     padding: 6rem 0;
 }
@@ -103,7 +101,7 @@
     outline-offset: 3px;
 }
 
-/* Modal */
+
 .project-modal {
     position: fixed;
     inset: 0;
