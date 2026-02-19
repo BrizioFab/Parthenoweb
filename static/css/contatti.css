@@ -224,17 +224,35 @@
     font-weight: 700;
     font-size: 1.05rem;
     cursor: pointer;
-    transition: color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: border-color 0.7s ease;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
+.contact-form button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, #4FA3F7, #2176d2);
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 1s ease;
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.contact-form button:hover::before {
+    clip-path: circle(150% at 50% 50%);
+}
+
 .contact-form button:hover {
-    color: var(--accent);
+    border-color: transparent;
 }
 
 .contact-form button:active {
-    color: var(--accent);
+    filter: brightness(0.95);
 }
 
 #form-message {
