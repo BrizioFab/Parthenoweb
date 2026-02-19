@@ -1131,6 +1131,11 @@ body:not(.aos-init) .service-card {
     .services-carousel .splide__slide {
         width: auto !important;
         min-width: 0;
+        display: flex;
+    }
+
+    .services-carousel .splide__slide .service-card {
+        flex: 1;
     }
 
     .services-carousel {
