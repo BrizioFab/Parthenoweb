@@ -3,10 +3,36 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Parthenoweb{% endblock %} - Web Design & Development Professionali</title>
+    <title>{% block title %}Parthenoweb{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Soluzioni web premium per il tuo business. Design, sviluppo e strategie digitali.">
+    <meta name="description" content="{{ seo_description | default('Studio di sviluppo siti web a Napoli (Materdei): siti moderni, veloci, responsive e ottimizzati SEO per attività locali e professionisti.') }}">
+    <meta name="keywords" content="{{ seo_keywords | default('sviluppo siti web Napoli, realizzazione siti web Materdei, siti web professionali Napoli, SEO locale Napoli, e-commerce Napoli') }}">
+    <meta name="robots" content="{{ seo_robots | default('index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1') }}">
+    <meta name="author" content="Parthenoweb">
+    <meta name="language" content="it">
+
+    <link rel="canonical" href="{{ canonical_url | default(request.url) }}">
+    <link rel="alternate" hreflang="it-IT" href="{{ canonical_url | default(request.url) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url | default(request.url) }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="Parthenoweb">
+    <meta property="og:title" content="{{ seo_og_title | default(self.title()) }}">
+    <meta property="og:description" content="{{ seo_og_description | default(seo_description | default('Studio di sviluppo siti web a Napoli (Materdei): siti moderni, veloci, responsive e ottimizzati SEO.')) }}">
+    <meta property="og:url" content="{{ canonical_url | default(request.url) }}">
+    <meta property="og:image" content="{{ seo_og_image | default(request.base_url ~ 'static/assets/images/logo-sfondato.webp') }}">
+    <meta property="og:image:alt" content="{{ seo_og_image_alt | default('Logo Parthenoweb') }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_twitter_title | default(self.title()) }}">
+    <meta name="twitter:description" content="{{ seo_twitter_description | default(seo_description | default('Sviluppo siti web a Napoli, SEO locale e performance optimization.')) }}">
+    <meta name="twitter:image" content="{{ seo_twitter_image | default(seo_og_image | default(request.base_url ~ 'static/assets/images/logo-sfondato.webp')) }}">
+
+    <meta name="geo.region" content="IT-NA">
+    <meta name="geo.placename" content="Napoli, Materdei">
+    <meta name="geo.position" content="40.8546;14.2509">
+    <meta name="ICBM" content="40.8546, 14.2509">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/static/assets/images/favicon/favicon.ico">
@@ -33,6 +59,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css">
 
     {% block extra_css %}{% endblock %}
+
+    {% if structured_data %}
+    <script type="application/ld+json">{{ structured_data | tojson }}</script>
+    {% endif %}
 </head>
 
 <body>
