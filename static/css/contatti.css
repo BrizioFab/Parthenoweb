@@ -437,41 +437,104 @@
 
 @media (max-width: 640px) {
     .social-wrapper {
-        margin: 1.25rem auto 0;
+        margin: 2rem auto 0;
+        width: 100%;
+        max-width: none;
+        padding: 0 1rem;
+    }
+
+    .social-wrapper::before {
+        border-radius: 14px;
+        border: 1px solid rgba(0, 212, 255, 0.2);
     }
 
     .social-icon-row {
-        gap: 6px;
-        padding: 6px;
+        gap: 10px;
+        padding: 12px 10px;
+        justify-content: center;
     }
 
     .social-icon-box {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-        flex: 0 0 48px;
-        border-radius: 10px;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        flex: 0 0 56px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        padding: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .social-icon-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 212, 255, 0.25);
+    }
+
+    .social-icon-box:focus-visible {
+        outline: 3px solid rgba(0, 212, 255, 0.8);
+        outline-offset: 3px;
     }
 
     .s-icon-image {
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
     }
 
     .s-instagram .s-icon-image {
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
     }
 
     .s-facebook .s-icon-image {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
     }
 
     .s-tiktok .s-icon-image {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Ultra-mobile optimization (screens < 480px) */
+@media (max-width: 480px) {
+    .social-wrapper {
+        margin: 1.75rem auto 0;
+        padding: 0 0.75rem;
+    }
+
+    .social-icon-row {
+        gap: 12px;
+        padding: 10px 8px;
+        justify-content: center;
+    }
+
+    .social-icon-box {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+        flex: 0 0 52px;
+        border-radius: 11px;
+    }
+
+    .s-icon-image {
+        width: 36px;
+        height: 36px;
+    }
+
+    .s-instagram .s-icon-image {
+        width: 36px;
+        height: 36px;
+    }
+
+    .s-facebook .s-icon-image {
+        width: 36px;
+        height: 36px;
+    }
+
+    .s-tiktok .s-icon-image {
+        width: 36px;
+        height: 36px;
     }
 }
 
