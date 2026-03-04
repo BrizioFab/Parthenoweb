@@ -438,9 +438,9 @@
 @media (max-width: 640px) {
     .social-wrapper {
         margin: 2rem auto 0;
-        width: 100%;
-        max-width: none;
-        padding: 0 1rem;
+        width: fit-content;
+        max-width: 290px;
+        padding: 0;
     }
 
     .social-wrapper::before {
@@ -500,7 +500,8 @@
 @media (max-width: 480px) {
     .social-wrapper {
         margin: 1.75rem auto 0;
-        padding: 0 0.75rem;
+        padding: 0;
+        max-width: 260px;
     }
 
     .social-icon-row {
