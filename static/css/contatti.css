@@ -438,6 +438,7 @@
 @media (max-width: 640px) {
     .social-wrapper {
         margin: 2rem auto 0;
+        width: 100%;
         max-width: 400px;
         padding: 0;
     }
