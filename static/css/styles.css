@@ -1648,6 +1648,7 @@ body:not(.aos-init) .service-card {
 
 @media (max-width: 640px) {
     .social-wrapper {
+        align-items: center;
         margin: 1.25rem auto 0;
         width: 85%;
     }
@@ -2246,6 +2247,7 @@ body:not(.aos-init) .service-card {
     }
 
     .social-icon-row {
+        justify-content: center;
         gap: 6px;
         padding: 6px;
     }
