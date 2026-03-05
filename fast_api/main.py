@@ -134,6 +134,7 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "seo_keywords": "cookie policy parthenoweb, privacy cookie tecnici",
             "seo_robots": "noindex,follow",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "canonical_url": cookies_canonical,
             "structured_data": {
                 "@context": "https://schema.org",
@@ -160,6 +161,9 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "seo_keywords": "404 parthenoweb, pagina non trovata",
             "seo_robots": "noindex,follow",
             "canonical_url": not_found_canonical
+=======
+            "canonical_url": cookies_canonical
+>>>>>>> parent of a8d0058 (Add custom 404 page, handler and assets)
 =======
             "canonical_url": cookies_canonical
 >>>>>>> parent of a8d0058 (Add custom 404 page, handler and assets)
