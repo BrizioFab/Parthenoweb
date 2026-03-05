@@ -10,18 +10,10 @@
     <meta name="robots" content="{{ seo_robots | default('index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1') }}">
     <meta name="author" content="Parthenoweb">
     <meta name="language" content="it">
-    <meta name="theme-color" content="#1a1a1a">
-    <meta name="color-scheme" content="light dark">
-    <meta name="format-detection" content="telephone=yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
+
     <link rel="canonical" href="{{ canonical_url | default(request.url) }}">
     <link rel="alternate" hreflang="it-IT" href="{{ canonical_url | default(request.url) }}">
     <link rel="alternate" hreflang="x-default" href="{{ canonical_url | default(request.url) }}">
-    
-    <!-- Sitemap and Robots declaration -->
-    <link rel="sitemap" type="application/xml" href="https://parthenoweb.it/sitemap.xml">
 
     <meta property="og:type" content="website">
     <meta property="og:locale" content="it_IT">
@@ -52,7 +44,6 @@
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" as="style">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -61,84 +52,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <!-- CSS - Preload below, load with link -->
-    <link rel="preload" href="/static/css/styles.css" as="style">
+    <!-- CSS -->
     <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="preload" href="/static/css/fixes.css" as="style">
     <link rel="stylesheet" href="/static/css/fixes.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css">
 
-    <!-- Schema.org Structured Data -->
-    {% if structured_data %}
-    <script type="application/ld+json">{{ structured_data | tojson }}</script>
-    {% endif %}
-    
-    <!-- Organization Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "@id": "https://parthenoweb.it",
-        "name": "Parthenoweb",
-        "description": "Studio di sviluppo web con sede a Napoli (Materdei). Realizziamo siti moderni, veloci, responsive e ottimizzati SEO per attività locali, professionisti e piccole imprese.",
-        "url": "https://parthenoweb.it",
-        "logo": "https://parthenoweb.it/static/assets/images/logo-sfondato.webp",
-        "email": "mailto:parthenoweb@gmail.com",
-        "telephone": "+39 377 092 0451",
-        "image": "https://parthenoweb.it/static/assets/images/logo-sfondato.webp",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Napoli, Materdei",
-            "addressLocality": "Napoli",
-            "addressRegion": "Campania",
-            "postalCode": "80131",
-            "addressCountry": "IT"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "40.8546",
-            "longitude": "14.2509"
-        },
-        "areaServed": [
-            {
-                "@type": "City",
-                "name": "Napoli"
-            },
-            {
-                "@type": "City",
-                "name": "Materdei"
-            },
-            {
-                "@type": "City",
-                "name": "Vomero"
-            },
-            {
-                "@type": "City",
-                "name": "Chiaia"
-            }
-        ],
-        "priceRange": "$$",
-        "sameAs": [
-            "https://www.facebook.com/parthenoweb",
-            "https://www.instagram.com/parthenoweb",
-            "https://www.linkedin.com/company/parthenoweb"
-        ],
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            "opens": "09:00",
-            "closes": "18:00"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+39 377 092 0451",
-            "contactType": "Sales"
-        }
-    }
-    </script>
+    {% block extra_css %}{% endblock %}
 
-    <!-- Schema.org Structured Data -->
     {% if structured_data %}
     <script type="application/ld+json">{{ structured_data | tojson }}</script>
     {% endif %}
@@ -155,7 +76,7 @@
                 style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
 
                 <a href="/" class="logo">
-                    <img src="/static/assets/images/logo-sfondato.webp" alt="Logo Parthenoweb" class="logo-img">
+                    <img src="/static/assets/images/logo%20bianco.png" alt="Logo Parthenoweb" class="logo-img">
                     <span class="logo-text">
                         <span class="logo-partheno">Partheno</span><span class="logo-web">web</span>
                     </span>
@@ -174,36 +95,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Breadcrumb Navigation -->
-    {% if page != 'home' %}
-    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
-                    <meta itemprop="position" content="1">
-                </li>
-                {% if page == 'contatti' %}
-                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">Contatti</span>
-                    <meta itemprop="position" content="2">
-                </li>
-                {% elif page == 'cookies' %}
-                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">Cookie Policy</span>
-                    <meta itemprop="position" content="2">
-                </li>
-                {% elif page == '404' %}
-                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">Pagina non trovata</span>
-                    <meta itemprop="position" content="2">
-                </li>
-                {% endif %}
-            </ol>
-        </div>
-    </nav>
-    {% endif %}
 
     <!-- ═══════════════════════════════════════ -->
     <!-- CONTENUTO PAGINA                       -->

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Pagina non trovata | Parthenoweb{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/404.css">
+{% endblock %}
+
+{% block content %}
+<div class="page-bg" aria-hidden="true">
+    <div class="hero-gradient-1"></div>
+    <div class="hero-gradient-2"></div>
+    <div class="hero-particles" id="particles"></div>
+</div>
+
+<section class="hero notfound-hero">
+    <div class="container hero-content notfound-content">
+        <div class="hero-text notfound-text" data-aos="fade-right" data-aos-duration="900">
+            <p class="notfound-badge">Errore di navigazione</p>
+            <h1>
+                <span class="gradient-text">404</span><br>
+                Pagina non trovata
+            </h1>
+            <p>Il link che hai aperto non esiste o è stato spostato. Torna alla home o contattaci e ti aiutiamo subito.</p>
+
+            <div class="hero-cta notfound-cta">
+                <a href="/" class="btn btn-primary">Torna alla Home</a>
+                <a href="/contatti" class="btn btn-secondary">Contattaci</a>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Torna indietro</button>
+            </div>
+        </div>
+
+        <div class="hero-visual notfound-visual" data-aos="fade-left" data-aos-duration="900">
+            <div class="floating-card notfound-card">
+                <img src="/static/assets/images/logo%20bianco.png" alt="Logo Parthenoweb" class="hero-logo notfound-logo">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
