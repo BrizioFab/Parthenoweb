@@ -1649,6 +1649,7 @@ body:not(.aos-init) .service-card {
 @media (max-width: 640px) {
     .social-wrapper {
         margin: 1.25rem auto 0;
+        width: 85%;
     }
 
     .social-icon-row {
@@ -2142,7 +2143,6 @@ body:not(.aos-init) .service-card {
 ================================ */
 
 .social-wrapper {
-    width: 85%;
     position: relative;
     margin-top: 1.25rem;
     width: fit-content;
@@ -2242,6 +2242,7 @@ body:not(.aos-init) .service-card {
 @media (max-width: 640px) {
     .social-wrapper {
         margin: 1.25rem auto 0;
+        width: 85%;
     }
 
     .social-icon-row {
