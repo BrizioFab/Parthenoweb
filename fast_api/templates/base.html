@@ -136,7 +136,10 @@
             "contactType": "Sales"
         }
     }
-    </script>tured_data %}
+    </script>
+
+    <!-- Schema.org Structured Data -->
+    {% if structured_data %}
     <script type="application/ld+json">{{ structured_data | tojson }}</script>
     {% endif %}
 </head>
