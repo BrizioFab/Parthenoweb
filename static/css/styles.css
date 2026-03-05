@@ -1314,7 +1314,7 @@ body:not(.aos-init) .service-card {
 }
 
 /* ===============================
-   Contact Page Premium Styles
+   CONTACT SECTION
 ================================ */
 
 .contact-section {
@@ -1789,6 +1789,10 @@ body:not(.aos-init) .service-card {
         height: 34px;
     }
 }
+
+/* ===============================
+   FIXES SECTION
+================================ */
 body:not(.aos-init) .service-card {
     opacity: 1 !important;
     transform: none !important;
@@ -1798,6 +1802,10 @@ body:not(.aos-init) .service-card {
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.services-carousel { visibility: visible; }
-.carousel-track { min-height: 1px; }
+.services-carousel {
+    visibility: visible;
+}
 
+.carousel-track {
+    min-height: 1px;
+}
