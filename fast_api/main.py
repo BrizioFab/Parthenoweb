@@ -4,7 +4,7 @@
 
 
 from fastapi import FastAPI, Request, Form, Response
-from fastapi.responses import HTMLResponse, Response, PlainTextResponse, JSONResponse
+from fastapi.responses import HTMLResponse, Response, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
@@ -95,7 +95,6 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
     home_canonical = _canonical_url(request, "/")
     contatti_canonical = _canonical_url(request, "/contatti")
     cookies_canonical = _canonical_url(request, "/cookies")
-    not_found_canonical = _canonical_url(request, "/404")
 
     page_map = {
         "home": {
@@ -134,6 +133,7 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "seo_description": "Informativa cookie di Parthenoweb: utilizzo di cookie tecnici essenziali e gestione preferenze.",
             "seo_keywords": "cookie policy parthenoweb, privacy cookie tecnici",
             "seo_robots": "noindex,follow",
+<<<<<<< HEAD
             "canonical_url": cookies_canonical,
             "structured_data": {
                 "@context": "https://schema.org",
@@ -160,6 +160,9 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "seo_keywords": "404 parthenoweb, pagina non trovata",
             "seo_robots": "noindex,follow",
             "canonical_url": not_found_canonical
+=======
+            "canonical_url": cookies_canonical
+>>>>>>> parent of a8d0058 (Add custom 404 page, handler and assets)
         }
     }
 
@@ -280,38 +283,6 @@ async def cookies(request: Request):
     }
     context.update(_build_seo_context(request, "cookies"))
     return templates.TemplateResponse("cookies.html", context)
-
-
-@app.get("/404", response_class=HTMLResponse)
-async def not_found_page(request: Request):
-
-    context = {
-        "request": request,
-        "page": "404",
-        "user_accepted_cookies": request.cookies.get("cookiesAccepted")
-    }
-    context.update(_build_seo_context(request, "404"))
-    return templates.TemplateResponse("404.html", context, status_code=404)
-
-
-@app.exception_handler(404)
-async def global_not_found_handler(request: Request, exc):
-    accept_header = request.headers.get("accept", "")
-    wants_html = "text/html" in accept_header and not request.url.path.startswith("/api/")
-
-    if wants_html:
-        context = {
-            "request": request,
-            "page": "404",
-            "user_accepted_cookies": request.cookies.get("cookiesAccepted")
-        }
-        context.update(_build_seo_context(request, "404"))
-        return templates.TemplateResponse("404.html", context, status_code=404)
-
-    if request.url.path.startswith("/api/"):
-        return JSONResponse(status_code=404, content={"detail": "Not Found"})
-
-    return PlainTextResponse("Not Found", status_code=404)
 
 
 @app.get("/robots.txt", response_class=PlainTextResponse)
