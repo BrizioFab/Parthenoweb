@@ -2142,6 +2142,7 @@ body:not(.aos-init) .service-card {
 ================================ */
 
 .social-wrapper {
+    width: 85%;
     position: relative;
     margin-top: 1.25rem;
     width: fit-content;
