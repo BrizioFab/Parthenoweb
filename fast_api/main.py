@@ -112,13 +112,21 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "canonical_url": contatti_canonical,
             "structured_data": {
                 "@context": "https://schema.org",
-                "@type": "ContactPage",
-                "name": "Contatti Parthenoweb",
-                "url": contatti_canonical,
-                "about": {
-                    "@type": "ProfessionalService",
-                    "name": "Parthenoweb"
-                }
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": home_canonical
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Contatti",
+                        "item": contatti_canonical
+                    }
+                ]
             }
         },
         "cookies": {
@@ -126,7 +134,25 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "seo_description": "Informativa cookie di Parthenoweb: utilizzo di cookie tecnici essenziali e gestione preferenze.",
             "seo_keywords": "cookie policy parthenoweb, privacy cookie tecnici",
             "seo_robots": "noindex,follow",
-            "canonical_url": cookies_canonical
+            "canonical_url": cookies_canonical,
+            "structured_data": {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": home_canonical
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Cookie Policy",
+                        "item": cookies_canonical
+                    }
+                ]
+            }
         },
         "404": {
             "page_title": "404 - Pagina non trovata | Parthenoweb",

@@ -1,0 +1,34 @@
+---
+/* TEAM */
+
+Parthenoweb - Web Development Studio
+Location: Napoli, Materdei, Italy
+Website: https://parthenoweb.it
+Email: parthenoweb@gmail.com
+Phone: +39 377 092 0451
+
+---
+/* SERVICES */
+
+- Web Development
+- UI/UX Design
+- SEO Optimization
+- E-commerce Solutions
+- WordPress Development
+- Digital Branding
+- Web Analytics
+- GDPR Compliance
+
+---
+/* TECHNOLOGY STACK */
+
+Backend: Python, FastAPI
+Frontend: HTML5, CSS3, JavaScript
+Hosting: Vercel
+Domain: Netsons
+SEO: Core Web Vitals optimized
+Performance: Image optimization, lazy loading, caching
+
+---
+/* LAST UPDATE */
+Last Updated: 2026-03-05

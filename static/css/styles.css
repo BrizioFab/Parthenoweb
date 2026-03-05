@@ -1312,3 +1312,71 @@ body:not(.aos-init) .service-card {
         box-shadow: none;
     }
 }
+/* ═══════════════════════════════════════════════════════════ */
+/* BREADCRUMB NAVIGATION                                       */
+/* ═══════════════════════════════════════════════════════════ */
+
+.breadcrumb-nav {
+    background: linear-gradient(135deg, rgba(2, 24, 59, 0.95) 0%, rgba(4, 56, 115, 0.95) 50%, rgba(1, 16, 41, 0.95) 100%);
+    border-bottom: 1px solid rgba(79, 163, 247, 0.1);
+    padding: 1rem 0;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.breadcrumb-item a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb-item a:hover,
+.breadcrumb-item a:focus {
+    color: var(--accent-glow);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: "/";
+    display: inline-block;
+    margin: 0 0.5rem;
+    color: var(--text-tertiary);
+}
+
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        padding: 0.75rem 0;
+    }
+
+    .breadcrumb {
+        font-size: 0.85rem;
+        gap: 0.25rem;
+    }
+
+    .breadcrumb-item {
+        font-size: 0.85rem;
+    }
+
+    .breadcrumb-item:not(:last-child)::after {
+        margin: 0 0.25rem;
+    }
+}
