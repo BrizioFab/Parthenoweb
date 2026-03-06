@@ -103,7 +103,9 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
             "seo_description": "Parthenoweb è uno studio di sviluppo siti web a Napoli (Materdei): realizziamo siti moderni, veloci, responsive, SEO-ready, e-commerce e WordPress per attività locali e professionisti.",
             "seo_keywords": "sviluppo siti web Napoli, realizzazione siti web Materdei, siti web professionali Napoli, SEO locale Napoli, sviluppo WordPress Napoli, e-commerce Napoli",
             "canonical_url": home_canonical,
-            "structured_data": _build_structured_data(request)
+            "structured_data": _build_structured_data(request),
+            "sitemap_priority": "1.0",
+            "sitemap_changefreq": "weekly"
         },
         "contatti": {
             "page_title": "Contatti | Consulenza Siti Web Napoli | Parthenoweb",
@@ -119,21 +121,25 @@ def _build_seo_context(request: Request, page_key: str) -> dict:
                     "@type": "ProfessionalService",
                     "name": "Parthenoweb"
                 }
-            }
+            },
+            "sitemap_priority": "0.8",
+            "sitemap_changefreq": "monthly"
         },
         "cookies": {
             "page_title": "Cookie Policy | Parthenoweb",
             "seo_description": "Informativa cookie di Parthenoweb: utilizzo di cookie tecnici essenziali e gestione preferenze.",
             "seo_keywords": "cookie policy parthenoweb, privacy cookie tecnici",
             "seo_robots": "noindex,follow",
-            "canonical_url": cookies_canonical
+            "canonical_url": cookies_canonical,
+            "exclude_from_sitemap": True
         },
         "404": {
             "page_title": "404 - Pagina non trovata | Parthenoweb",
             "seo_description": "Pagina non trovata su Parthenoweb. Torna alla home o contattaci per supporto.",
             "seo_keywords": "404 parthenoweb, pagina non trovata",
             "seo_robots": "noindex,follow",
-            "canonical_url": not_found_canonical
+            "canonical_url": not_found_canonical,
+            "exclude_from_sitemap": True
         }
     }
 
@@ -328,27 +334,38 @@ async def llms_txt(request: Request):
 
 @app.get("/sitemap.xml")
 async def sitemap_xml(request: Request):
-    urls = [
-        _canonical_url(request, "/"),
-        _canonical_url(request, "/contatti"),
-        _canonical_url(request, "/cookies")
-    ]
     lastmod = date.today().isoformat()
-    xml_items = "\n".join(
-        (
+    
+    # Generate all seo contexts
+    contexts = [
+        _build_seo_context(request, "home"),
+        _build_seo_context(request, "contatti"),
+        _build_seo_context(request, "cookies"),
+        _build_seo_context(request, "404")
+    ]
+    
+    xml_items = []
+    for ctx in contexts:
+        if ctx.get("exclude_from_sitemap"):
+            continue
+            
+        url = ctx.get("canonical_url", _canonical_url(request, "/"))
+        priority = ctx.get("sitemap_priority", "0.5")
+        changefreq = ctx.get("sitemap_changefreq", "monthly")
+        
+        xml_items.append(
             "  <url>\n"
             f"    <loc>{url}</loc>\n"
             f"    <lastmod>{lastmod}</lastmod>\n"
-            "    <changefreq>weekly</changefreq>\n"
-            "    <priority>0.8</priority>\n"
+            f"    <changefreq>{changefreq}</changefreq>\n"
+            f"    <priority>{priority}</priority>\n"
             "  </url>"
         )
-        for url in urls
-    )
+
     xml = (
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n"
-        f"{xml_items}\n"
+        f"{chr(10).join(xml_items)}\n"
         "</urlset>"
     )
     return Response(content=xml, media_type="application/xml")
