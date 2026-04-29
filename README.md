@@ -1,6 +1,6 @@
 # Parthenoweb
 
-![CI](https://img.shields.io/badge/CI-setup-lightgrey) ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![CI](https://img.shields.io/badge/CI-setup-lightgrey) ![Python](https://img.shields.io/badge/python-3.10%2B-blue) 
 
 Descrizione
 -----------
