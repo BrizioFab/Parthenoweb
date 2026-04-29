@@ -1,15 +1,6 @@
 /**
- * CAROUSEL - Splide inizializzato solo su mobile (<=900px)
+ * CAROUSEL - Splide inizializzato solo su mobile 
  * Su desktop Splide viene distrutto e le card tornano a griglia CSS.
- *
- * Configurazione:
- *  - type: 'loop'        scorrimento infinito
- *  - perPage: 1          una card per volta
- *  - pagination: true    dots circolari
- *  - arrows: false       no frecce (design pulito)
- *  - autoplay: true      scorrimento automatico ogni 2.5s
- *  - mediaQuery: 'min'   i breakpoints si attivano su min-width
- *  - breakpoints 901     destroy: true su desktop
  */
 document.addEventListener('DOMContentLoaded', () => {
     const el = document.querySelector('#servicesCarousel');

@@ -9,7 +9,7 @@ class FormValidator:
     def validate_nome(nome: str) -> Optional[str]:
         if not nome or len(nome.strip()) < 2:
             return "Il nome deve avere almeno 2 caratteri"
-        if len(nome) > 50:
+        if len(nome) > 20:
             return "Il nome non può superare 50 caratteri"
         
         if not re.match(r"^[a-zA-Zà-ùÀ-Ù\s]{2,50}$", nome):
@@ -26,8 +26,8 @@ class FormValidator:
         if not re.match(pattern, email):
             return "Inserisci un'email valida"
         
-        if len(email) > 120:
-            return "L'email non può superare 120 caratteri"
+        if len(email) > 60:
+            return "L'email non può superare 60 caratteri"
         
         return None
     

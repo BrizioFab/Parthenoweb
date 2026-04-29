@@ -1,5 +1,5 @@
 /* ===============================
-   Contact Page Premium Styles
+   Pagina contatti
 ================================ */
 
 .contact-section {
@@ -51,7 +51,7 @@
     align-items: start;
 }
 
-/* Left Column */
+/* Colonna di sinistra */
 .contact-left {
     display: flex;
     flex-direction: column;
@@ -140,7 +140,7 @@
     filter: brightness(0) invert(1);
 }
 
-/* Right Column - Form */
+/* Colonna di destra (Form) */
 .cta-box {
     position: relative;
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(0, 255, 136, 0.02) 100%);
@@ -177,7 +177,7 @@
     margin-bottom: 2rem;
 }
 
-/* Form Styles */
+/* Styles del form */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -335,7 +335,7 @@
 }
 
 /* ===============================
-   Social Icons
+   Icone dei social
 ================================ */
 
 .social-wrapper {

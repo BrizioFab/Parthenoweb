@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 import os
 import re
@@ -38,7 +37,7 @@ for dirpath, dirnames, filenames in os.walk(ROOT):
                         broken.append((rel_fpath, href, 'anchor-not-found'))
                 continue
             if href.startswith(skip_schemes):
-           
+                continue
             if href.startswith('/'):
                 
                 target = os.path.join(ROOT, href.lstrip('/'))
