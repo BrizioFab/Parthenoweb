@@ -3,7 +3,7 @@ import uvicorn
 import sys
 
 if __name__ == "__main__":
-    print("🚀 Starting Parthenoweb Development Server...")
+    print("🚀 Avvio server di sviluppo...")
     print("📍 Server running at http://localhost:8000")
     print("📚 API Docs at http://localhost:8000/docs")
     print("✋ Press Ctrl+C to stop")

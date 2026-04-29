@@ -951,10 +951,8 @@ a {
 }
 
 .cookie-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    max-width: calc(100% - 180px);
+    flex: 1;
+    max-width: none;
 }
 
 .cookie-content h3 {

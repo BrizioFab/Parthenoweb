@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="/static/css/contatti.css">
 <section class="contact-section">
     <div class="contact-wrapper">
         <div class="contact-left">
@@ -23,13 +24,15 @@
 
             <div class="contact-info">
                 <a href="https://wa.me/393770920451" target="_blank">
-                    <img src="/static/assets/images/Icona whatsapp.svg" alt="Icona whatsapp" class="contact-icon" aria-hidden="true">
+                    <img src="/static/assets/images/Icona whatsapp.svg" alt="Icona whatsapp" class="contact-icon"
+                        aria-hidden="true">
                     +39 377 092 0451
                 </a>
                 <p><a href="mailto:parthenoweb@gmail.com">
-                    <img src="/static/assets/images/Icona Mail.svg" alt="Icona mail" class="contact-icon mail-icon" aria-hidden="true">
-                    parthenoweb@gmail.com
-                </a></p>
+                        <img src="/static/assets/images/Icona Mail.svg" alt="Icona mail" class="contact-icon mail-icon"
+                            aria-hidden="true">
+                        parthenoweb@gmail.com
+                    </a></p>
             </div>
 
             <!-- SOCIAL BUTTONS (ordine: Instagram, Facebook, TikTok) -->
@@ -46,21 +49,24 @@
                     <div class="social-icon-row">
 
                         <!-- SOCIAL: INSTAGRAM -->
-                        <a href="https://www.instagram.com/parthenoweb?igsh=enoxZGNwMXB6a2No&utm_source=qr" rel="noopener noreferrer"
-                           class="social-icon-box s-instagram" aria-label="Instagram">
-                            <img src="/static/assets/images/ICON-INSTAGRAM.webp" alt="Logo Instagram" class="s-icon-image" loading="lazy">
+                        <a href="https://www.instagram.com/parthenoweb?igsh=enoxZGNwMXB6a2No&utm_source=qr"
+                            rel="noopener noreferrer" class="social-icon-box s-instagram" aria-label="Instagram">
+                            <img src="/static/assets/images/ICON-INSTAGRAM.webp" alt="Logo Instagram"
+                                class="s-icon-image" loading="lazy">
                         </a>
 
                         <!-- SOCIAL: FACEBOOK -->
                         <a href="https://www.facebook.com/share/14e8vmDQ8rC/?mibextid=wwXIfr" rel="noopener noreferrer"
-                           class="social-icon-box s-facebook" aria-label="Facebook">
-                            <img src="/static/assets/images/ICON-FACEBOOK.webp" alt="Logo Facebook" class="s-icon-image" loading="lazy">
+                            class="social-icon-box s-facebook" aria-label="Facebook">
+                            <img src="/static/assets/images/ICON-FACEBOOK.webp" alt="Logo Facebook" class="s-icon-image"
+                                loading="lazy">
                         </a>
 
                         <!-- SOCIAL: TIKTOK -->
                         <a href="https://www.tiktok.com/@parthenoweb?_r=1&_t=ZN-94PBlqkeffa" rel="noopener noreferrer"
-                           class="social-icon-box s-tiktok" aria-label="TikTok">
-                            <img src="/static/assets/images/ICON-TIKTOK.webp" alt="Logo TikTok" class="s-icon-image" loading="lazy">
+                            class="social-icon-box s-tiktok" aria-label="TikTok">
+                            <img src="/static/assets/images/ICON-TIKTOK.webp" alt="Logo TikTok" class="s-icon-image"
+                                loading="lazy">
                         </a>
 
                     </div>
@@ -94,52 +100,51 @@
                 </div>
                 {% endif %}
 
-                <input 
-                    type="text" 
-                    name="nome" 
-                    placeholder="Nome e Cognome" 
-                    required
-                    value="{{ form_data.get('nome', '') }}"
-                    pattern="[a-zA-Zà-ùÀ-Ù\s]{2,100}"
+                <input type="text" name="nome" placeholder="Nome e Cognome" required
+                    value="{{ form_data.get('nome', '') }}" pattern="[a-zA-Zà-ùÀ-Ù\s]{2,100}"
                     title="Inserisci un nome valido (solo lettere e spazi)">
 
-                <input 
-                    type="tel" 
-                    name="telefono" 
-                    placeholder="Numero di telefono"
-                    value="{{ form_data.get('telefono', '') }}"
-                    pattern="[0-9\s\+\-]{5,20}"
+                <input type="tel" name="telefono" placeholder="Numero di telefono"
+                    value="{{ form_data.get('telefono', '') }}" pattern="[0-9\s\+\-]{5,20}"
                     title="Inserisci un numero valido">
 
-                <input 
-                    type="email" 
-                    name="email" 
-                    placeholder="Indirizzo email" 
-                    required
-                    value="{{ form_data.get('email', '') }}"
-                    title="Inserisci un email valido">
+                <input type="email" name="email" placeholder="Indirizzo email" required
+                    value="{{ form_data.get('email', '') }}" title="Inserisci un email valido">
 
-                <textarea 
-                    name="descrizione" 
-                    placeholder="Parlaci brevemente del tuo progetto, lo approfondiremo insieme..."
-                    rows="4" 
-                    required
-                    minlength="10"
-                    maxlength="1000">{{ form_data.get('descrizione', '') }}</textarea>
+                <textarea name="descrizione"
+                    placeholder="Parlaci brevemente del tuo progetto, lo approfondiremo insieme..." rows="4" required
+                    minlength="10" maxlength="1000">{{ form_data.get('descrizione', '') }}</textarea>
+
+                <div class="privacy-checkbox">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="privacy" required>
+                        <span class="checkmark"></span>
+
+                        <span class="checkbox-text">
+                            Ho letto l’
+                            <a href="/cookies" target="_blank" rel="noopener noreferrer">
+                                informativa sulla privacy
+                            </a>
+                            e acconsento al trattamento dei miei dati personali.
+                        </span>
+                    </label>
+                </div>
 
                 <button type="submit" id="submit-btn">INVIA RICHIESTA</button>
             </form>
         </div>
     </div>
+
 </section>
+
 {% endblock %}
 
 {% block extra_js %}
 <script>
-document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
-    if (e.target.method === 'POST') {
-        return;
-    }
-});
+    document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
+        if (e.target.method === 'POST') {
+            return;
+        }
+    });
 </script>
 {% endblock %}
